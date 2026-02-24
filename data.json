@@ -1,0 +1,376 @@
+{
+  "asOf": "February 24, 2026",
+  "whatYouMissed": {
+    "summary": "February 22, 2026 vs Dallas Mavericks: Loss (130-134).",
+    "leaders": [
+      {
+        "stat": "PTS",
+        "value": "30",
+        "player": "Pascal Siakam",
+        "athleteId": "3149673",
+        "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/3149673.png"
+      },
+      {
+        "stat": "REB",
+        "value": "9",
+        "player": "Jarace Walker",
+        "athleteId": "5106060",
+        "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5106060.png"
+      },
+      {
+        "stat": "AST",
+        "value": "11",
+        "player": "Andrew Nembhard",
+        "athleteId": "4395712",
+        "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4395712.png"
+      },
+      {
+        "stat": "MIN",
+        "value": "34",
+        "player": "Jarace Walker",
+        "athleteId": "5106060",
+        "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5106060.png"
+      }
+    ],
+    "highlightVideoUrl": "https://www.youtube.com/embed?listType=playlist&list=UUUQDCnAwU-35cOo8WCzg6zA"
+  },
+  "lotteryStandings": [
+    {
+      "slot": 1,
+      "team": "SAC",
+      "record": "13-46",
+      "top4": 52.1,
+      "first": 14.0,
+      "mockPlayerName": "Darryn Peterson",
+      "mockPlayerUrl": "https://www.nbadraft.net/players/darryn-peterson/"
+    },
+    {
+      "slot": 2,
+      "team": "IND",
+      "record": "15-43",
+      "top4": 52.1,
+      "first": 14.0,
+      "mockPlayerName": "Cameron Boozer",
+      "mockPlayerUrl": "https://www.nbadraft.net/players/cameron-boozer/"
+    },
+    {
+      "slot": 3,
+      "team": "BKN",
+      "record": "15-41",
+      "top4": 52.1,
+      "first": 14.0,
+      "mockPlayerName": "AJ Dybantsa",
+      "mockPlayerUrl": "https://www.nbadraft.net/players/aj-dybantsa/"
+    },
+    {
+      "slot": 4,
+      "team": "NO",
+      "record": "16-42",
+      "top4": 48.1,
+      "first": 12.5,
+      "mockPlayerName": "Kingston Flemings",
+      "mockPlayerUrl": "https://www.nbadraft.net/players/kingston-flemings/"
+    },
+    {
+      "slot": 5,
+      "team": "WSH",
+      "record": "16-40",
+      "top4": 42.1,
+      "first": 10.5,
+      "mockPlayerName": "Caleb Wilson",
+      "mockPlayerUrl": "https://www.nbadraft.net/players/caleb-wilson/"
+    },
+    {
+      "slot": 6,
+      "team": "UTAH",
+      "record": "18-40",
+      "top4": 37.2,
+      "first": 9.0,
+      "mockPlayerName": "Mikel Brown",
+      "mockPlayerUrl": "https://www.nbadraft.net/players/mikel-brown/"
+    },
+    {
+      "slot": 7,
+      "team": "DAL",
+      "record": "20-36",
+      "top4": 32.0,
+      "first": 7.5,
+      "mockPlayerName": "Nate Ament",
+      "mockPlayerUrl": "https://www.nbadraft.net/players/nate-ament/"
+    },
+    {
+      "slot": 8,
+      "team": "MEM",
+      "record": "21-35",
+      "top4": 26.3,
+      "first": 6.0,
+      "mockPlayerName": "Alijah Arenas",
+      "mockPlayerUrl": "https://www.nbadraft.net/players/alijah-arenas/"
+    },
+    {
+      "slot": 9,
+      "team": "CHI",
+      "record": "24-34",
+      "top4": 20.3,
+      "first": 4.5,
+      "mockPlayerName": "Keaton Wagler",
+      "mockPlayerUrl": "https://www.nbadraft.net/players/keaton-wagler/"
+    },
+    {
+      "slot": 10,
+      "team": "MIL",
+      "record": "24-31",
+      "top4": 13.9,
+      "first": 3.0,
+      "mockPlayerName": "Braylon Mullins",
+      "mockPlayerUrl": "https://www.nbadraft.net/players/braylon-mullins/"
+    },
+    {
+      "slot": 11,
+      "team": "CHA",
+      "record": "27-31",
+      "top4": 9.4,
+      "first": 2.0,
+      "mockPlayerName": "Brayden Burries",
+      "mockPlayerUrl": "https://www.nbadraft.net/players/brayden-burries/"
+    },
+    {
+      "slot": 12,
+      "team": "LAC",
+      "record": "27-30",
+      "top4": 7.1,
+      "first": 1.5,
+      "mockPlayerName": "Chris Cenac",
+      "mockPlayerUrl": "https://www.nbadraft.net/players/chris-cenac/"
+    },
+    {
+      "slot": 13,
+      "team": "ATL",
+      "record": "28-31",
+      "top4": 4.8,
+      "first": 1.0,
+      "mockPlayerName": "Darius Acuff",
+      "mockPlayerUrl": "https://www.nbadraft.net/players/darius-acuff/"
+    },
+    {
+      "slot": 14,
+      "team": "POR",
+      "record": "28-30",
+      "top4": 2.4,
+      "first": 0.5,
+      "mockPlayerName": "Labaron Philon",
+      "mockPlayerUrl": "https://www.nbadraft.net/players/labaron-philon/"
+    }
+  ],
+  "pacersPickOdds": [
+    {
+      "pick": 1,
+      "pct": 14.0
+    },
+    {
+      "pick": 2,
+      "pct": 13.4
+    },
+    {
+      "pick": 3,
+      "pct": 12.7
+    },
+    {
+      "pick": 4,
+      "pct": 12.0
+    },
+    {
+      "pick": 5,
+      "pct": 27.8
+    },
+    {
+      "pick": 6,
+      "pct": 20.0
+    }
+  ],
+  "pickProtection": {
+    "text": "Reported protection in the Ivica Zubac deal: Indiana's 2026 first-round pick is protected 1-4 and 10-30.",
+    "keepSlots": "1-4 and 10-30",
+    "sendSlots": "5-9",
+    "sourceTeam": "LAC"
+  },
+  "pickProtectionImpact": {
+    "sourceTeam": "LAC",
+    "currentSlot": 12,
+    "currentTop4": 7.1,
+    "currentFirst": 1.5,
+    "conveyProbability": 0.0,
+    "protectProbability": 100.1,
+    "note": "Auto-calculated from standings + fixed lottery odds table"
+  },
+  "upcomingGames": [
+    {
+      "date": "Wed, Feb 25, 2026",
+      "opponent": "Philadelphia 76ers",
+      "location": "Home",
+      "isKey": false,
+      "why": ""
+    },
+    {
+      "date": "Fri, Feb 27, 2026",
+      "opponent": "Charlotte Hornets",
+      "location": "Home",
+      "isKey": false,
+      "why": ""
+    },
+    {
+      "date": "Sun, Mar 1, 2026",
+      "opponent": "Memphis Grizzlies",
+      "location": "Home",
+      "isKey": false,
+      "why": ""
+    },
+    {
+      "date": "Thu, Mar 5, 2026",
+      "opponent": "LA Clippers",
+      "location": "Away",
+      "isKey": false,
+      "why": ""
+    },
+    {
+      "date": "Sat, Mar 7, 2026",
+      "opponent": "Los Angeles Lakers",
+      "location": "Away",
+      "isKey": false,
+      "why": ""
+    },
+    {
+      "date": "Mon, Mar 9, 2026",
+      "opponent": "Portland Trail Blazers",
+      "location": "Away",
+      "isKey": false,
+      "why": ""
+    },
+    {
+      "date": "Wed, Mar 11, 2026",
+      "opponent": "Sacramento Kings",
+      "location": "Away",
+      "isKey": false,
+      "why": ""
+    },
+    {
+      "date": "Thu, Mar 12, 2026",
+      "opponent": "Phoenix Suns",
+      "location": "Home",
+      "isKey": false,
+      "why": ""
+    },
+    {
+      "date": "Fri, Mar 13, 2026",
+      "opponent": "New York Knicks",
+      "location": "Home",
+      "isKey": false,
+      "why": ""
+    },
+    {
+      "date": "Sun, Mar 15, 2026",
+      "opponent": "Milwaukee Bucks",
+      "location": "Away",
+      "isKey": false,
+      "why": ""
+    }
+  ],
+  "keyGames": [],
+  "meta": {
+    "pacersSlot": 2,
+    "updatedAtUtc": "2026-02-24T21:52:14.201236Z",
+    "sources": {
+      "draftStandings": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/standings",
+      "draftSchedule": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/11/schedule",
+      "nbaSchedule": "https://cdn.nba.com/static/json/staticData/scheduleLeagueV2_1.json",
+      "nbaBoxscoreTemplate": "https://cdn.nba.com/static/json/liveData/boxscore/boxscore_{game_id}.json",
+      "nbaPlayers": "https://cdn.nba.com/static/json/staticData/players.json",
+      "mockSourceUsed": "manual:mock_override.json",
+      "nbadraftProfilesFromNames": true,
+      "mockOverrideFile": "mock_override.json",
+      "standingsFetch": {
+        "url": "https://site.web.api.espn.com/apis/v2/sports/basketball/nba/standings",
+        "http_status": 200,
+        "source": "cache:fresh",
+        "fetched_at_utc": "2026-02-24T21:38:29.298754Z",
+        "ok": true,
+        "validated_rows": 14
+      }
+    },
+    "refreshStatus": {
+      "draft": "ok:espn_api+odds_table+manual_override",
+      "whatYouMissed": "ok:espn_boxscore"
+    },
+    "stale": true,
+    "schema_version": 1,
+    "generated_at_utc": "2026-02-24T21:52:14.306894Z",
+    "sections": {
+      "standings": {
+        "status": "ok",
+        "source": "espn_api",
+        "fetched_at_utc": "2026-02-24T21:52:14.306904Z",
+        "last_ok_at_utc": "2026-02-24T21:52:14.306904Z"
+      },
+      "schedule": {
+        "status": "ok",
+        "source": "espn_api",
+        "fetched_at_utc": "2026-02-24T21:52:14.306906Z",
+        "last_ok_at_utc": "2026-02-24T21:52:14.306906Z"
+      },
+      "scoreboard": {
+        "status": "ok",
+        "source": "espn_api",
+        "fetched_at_utc": "2026-02-24T21:52:14.306908Z",
+        "last_ok_at_utc": "2026-02-24T21:52:14.306908Z"
+      },
+      "boxscores": {
+        "status": "ok",
+        "source": "espn_api",
+        "fetched_at_utc": "2026-02-24T21:52:14.306910Z",
+        "last_ok_at_utc": "2026-02-24T21:52:14.306910Z"
+      },
+      "players": {
+        "status": "disabled",
+        "source": "none",
+        "fetched_at_utc": "2026-02-24T21:52:14.306912Z",
+        "last_ok_at_utc": "2026-02-24T17:51:48.566416Z",
+        "reason": "no_compliant_source"
+      },
+      "draft": {
+        "status": "ok",
+        "source": "espn_api+odds_table+manual_override",
+        "fetched_at_utc": "2026-02-24T21:52:14.306913Z",
+        "last_ok_at_utc": "2026-02-24T21:52:14.306938Z",
+        "reason": null
+      },
+      "videos": {
+        "status": "ok",
+        "source": "youtube_embed_official",
+        "fetched_at_utc": "2026-02-24T21:52:14.306915Z",
+        "last_ok_at_utc": "2026-02-24T21:52:14.306915Z"
+      },
+      "whatYouMissed": {
+        "status": "ok",
+        "source": "espn_api",
+        "fetched_at_utc": "2026-02-24T21:52:14.306917Z",
+        "last_ok_at_utc": "2026-02-24T21:52:14.306917Z"
+      },
+      "pickProtection": {
+        "status": "ok",
+        "source": "static",
+        "fetched_at_utc": "2026-02-24T21:52:14.306918Z",
+        "last_ok_at_utc": "2026-02-24T21:52:14.306918Z"
+      }
+    },
+    "requirements": {
+      "standings": "api",
+      "schedule": "api",
+      "scoreboard": "api",
+      "boxscores": "api",
+      "players": "api",
+      "draft": "manual_or_paid_api",
+      "videos": "youtube_embed_or_youtube_api_or_manual"
+    },
+    "errors": []
+  }
+}

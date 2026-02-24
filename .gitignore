@@ -1,0 +1,4 @@
+.cache/
+update.log
+data.json.tmp
+*.tmp

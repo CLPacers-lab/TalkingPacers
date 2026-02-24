@@ -1,0 +1,60 @@
+{
+  "request": {
+    "timeout_seconds": 2,
+    "max_retries": 1,
+    "backoff_seconds": 0.5,
+    "jitter_seconds": 0.1,
+    "global_min_delay_seconds": 0.1,
+    "per_host_min_delay_seconds": 0.1
+  },
+  "ttl_seconds": {
+    "standings": 1800,
+    "scoreboard": 180,
+    "schedule": 43200,
+    "player_profiles": 86400,
+    "draft": 86400,
+    "videos": 43200,
+    "default": 1800
+  },
+  "enabled_sections": {
+    "standings": true,
+    "schedule": true,
+    "scoreboard": true,
+    "boxscores": true,
+    "players": true,
+    "draft": true,
+    "videos": true,
+    "whatYouMissed": true,
+    "pickProtection": true
+  },
+  "team": {
+    "abbr": "IND",
+    "espn_id": "11",
+    "nba_id": 1610612754
+  },
+  "sources": {
+    "allow_html_scraping": false,
+    "allow_pdf_scraping": false,
+    "allow_stats_nba_com": false,
+    "nba_stats": false,
+    "youtube_data_api": false
+  },
+  "youtube": {
+    "channel_id": "",
+    "uploads_playlist_id": "UUUQDCnAwU-35cOo8WCzg6zA",
+    "uploads_playlist_id_note": "Required for official uploads embed. Paste the Pacers uploads playlist id (starts with UU)."
+  },
+  "policy": {
+    "no_scraping": true,
+    "require_compliant_sources": true
+  },
+  "requirements": {
+    "standings": "api",
+    "schedule": "api",
+    "scoreboard": "api",
+    "boxscores": "api",
+    "players": "api",
+    "draft": "manual_or_paid_api",
+    "videos": "youtube_embed_or_youtube_api_or_manual"
+  }
+}

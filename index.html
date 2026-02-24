@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Talking Pacers</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css?v=20260224-4" />
+  </head>
+  <body>
+    <header class="hero">
+      <div class="hero__overlay"></div>
+      <div class="hero__content">
+        <div class="hero__brand">
+          <img class="hero-logo" src="https://cdn.nba.com/logos/nba/1610612754/primary/L/logo.svg" alt="Indiana Pacers logo" />
+          <div>
+            <h1>Talking Pacers</h1>
+            <p class="subtitle">Your dashboard for the rest of the Pacers season</p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="dashboard-grid">
+        <section class="panel panel-missed" aria-labelledby="missed-title">
+          <h2 id="missed-title">1) Last Game</h2>
+          <p id="missed-meta" class="section-note"></p>
+          <h3 class="subhead">Stat Leaders</h3>
+          <div id="missed-grid" class="leader-grid"></div>
+          <div id="missed-highlight" class="highlight-wrap"></div>
+          <h3 class="subhead">Key Upcoming Games</h3>
+          <div id="games-list" class="games"></div>
+        </section>
+
+        <section class="panel panel-draft" aria-labelledby="draft-title">
+          <h2 id="draft-title">2) Draft Outlook</h2>
+          <p class="section-note">Current lottery order, pick odds, trade protection impact, and key standings-swing games.</p>
+
+          <h3 class="subhead">Lottery Snapshot</h3>
+          <div id="standings-table" class="table-wrap"></div>
+
+          <h3 class="subhead">Pick Protection</h3>
+          <p id="protection-summary" class="section-note"></p>
+          <div class="odds-viz-wrap">
+            <div id="odds-ring" class="odds-ring">
+              <div class="odds-ring__inner">
+                <p class="odds-ring__label">Keep Odds</p>
+                <p id="keep-pct-ring" class="odds-ring__value"></p>
+              </div>
+            </div>
+            <div class="odds-grid">
+              <article class="odds-card keep">
+                <h3>Keep Pick</h3>
+                <p id="keep-pct" class="big-pct"></p>
+                <p id="keep-detail" class="muted"></p>
+              </article>
+              <article class="odds-card send">
+                <h3>Pick Sent to LAC</h3>
+                <p id="send-pct" class="big-pct"></p>
+                <p id="send-detail" class="muted"></p>
+              </article>
+            </div>
+          </div>
+          <div id="pick-odds-breakdown" class="table-wrap"></div>
+
+        </section>
+
+      </div>
+
+    </main>
+
+    <script src="script.js?v=20260224-4"></script>
+  </body>
+</html>
