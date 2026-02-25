@@ -198,6 +198,12 @@ function upsertStatusBanner(anchorEl, sectionKey, metaObj) {
     banner.style.display = "";
     return;
   }
+  if (status === "ok" && reason === "game_in_progress") {
+    banner.className = "status-banner status-banner-live";
+    banner.textContent = "LIVE — game in progress. Section updates after final.";
+    banner.style.display = "";
+    return;
+  }
   banner.style.display = "none";
 }
 

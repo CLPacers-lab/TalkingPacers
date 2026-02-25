@@ -453,6 +453,12 @@ tr.pacers-row {
   border: 1px solid #fcd34d;
 }
 
+.status-banner-live {
+  background: #dbeafe;
+  color: #1e3a8a;
+  border: 1px solid #93c5fd;
+}
+
 .sources ul {
   margin: 0.5rem 0 0;
   padding-left: 1rem;

@@ -6,6 +6,7 @@ from __future__ import annotations
 import json
 import os
 import re
+import socket
 import sys
 import time
 import random
@@ -183,18 +184,19 @@ def section_status(section: str, status: str, source: str, fetched_at_utc: Optio
     SECTION_META[section] = entry
 
 # Draft section (existing model)
-ESPN_STANDINGS_URL = "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/standings"
+ESPN_BASE_URL = "https://site.api.espn.com"
+ESPN_STANDINGS_URL = f"{ESPN_BASE_URL}/apis/site/v2/sports/basketball/nba/standings"
 ESPN_STANDINGS_URLS = [
     ESPN_STANDINGS_URL,
     "https://site.web.api.espn.com/apis/v2/sports/basketball/nba/standings",
 ]
-ESPN_SCHEDULE_URL = "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/11/schedule"
+ESPN_SCHEDULE_URL = f"{ESPN_BASE_URL}/apis/site/v2/sports/basketball/nba/teams/11/schedule"
 ESPN_SCHEDULE_URLS = [
     ESPN_SCHEDULE_URL,
     "https://site.web.api.espn.com/apis/v2/sports/basketball/nba/teams/11/schedule",
 ]
-ESPN_SUMMARY_URL_TEMPLATE = "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/summary?event={event_id}"
-ESPN_SCOREBOARD_URL_TEMPLATE = "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates={yyyymmdd}"
+ESPN_SUMMARY_URL_TEMPLATE = f"{ESPN_BASE_URL}/apis/site/v2/sports/basketball/nba/summary?event={{event_id}}"
+ESPN_SCOREBOARD_URL_TEMPLATE = f"{ESPN_BASE_URL}/apis/site/v2/sports/basketball/nba/scoreboard?dates={{yyyymmdd}}"
 ESPN_STANDINGS_HTML_URL = "https://www.espn.com/nba/standings"
 
 # NBA official sources for "What You Missed"
@@ -224,6 +226,7 @@ VIDEOS_OVERRIDE_FILE = "videos_override.json"
 YOUTUBE_FALLBACK_HIGHLIGHT_URL = "https://youtu.be/nVnPeY3di08?si=-CGsEbxXmEJdrWuB"
 HTTP_TIMEOUT_SECONDS = 8
 HTTP_RETRY_ATTEMPTS = 3
+HTTP_DNS_EXTRA_RETRIES = 2
 LOCAL_DISPLAY_TZ = ZoneInfo("America/New_York") if ZoneInfo else timezone(timedelta(hours=-5))
 
 PACERS_ABBR = "IND"
@@ -410,6 +413,24 @@ DEFAULT_MOCK_MAP: Dict[int, Dict[str, str]] = {
     14: {"name": "Yaxel Lendeborg", "url": "https://www.nbadraft.net/players/yaxel-lendeborg/"},
 }
 
+BLOCKED_MOCK_PLAYER_NAMES = {"cooper flagg"}
+
+
+def is_blocked_mock_player(name: object) -> bool:
+    return str(name or "").strip().lower() in BLOCKED_MOCK_PLAYER_NAMES
+
+
+def sanitize_mock_map(mock_map: Dict[int, Dict[str, str]]) -> Dict[int, Dict[str, str]]:
+    clean: Dict[int, Dict[str, str]] = {}
+    for slot, info in (mock_map or {}).items():
+        if not isinstance(info, dict):
+            continue
+        if is_blocked_mock_player(info.get("name")):
+            continue
+        clean[slot] = {"name": str(info.get("name") or "").strip(), "url": str(info.get("url") or "").strip()}
+    return clean
+
+
 TEAM_NAMES = {
     "Atlanta Hawks", "Boston Celtics", "Brooklyn Nets", "Charlotte Hornets", "Chicago Bulls",
     "Cleveland Cavaliers", "Dallas Mavericks", "Denver Nuggets", "Detroit Pistons",
@@ -566,7 +587,30 @@ def _respect_rate_limits(url: str) -> None:
     LAST_REQUEST_BY_HOST[host] = now2
 
 
-def fetch_url(url: str, headers: Optional[Dict[str, str]] = None, timeout: Optional[int] = None, max_retries: Optional[int] = None, backoff: Optional[float] = None, jitter: Optional[float] = None, allow_stale_cache: bool = True) -> Optional[dict]:
+def _is_dns_resolution_error(exc: BaseException) -> bool:
+    text = str(exc).lower()
+    if isinstance(exc, URLError):
+        reason = getattr(exc, "reason", None)
+        if isinstance(reason, socket.gaierror):
+            return True
+    return (
+        "nodename nor servname provided" in text
+        or "temporary failure in name resolution" in text
+        or "name or service not known" in text
+        or "getaddrinfo failed" in text
+    )
+
+
+def fetch_url(
+    url: str,
+    headers: Optional[Dict[str, str]] = None,
+    timeout: Optional[int] = None,
+    max_retries: Optional[int] = None,
+    backoff: Optional[float] = None,
+    jitter: Optional[float] = None,
+    allow_stale_cache: bool = True,
+    use_fresh_cache: bool = True,
+) -> Optional[dict]:
     try:
         _ensure_compliant_request(url)
     except PolicyViolation as exc:
@@ -631,7 +675,7 @@ def fetch_url(url: str, headers: Optional[Dict[str, str]] = None, timeout: Optio
 
     ttl = _ttl_for_url(url)
     now = datetime.now(timezone.utc)
-    if cached and isinstance(cached.get("fetched_at_utc"), str):
+    if use_fresh_cache and cached and isinstance(cached.get("fetched_at_utc"), str):
         try:
             fetched_at = datetime.fromisoformat(str(cached["fetched_at_utc"]).replace("Z", "+00:00"))
         except Exception:
@@ -703,10 +747,32 @@ def fetch_url(url: str, headers: Optional[Dict[str, str]] = None, timeout: Optio
         }
 
     last_err = None
-    for attempt in range(retries):
+    dns_extra_remaining = max(0, HTTP_DNS_EXTRA_RETRIES)
+    attempt = 0
+    while attempt < retries:
         try:
             _respect_rate_limits(url)
-            req = Request(url, headers=base_headers)
+            final_url = str(url).strip()
+            print(f"Final request URL: {repr(final_url)}", flush=True)
+            parsed = urlparse(final_url)
+            print(
+                "Parsed URL components:",
+                {
+                    "scheme": parsed.scheme,
+                    "netloc": parsed.netloc,
+                    "path": parsed.path,
+                    "params": parsed.params,
+                    "query": parsed.query,
+                    "fragment": parsed.fragment,
+                    "hostname": parsed.hostname,
+                    "port": parsed.port,
+                    "username": parsed.username,
+                },
+                flush=True,
+            )
+            if parsed.hostname is None:
+                raise ValueError(f"Malformed URL (missing hostname): {repr(final_url)}")
+            req = Request(final_url, headers=base_headers)
             with urlopen(req, timeout=timeout_s) as response:
                 status = int(getattr(response, "status", 200) or 200)
                 resp_headers = {k: v for k, v in response.headers.items()} if response.headers else {}
@@ -733,15 +799,32 @@ def fetch_url(url: str, headers: Optional[Dict[str, str]] = None, timeout: Optio
             if status in (429, 503):
                 wait = max(retry_after, (backoff_s * (2 ** attempt)) + random.uniform(0, jitter_s))
                 time.sleep(wait)
+                attempt += 1
                 continue
             if attempt < retries - 1:
                 time.sleep((backoff_s * (2 ** attempt)) + random.uniform(0, jitter_s))
+                attempt += 1
                 continue
         except (URLError, TimeoutError, OSError) as exc:
             last_err = exc
+            if _is_dns_resolution_error(exc) and dns_extra_remaining > 0:
+                dns_extra_remaining -= 1
+                wait = (backoff_s * (2 ** attempt)) + random.uniform(0, jitter_s)
+                log_event(
+                    "warn",
+                    "dns_retry",
+                    url=url,
+                    error=str(exc),
+                    retries_remaining=dns_extra_remaining,
+                    wait_seconds=round(wait, 2),
+                )
+                time.sleep(wait)
+                continue
             if attempt < retries - 1:
                 time.sleep((backoff_s * (2 ** attempt)) + random.uniform(0, jitter_s))
+                attempt += 1
                 continue
+        attempt += 1
 
     if allow_stale_cache and cached:
         body = _decode_cached_body(cached)
@@ -803,15 +886,15 @@ def fetch_text(url: str) -> str:
     return fetch_bytes(url).decode("utf-8", errors="ignore")
 
 
-def fetch_json_any(urls: List[str]) -> dict:
-    payload, _meta = fetch_json_any_with_meta(urls)
+def fetch_json_any(urls: List[str], use_fresh_cache: bool = True) -> dict:
+    payload, _meta = fetch_json_any_with_meta(urls, use_fresh_cache=use_fresh_cache)
     return payload
 
 
-def fetch_json_any_with_meta(urls: List[str]) -> Tuple[dict, dict]:
+def fetch_json_any_with_meta(urls: List[str], use_fresh_cache: bool = True) -> Tuple[dict, dict]:
     last_exc: Optional[Exception] = None
     for url in urls:
-        res = fetch_url(url)
+        res = fetch_url(url, use_fresh_cache=use_fresh_cache)
         if not res or res.get("body") is None:
             last_exc = URLError(str((res or {}).get("error") if isinstance(res, dict) else "network failure"))
             continue
@@ -928,6 +1011,8 @@ def load_mock_override(project_root: Path) -> Dict[int, Dict[str, str]]:
 
         name = str(row.get("mockPlayerName") or "").strip()
         if not name:
+            continue
+        if is_blocked_mock_player(name):
             continue
         name_counts[name.lower()] += 1
 
@@ -1444,7 +1529,7 @@ def get_mock_map(mock_override: Dict[int, Dict[str, str]]) -> Tuple[Dict[int, Di
     # Compliance mode: no scraping and no embedded defaults for draft mocks.
     if bool(_policy_dict().get("no_scraping")):
         if mock_override:
-            return dict(mock_override), f"manual:{MOCK_OVERRIDE_FILE}"
+            return sanitize_mock_map(dict(mock_override)), f"manual:{MOCK_OVERRIDE_FILE}"
         log_event("info", "section_skipped_policy", section="draft", reason="policy_no_scrape_no_manual_override")
         return {}, None
 
@@ -1456,7 +1541,7 @@ def get_mock_map(mock_override: Dict[int, Dict[str, str]]) -> Tuple[Dict[int, Di
         mock_source_url = "fallback:embedded-default-mock"
     if mock_override:
         mock_map.update(mock_override)
-    return mock_map, mock_source_url
+    return sanitize_mock_map(mock_map), mock_source_url
 
 
 def apply_mock_to_lottery_rows(rows: List[dict], mock_map: Dict[int, Dict[str, str]]) -> List[dict]:
@@ -2094,7 +2179,7 @@ def build_upcoming_games(espn_schedule_payload: dict, lottery_slots: Dict[str, i
         candidates.append(
             {
                 "date_obj": tip,
-                "date": tip.strftime("%a, %b %-d, %Y"),
+                "date": _format_display_date(tip, "%a, %b %-d, %Y"),
                 "opponent": opp_name,
                 "location": location,
                 "isKey": is_key,
@@ -2154,7 +2239,7 @@ def build_upcoming_games_from_nba_schedule(schedule_payload: dict, lottery_slots
         candidates.append(
             {
                 "date_obj": game_dt,
-                "date": game_dt.strftime("%a, %b %-d, %Y"),
+                "date": _format_display_date(game_dt, "%a, %b %-d, %Y"),
                 "opponent": opp_name,
                 "location": location,
                 "isKey": is_key,
@@ -2190,6 +2275,16 @@ def _try_parse_dt(value: object) -> Optional[datetime]:
         except ValueError:
             continue
     return None
+
+
+def _to_local_display_dt(dt: datetime) -> datetime:
+    if dt.tzinfo is None:
+        dt = dt.replace(tzinfo=timezone.utc)
+    return dt.astimezone(LOCAL_DISPLAY_TZ)
+
+
+def _format_display_date(dt: datetime, fmt: str) -> str:
+    return _to_local_display_dt(dt).strftime(fmt)
 
 
 def _try_parse_game_date(value: object) -> Optional[datetime]:
@@ -2491,6 +2586,68 @@ def _extract_schedule_events(payload: dict) -> List[dict]:
     return []
 
 
+def _is_pacers_event(event: dict) -> bool:
+    competitions = event.get("competitions", [])
+    if not isinstance(competitions, list) or not competitions or not isinstance(competitions[0], dict):
+        return False
+    competitors = competitions[0].get("competitors", [])
+    if not isinstance(competitors, list):
+        return False
+    for comp in competitors:
+        if not isinstance(comp, dict):
+            continue
+        team = comp.get("team", {}) if isinstance(comp.get("team"), dict) else {}
+        if str(team.get("id") or "").strip() == PACERS_TEAM_ID_STR:
+            return True
+        if str(team.get("abbreviation") or "").upper() == PACERS_ABBR:
+            return True
+    return False
+
+
+def _is_pacers_game_in_progress(schedule_payload: dict) -> bool:
+    now_utc = datetime.now(timezone.utc)
+    for event in _extract_schedule_events(schedule_payload if isinstance(schedule_payload, dict) else {}):
+        if not _is_pacers_event(event):
+            continue
+        competitions = event.get("competitions", [])
+        comp0 = competitions[0] if isinstance(competitions, list) and competitions and isinstance(competitions[0], dict) else {}
+        event_type = event.get("status", {}).get("type", {}) if isinstance(event.get("status"), dict) else {}
+        comp_type = comp0.get("status", {}).get("type", {}) if isinstance(comp0.get("status"), dict) else {}
+        event_completed = event_type.get("completed")
+        comp_completed = comp_type.get("completed")
+        if event_completed is True or comp_completed is True:
+            continue
+
+        state = str(comp_type.get("state") or event_type.get("state") or "").strip().lower()
+        name = str(comp_type.get("name") or event_type.get("name") or "").strip().lower()
+        detail = str(comp_type.get("detail") or event_type.get("detail") or comp0.get("status", {}).get("displayClock") or "").strip().lower()
+        signal_text = f"{state} {name} {detail}"
+        if "final" in signal_text or "postponed" in signal_text or "canceled" in signal_text:
+            continue
+        if state == "pre" or "scheduled" in signal_text:
+            continue
+        if (
+            state == "in"
+            or "in progress" in signal_text
+            or "halftime" in signal_text
+            or "q1" in signal_text
+            or "q2" in signal_text
+            or "q3" in signal_text
+            or "q4" in signal_text
+            or "ot" in signal_text
+            or "live" in signal_text
+        ):
+            return True
+
+        dt = _try_parse_dt(event.get("date"))
+        if dt is not None:
+            dt_utc = dt.astimezone(timezone.utc)
+            # Fallback heuristic for feeds that lag status updates.
+            if dt_utc <= now_utc <= dt_utc + timedelta(hours=6):
+                return True
+    return False
+
+
 def _is_completed_espn_event(event: dict) -> bool:
     competitions = event.get("competitions", [])
     if isinstance(competitions, list) and competitions and isinstance(competitions[0], dict):
@@ -2517,8 +2674,68 @@ def _first_completed_event(events: List[dict]) -> Optional[dict]:
     completed = [e for e in events if _is_completed_espn_event(e)]
     if not completed:
         return None
+    for event in completed:
+        event_id = str(event.get("id") or "").strip()
+        raw_date = event.get("date")
+        sort_dt = _event_datetime(event)
+        print(
+            f"FINAL Pacers event candidate: id={event_id!r}, date_field={raw_date!r}, sort_key_utc={sort_dt.isoformat()}",
+            flush=True,
+        )
     completed.sort(key=_event_datetime, reverse=True)
-    return completed[0]
+    latest = completed[0]
+    latest_id = str(latest.get("id") or "").strip()
+    latest_raw_date = latest.get("date")
+    latest_sort_dt = _event_datetime(latest)
+    print(
+        f"Selected latest FINAL Pacers event: id={latest_id!r}, date_field={latest_raw_date!r}, sort_key_utc={latest_sort_dt.isoformat()}",
+        flush=True,
+    )
+    return latest
+
+
+def _latest_completed_pacers_event_from_scoreboard(days_back: int = 14) -> Optional[dict]:
+    now_local = datetime.now(LOCAL_DISPLAY_TZ)
+    candidates: List[Tuple[datetime, dict]] = []
+    seen_ids = set()
+    for delta in range(max(0, days_back) + 1):
+        day = (now_local - timedelta(days=delta)).strftime("%Y%m%d")
+        url = ESPN_SCOREBOARD_URL_TEMPLATE.format(yyyymmdd=day)
+        res = fetch_url(url, use_fresh_cache=False)
+        if not res or res.get("body") is None:
+            continue
+        try:
+            payload = json.loads(res["body"].decode("utf-8"))
+        except Exception:
+            continue
+        for event in _extract_schedule_events(payload if isinstance(payload, dict) else {}):
+            if not _is_pacers_event(event):
+                continue
+            if not _is_completed_espn_event(event):
+                continue
+            event_id = str(event.get("id") or "").strip()
+            if event_id in seen_ids:
+                continue
+            seen_ids.add(event_id)
+            sort_dt = _event_datetime(event)
+            print(
+                f"FINAL Pacers scoreboard candidate: id={event_id!r}, date_field={event.get('date')!r}, "
+                f"sort_key_utc={sort_dt.isoformat()}, scoreboard_date={day}",
+                flush=True,
+            )
+            candidates.append((sort_dt, event))
+    if not candidates:
+        return None
+    candidates.sort(key=lambda x: x[0], reverse=True)
+    latest = candidates[0][1]
+    latest_id = str(latest.get("id") or "").strip()
+    latest_sort = _event_datetime(latest)
+    print(
+        f"Selected latest FINAL Pacers event from scoreboard: id={latest_id!r}, "
+        f"date_field={latest.get('date')!r}, sort_key_utc={latest_sort.isoformat()}",
+        flush=True,
+    )
+    return latest
 
 
 def _espn_headshot_url(athlete_id: str) -> str:
@@ -2660,14 +2877,8 @@ def _event_opponent_and_scoreline(event: dict) -> Tuple[str, str, str, str]:
 
 
 def extract_what_you_missed(espn_schedule_payload: Optional[dict] = None) -> dict:
-    payload = espn_schedule_payload if isinstance(espn_schedule_payload, dict) else {}
-    if not payload:
-        try:
-            payload = fetch_json_any(ESPN_SCHEDULE_URLS)
-        except Exception:
-            payload = {}
-    events = _extract_schedule_events(payload)
-    completed_event = _first_completed_event(events)
+    _ = espn_schedule_payload  # Selection is scoreboard-based; schedule is intentionally not used.
+    completed_event = _latest_completed_pacers_event_from_scoreboard()
     if not completed_event:
         return {"summary": "Latest completed game not available.", "leaders": [], "_error": "no_completed_game_found"}
 
@@ -2692,7 +2903,7 @@ def extract_what_you_missed(espn_schedule_payload: Optional[dict] = None) -> dic
 
     game_dt = _event_datetime(completed_event)
     opp, pacers_score, opp_score, outcome = _event_opponent_and_scoreline(completed_event)
-    summary = f"{game_dt.strftime('%B %-d, %Y')} vs {opp}: {outcome} ({pacers_score}-{opp_score})."
+    summary = f"{_format_display_date(game_dt, '%B %-d, %Y')} vs {opp}: {outcome} ({pacers_score}-{opp_score})."
     if not leaders:
         return {"summary": summary, "leaders": [], "_error": "leader_extraction_failed"}
     return {"summary": summary, "leaders": leaders}
@@ -2859,7 +3070,7 @@ def main() -> int:
             fetch_source=standings_fetch_meta.get("source"),
             fetched_at_utc=standings_fetch_meta.get("fetched_at_utc"),
         )
-        espn_schedule = fetch_json_any(ESPN_SCHEDULE_URLS)
+        espn_schedule = fetch_json_any(ESPN_SCHEDULE_URLS, use_fresh_cache=False)
         payload = build_output(standings, espn_schedule, mock_override)
         if TEST_FAIL_SECTION == "standings":
             payload["lotteryStandings"] = []
@@ -2900,6 +3111,8 @@ def main() -> int:
         log_event("warn", "standings_lkg_used", reason=str(exc), last_ok_at_utc=prev_last_ok)
 
     # Always attempt NBA-driven sections even if draft fetch fails.
+    pacers_live = _is_pacers_game_in_progress(espn_schedule if isinstance(espn_schedule, dict) else {})
+
     try:
         print("Refreshing section 1 (What You Missed)...", flush=True)
         payload["whatYouMissed"] = extract_what_you_missed(espn_schedule if isinstance(espn_schedule, dict) else None)
@@ -2909,7 +3122,10 @@ def main() -> int:
         summary_text = str(payload["whatYouMissed"].get("summary") or "").lower()
         is_unavailable = ("not available" in summary_text) or ("unavailable" in summary_text)
         if not isinstance(leaders, list) or len(leaders) == 0:
-            refresh_status["whatYouMissed"] = f"error: {extraction_error or 'leader_extraction_failed'}"
+            if pacers_live:
+                refresh_status["whatYouMissed"] = "live:game_in_progress"
+            else:
+                refresh_status["whatYouMissed"] = f"error: {extraction_error or 'leader_extraction_failed'}"
             existing_missed = existing_payload.get("whatYouMissed", {})
             existing_leaders = existing_missed.get("leaders", []) if isinstance(existing_missed, dict) else []
             if isinstance(existing_leaders, list) and len(existing_leaders) > 0:
@@ -2919,7 +3135,7 @@ def main() -> int:
             existing_leaders = existing_missed.get("leaders", []) if isinstance(existing_missed, dict) else []
             if isinstance(existing_leaders, list) and len(existing_leaders) > 0:
                 payload["whatYouMissed"] = existing_missed
-            refresh_status["whatYouMissed"] = f"error: {extraction_error or 'leader_extraction_failed'}"
+            refresh_status["whatYouMissed"] = "live:game_in_progress" if pacers_live else f"error: {extraction_error or 'leader_extraction_failed'}"
         else:
             refresh_status["whatYouMissed"] = "ok:espn_boxscore"
     except Exception as exc:  # pragma: no cover
@@ -2929,7 +3145,7 @@ def main() -> int:
 
     # Refresh upcoming games independently so this section still updates when standings fail.
     try:
-        espn_schedule = fetch_json_any(ESPN_SCHEDULE_URLS)
+        espn_schedule = fetch_json_any(ESPN_SCHEDULE_URLS, use_fresh_cache=False)
         fresh_games = build_upcoming_games(espn_schedule, {}, {})
         if fresh_games:
             payload["upcomingGames"] = fresh_games
@@ -2983,6 +3199,9 @@ def main() -> int:
             url_val = out_row.get("mockPlayerUrl")
             out_row["mockPlayerName"] = name_val if name_val not in (None, "") else prev_mock.get("mockPlayerName")
             out_row["mockPlayerUrl"] = url_val if url_val not in (None, "") else prev_mock.get("mockPlayerUrl")
+        if is_blocked_mock_player(out_row.get("mockPlayerName")):
+            out_row["mockPlayerName"] = ""
+            out_row["mockPlayerUrl"] = ""
         cleaned_rows.append(out_row)
     payload["lotteryStandings"] = cleaned_rows
     payload.setdefault("pacersPickOdds", existing_payload.get("pacersPickOdds", []))
@@ -3063,6 +3282,8 @@ def main() -> int:
         }
         if error:
             entry["error"] = error
+        if reason:
+            entry["reason"] = reason
         if status == "disabled":
             entry["reason"] = reason or "no_compliant_source"
         return entry
@@ -3076,6 +3297,7 @@ def main() -> int:
     draft_reason = None if draft_ok else "espn_standings_missing"
 
     boxscore_error = None
+    wym_live = wym_status.startswith("live:")
     if wym_status.startswith("error:"):
         boxscore_error = wym_status.split("error:", 1)[1].strip()
     meta["sections"] = {
@@ -3093,9 +3315,10 @@ def main() -> int:
         "videos": _section_entry("videos", videos_status, videos_source, None, videos_reason),
         "whatYouMissed": _section_entry(
             "whatYouMissed",
-            "ok" if not wym_status.startswith("error") and wym_status != "empty" else "stale",
+            "ok" if (wym_live or (not wym_status.startswith("error") and wym_status != "empty")) else "stale",
             "espn_api",
             wym_status.split("error:", 1)[1].strip() if wym_status.startswith("error:") else (wym_status if wym_status.startswith("error") else None),
+            "game_in_progress" if wym_live else None,
         ),
         "pickProtection": _section_entry("pickProtection", "ok" if payload.get("pickProtection") else "stale", "static"),
     }
@@ -3176,6 +3399,9 @@ def main() -> int:
             url_val = r.get("mockPlayerUrl")
             r["mockPlayerName"] = name_val if name_val not in (None, "") else prev_mock.get("mockPlayerName")
             r["mockPlayerUrl"] = url_val if url_val not in (None, "") else prev_mock.get("mockPlayerUrl")
+        if is_blocked_mock_player(r.get("mockPlayerName")):
+            r["mockPlayerName"] = ""
+            r["mockPlayerUrl"] = ""
         normalized_rows.append(r)
     payload["lotteryStandings"] = normalized_rows
     draft_section = meta.get("sections", {}).get("draft", {})
