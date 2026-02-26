@@ -28,6 +28,24 @@ python3 scripts/update_data.py --fast
 python3 scripts/update_data.py --safe
 ```
 
+## Local web server (auto-refresh on open)
+
+To ensure `data.json` is refreshed from network when you open the page locally:
+
+```bash
+python3 scripts/dev_server.py
+```
+
+Then open:
+
+```text
+http://localhost:8000
+```
+
+Notes:
+- The server refreshes data on `/`, `/index.html`, and `/data.json` requests.
+- It uses a short refresh throttle (default 60s). Override with `PACERS_REFRESH_MIN_SECONDS`.
+
 ## How to make everything green
 
 1. Standings / Schedule / Scoreboard / Boxscores / Players

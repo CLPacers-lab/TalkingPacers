@@ -916,10 +916,10 @@ def fetch_json_any_with_meta(urls: List[str], use_fresh_cache: bool = True) -> T
     raise URLError("No URL candidates provided")
 
 
-def fetch_valid_standings_payload(urls: List[str]) -> Tuple[dict, dict]:
+def fetch_valid_standings_payload(urls: List[str], use_fresh_cache: bool = True) -> Tuple[dict, dict]:
     last_exc: Optional[Exception] = None
     for url in urls:
-        res = fetch_url(url)
+        res = fetch_url(url, use_fresh_cache=use_fresh_cache)
         if not res or res.get("body") is None:
             last_exc = URLError(str((res or {}).get("error") if isinstance(res, dict) else "network failure"))
             log_event("warn", "standings_fetch_failed", url=url, error=str(last_exc))
@@ -3061,7 +3061,7 @@ def main() -> int:
     standings_fetch_meta: Dict[str, object] = {}
     try:
         print("Fetching draft base data (compliant APIs/manual only)...", flush=True)
-        standings, standings_fetch_meta = fetch_valid_standings_payload(ESPN_STANDINGS_URLS)
+        standings, standings_fetch_meta = fetch_valid_standings_payload(ESPN_STANDINGS_URLS, use_fresh_cache=False)
         log_event(
             "info",
             "standings_url_used",
