@@ -1,32 +1,32 @@
 {
-  "asOf": "February 26, 2026",
+  "asOf": "February 27, 2026",
   "whatYouMissed": {
-    "summary": "February 24, 2026 vs Philadelphia 76ers: Loss (114-135).",
+    "summary": "February 26, 2026 vs Charlotte Hornets: Loss (109-133).",
     "leaders": [
       {
         "stat": "PTS",
-        "value": "23",
+        "value": "20",
         "player": "Andrew Nembhard",
         "athleteId": "4395712",
         "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4395712.png"
       },
       {
         "stat": "REB",
-        "value": "10",
-        "player": "Jarace Walker",
-        "athleteId": "5106060",
-        "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5106060.png"
-      },
-      {
-        "stat": "AST",
         "value": "6",
         "player": "Jarace Walker",
         "athleteId": "5106060",
         "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5106060.png"
       },
       {
+        "stat": "AST",
+        "value": "7",
+        "player": "Andrew Nembhard",
+        "athleteId": "4395712",
+        "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4395712.png"
+      },
+      {
         "stat": "MIN",
-        "value": "32",
+        "value": "31",
         "player": "Jarace Walker",
         "athleteId": "5106060",
         "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5106060.png"
@@ -47,7 +47,7 @@
     {
       "slot": 2,
       "team": "IND",
-      "record": "15-44",
+      "record": "15-45",
       "top4": 52.1,
       "first": 14.0,
       "mockPlayerName": "Cameron Boozer",
@@ -136,7 +136,7 @@
     },
     {
       "slot": 12,
-      "team": "CHA",
+      "team": "POR",
       "record": "28-31",
       "top4": 7.1,
       "first": 1.5,
@@ -145,8 +145,8 @@
     },
     {
       "slot": 13,
-      "team": "POR",
-      "record": "28-31",
+      "team": "CHA",
+      "record": "29-31",
       "top4": 4.8,
       "first": 1.0,
       "mockPlayerName": "Darius Acuff",
@@ -204,13 +204,6 @@
     "note": "Auto-calculated from standings + fixed lottery odds table"
   },
   "upcomingGames": [
-    {
-      "date": "Thu, Feb 26, 2026",
-      "opponent": "Charlotte Hornets",
-      "location": "Home",
-      "isKey": false,
-      "why": ""
-    },
     {
       "date": "Sun, Mar 1, 2026",
       "opponent": "Memphis Grizzlies",
@@ -273,12 +266,19 @@
       "location": "Away",
       "isKey": false,
       "why": ""
+    },
+    {
+      "date": "Wed, Mar 18, 2026",
+      "opponent": "Portland Trail Blazers",
+      "location": "Home",
+      "isKey": false,
+      "why": ""
     }
   ],
   "keyGames": [],
   "meta": {
     "pacersSlot": 2,
-    "updatedAtUtc": "2026-02-26T23:04:20.745405Z",
+    "updatedAtUtc": "2026-02-27T02:30:22.673598Z",
     "sources": {
       "draftStandings": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/standings",
       "draftSchedule": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/11/schedule",
@@ -292,7 +292,7 @@
         "url": "https://site.web.api.espn.com/apis/v2/sports/basketball/nba/standings",
         "http_status": 200,
         "source": "network",
-        "fetched_at_utc": "2026-02-26T23:04:16.255950Z",
+        "fetched_at_utc": "2026-02-27T02:30:19.419594Z",
         "ok": true,
         "validated_rows": 14
       }
@@ -303,63 +303,63 @@
     },
     "stale": true,
     "schema_version": 1,
-    "generated_at_utc": "2026-02-26T23:04:23.316066Z",
+    "generated_at_utc": "2026-02-27T02:30:25.681802Z",
     "sections": {
       "standings": {
         "status": "ok",
         "source": "espn_api",
-        "fetched_at_utc": "2026-02-26T23:04:23.316080Z",
-        "last_ok_at_utc": "2026-02-26T23:04:23.316080Z"
+        "fetched_at_utc": "2026-02-27T02:30:25.681818Z",
+        "last_ok_at_utc": "2026-02-27T02:30:25.681818Z"
       },
       "schedule": {
         "status": "ok",
         "source": "espn_api",
-        "fetched_at_utc": "2026-02-26T23:04:23.316085Z",
-        "last_ok_at_utc": "2026-02-26T23:04:23.316085Z"
+        "fetched_at_utc": "2026-02-27T02:30:25.681823Z",
+        "last_ok_at_utc": "2026-02-27T02:30:25.681823Z"
       },
       "scoreboard": {
         "status": "ok",
         "source": "espn_api",
-        "fetched_at_utc": "2026-02-26T23:04:23.316089Z",
-        "last_ok_at_utc": "2026-02-26T23:04:23.316089Z"
+        "fetched_at_utc": "2026-02-27T02:30:25.681826Z",
+        "last_ok_at_utc": "2026-02-27T02:30:25.681826Z"
       },
       "boxscores": {
         "status": "ok",
         "source": "espn_api",
-        "fetched_at_utc": "2026-02-26T23:04:23.316092Z",
-        "last_ok_at_utc": "2026-02-26T23:04:23.316092Z"
+        "fetched_at_utc": "2026-02-27T02:30:25.681830Z",
+        "last_ok_at_utc": "2026-02-27T02:30:25.681830Z"
       },
       "players": {
         "status": "disabled",
         "source": "none",
-        "fetched_at_utc": "2026-02-26T23:04:23.316095Z",
+        "fetched_at_utc": "2026-02-27T02:30:25.681832Z",
         "last_ok_at_utc": "2026-02-24T17:51:48.566416Z",
         "reason": "no_compliant_source"
       },
       "draft": {
         "status": "ok",
         "source": "espn_api+odds_table+manual_override",
-        "fetched_at_utc": "2026-02-26T23:04:23.316098Z",
-        "last_ok_at_utc": "2026-02-26T23:04:23.316156Z",
+        "fetched_at_utc": "2026-02-27T02:30:25.681835Z",
+        "last_ok_at_utc": "2026-02-27T02:30:25.681894Z",
         "reason": null
       },
       "videos": {
         "status": "ok",
         "source": "youtube_embed_official",
-        "fetched_at_utc": "2026-02-26T23:04:23.316101Z",
-        "last_ok_at_utc": "2026-02-26T23:04:23.316101Z"
+        "fetched_at_utc": "2026-02-27T02:30:25.681838Z",
+        "last_ok_at_utc": "2026-02-27T02:30:25.681838Z"
       },
       "whatYouMissed": {
         "status": "ok",
         "source": "espn_api",
-        "fetched_at_utc": "2026-02-26T23:04:23.316106Z",
-        "last_ok_at_utc": "2026-02-26T23:04:23.316106Z"
+        "fetched_at_utc": "2026-02-27T02:30:25.681842Z",
+        "last_ok_at_utc": "2026-02-27T02:30:25.681842Z"
       },
       "pickProtection": {
         "status": "ok",
         "source": "static",
-        "fetched_at_utc": "2026-02-26T23:04:23.316109Z",
-        "last_ok_at_utc": "2026-02-26T23:04:23.316109Z"
+        "fetched_at_utc": "2026-02-27T02:30:25.681845Z",
+        "last_ok_at_utc": "2026-02-27T02:30:25.681845Z"
       }
     },
     "requirements": {
