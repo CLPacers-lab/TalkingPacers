@@ -131,16 +131,17 @@ main {
   display: grid;
   gap: 1rem;
   grid-template-columns: minmax(320px, 0.95fr) minmax(520px, 1.25fr);
-  grid-template-areas:
-    "missed draft";
+  align-items: start;
 }
 
-.panel-missed {
-  grid-area: missed;
+.left-column {
+  display: grid;
+  gap: 1rem;
+  align-content: start;
 }
 
 .panel-draft {
-  grid-area: draft;
+  align-self: start;
 }
 
 .panel {
@@ -475,9 +476,6 @@ a {
 @media (max-width: 980px) {
   .dashboard-grid {
     grid-template-columns: 1fr;
-    grid-template-areas:
-      "missed"
-      "draft";
   }
 
   .odds-viz-wrap {
