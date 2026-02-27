@@ -73,5 +73,34 @@
     </main>
 
     <script src="script.js?v=20260224-4"></script>
+    <script type="module">
+      import { FEATURES } from './config/features.js';
+
+      async function loadRememberThisCard() {
+        try {
+          const mod = await import('./components/RememberThisCard.jsx');
+          return mod.default;
+        } catch (_err) {
+          const response = await fetch('./components/RememberThisCard.jsx', { cache: 'no-store' });
+          const source = await response.text();
+          const blobUrl = URL.createObjectURL(new Blob([source], { type: 'text/javascript' }));
+          const mod = await import(blobUrl);
+          URL.revokeObjectURL(blobUrl);
+          return mod.default;
+        }
+      }
+
+      if (FEATURES.rememberThis) {
+        const grid = document.querySelector('.dashboard-grid');
+        if (grid) {
+          const RememberThisCard = await loadRememberThisCard();
+          const section = document.createElement('section');
+          section.className = 'panel remember-this-section';
+          section.setAttribute('aria-label', 'Remember This?');
+          section.appendChild(RememberThisCard());
+          grid.appendChild(section);
+        }
+      }
+    </script>
   </body>
 </html>
