@@ -518,3 +518,98 @@ a {
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 768px) {
+  html,
+  body {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  main {
+    padding: 0.9rem 0.75rem;
+  }
+
+  .dashboard-grid,
+  .panel,
+  .odds-viz-wrap,
+  .odds-grid,
+  .leader-grid,
+  .leader-card {
+    min-width: 0;
+  }
+
+  .panel {
+    border-radius: 14px;
+  }
+
+  .table-wrap {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  table {
+    min-width: 640px;
+  }
+
+  th,
+  td {
+    padding: 0.5rem;
+    font-size: 0.92rem;
+  }
+
+  .team-cell,
+  .game-heading {
+    flex-wrap: wrap;
+  }
+
+  .odds-viz-wrap {
+    gap: 0.7rem;
+  }
+
+  .odds-ring {
+    width: 140px;
+    height: 140px;
+  }
+
+  .odds-ring__inner {
+    width: 96px;
+    height: 96px;
+  }
+
+  .odds-ring__value,
+  .big-pct {
+    font-size: 1.7rem;
+  }
+
+  .games {
+    max-height: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero__content {
+    padding: 2rem 0.85rem;
+  }
+
+  main {
+    padding: 0.75rem 0.55rem;
+  }
+
+  .panel {
+    padding: 0.75rem;
+  }
+
+  .subhead {
+    font-size: 1.05rem;
+  }
+
+  table {
+    min-width: 560px;
+  }
+
+  th,
+  td {
+    font-size: 0.86rem;
+  }
+}
