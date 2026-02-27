@@ -128,7 +128,7 @@
     {
       "slot": 11,
       "team": "LAC",
-      "record": "27-30",
+      "record": "27-31",
       "top4": 9.4,
       "first": 2.0,
       "mockPlayerName": "Brayden Burries",
@@ -278,7 +278,7 @@
   "keyGames": [],
   "meta": {
     "pacersSlot": 2,
-    "updatedAtUtc": "2026-02-27T05:03:53.281030Z",
+    "updatedAtUtc": "2026-02-27T07:55:53.176888Z",
     "sources": {
       "draftStandings": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/standings",
       "draftSchedule": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/11/schedule",
@@ -292,7 +292,7 @@
         "url": "https://site.web.api.espn.com/apis/v2/sports/basketball/nba/standings",
         "http_status": 200,
         "source": "network",
-        "fetched_at_utc": "2026-02-27T05:03:50.303782Z",
+        "fetched_at_utc": "2026-02-27T07:55:50.026957Z",
         "ok": true,
         "validated_rows": 14
       }
@@ -303,63 +303,63 @@
     },
     "stale": true,
     "schema_version": 1,
-    "generated_at_utc": "2026-02-27T05:03:55.212289Z",
+    "generated_at_utc": "2026-02-27T07:55:55.154759Z",
     "sections": {
       "standings": {
         "status": "ok",
         "source": "espn_api",
-        "fetched_at_utc": "2026-02-27T05:03:55.212304Z",
-        "last_ok_at_utc": "2026-02-27T05:03:55.212304Z"
+        "fetched_at_utc": "2026-02-27T07:55:55.154774Z",
+        "last_ok_at_utc": "2026-02-27T07:55:55.154774Z"
       },
       "schedule": {
         "status": "ok",
         "source": "espn_api",
-        "fetched_at_utc": "2026-02-27T05:03:55.212309Z",
-        "last_ok_at_utc": "2026-02-27T05:03:55.212309Z"
+        "fetched_at_utc": "2026-02-27T07:55:55.154779Z",
+        "last_ok_at_utc": "2026-02-27T07:55:55.154779Z"
       },
       "scoreboard": {
         "status": "ok",
         "source": "espn_api",
-        "fetched_at_utc": "2026-02-27T05:03:55.212312Z",
-        "last_ok_at_utc": "2026-02-27T05:03:55.212312Z"
+        "fetched_at_utc": "2026-02-27T07:55:55.154782Z",
+        "last_ok_at_utc": "2026-02-27T07:55:55.154782Z"
       },
       "boxscores": {
         "status": "ok",
         "source": "espn_api",
-        "fetched_at_utc": "2026-02-27T05:03:55.212316Z",
-        "last_ok_at_utc": "2026-02-27T05:03:55.212316Z"
+        "fetched_at_utc": "2026-02-27T07:55:55.154785Z",
+        "last_ok_at_utc": "2026-02-27T07:55:55.154785Z"
       },
       "players": {
         "status": "disabled",
         "source": "none",
-        "fetched_at_utc": "2026-02-27T05:03:55.212319Z",
+        "fetched_at_utc": "2026-02-27T07:55:55.154788Z",
         "last_ok_at_utc": "2026-02-24T17:51:48.566416Z",
         "reason": "no_compliant_source"
       },
       "draft": {
         "status": "ok",
         "source": "espn_api+odds_table+manual_override",
-        "fetched_at_utc": "2026-02-27T05:03:55.212322Z",
-        "last_ok_at_utc": "2026-02-27T05:03:55.212381Z",
+        "fetched_at_utc": "2026-02-27T07:55:55.154791Z",
+        "last_ok_at_utc": "2026-02-27T07:55:55.154850Z",
         "reason": null
       },
       "videos": {
         "status": "ok",
         "source": "youtube_embed_official",
-        "fetched_at_utc": "2026-02-27T05:03:55.212325Z",
-        "last_ok_at_utc": "2026-02-27T05:03:55.212325Z"
+        "fetched_at_utc": "2026-02-27T07:55:55.154793Z",
+        "last_ok_at_utc": "2026-02-27T07:55:55.154793Z"
       },
       "whatYouMissed": {
         "status": "ok",
         "source": "espn_api",
-        "fetched_at_utc": "2026-02-27T05:03:55.212329Z",
-        "last_ok_at_utc": "2026-02-27T05:03:55.212329Z"
+        "fetched_at_utc": "2026-02-27T07:55:55.154798Z",
+        "last_ok_at_utc": "2026-02-27T07:55:55.154798Z"
       },
       "pickProtection": {
         "status": "ok",
         "source": "static",
-        "fetched_at_utc": "2026-02-27T05:03:55.212332Z",
-        "last_ok_at_utc": "2026-02-27T05:03:55.212332Z"
+        "fetched_at_utc": "2026-02-27T07:55:55.154801Z",
+        "last_ok_at_utc": "2026-02-27T07:55:55.154801Z"
       }
     },
     "requirements": {
