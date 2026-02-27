@@ -2738,6 +2738,25 @@ def _latest_completed_pacers_event_from_scoreboard(days_back: int = 14) -> Optio
     return latest
 
 
+def _latest_completed_pacers_event(schedule_payload: Optional[dict], days_back: int = 14) -> Optional[dict]:
+    schedule_latest: Optional[dict] = None
+    if isinstance(schedule_payload, dict):
+        schedule_events = [
+            e
+            for e in _extract_schedule_events(schedule_payload)
+            if _is_pacers_event(e) and _is_completed_espn_event(e)
+        ]
+        schedule_latest = _first_completed_event(schedule_events)
+    scoreboard_latest = _latest_completed_pacers_event_from_scoreboard(days_back=days_back)
+    if schedule_latest and scoreboard_latest:
+        return (
+            schedule_latest
+            if _event_datetime(schedule_latest) >= _event_datetime(scoreboard_latest)
+            else scoreboard_latest
+        )
+    return schedule_latest or scoreboard_latest
+
+
 def _espn_headshot_url(athlete_id: str) -> str:
     return f"https://a.espncdn.com/i/headshots/nba/players/full/{athlete_id}.png"
 
@@ -2877,8 +2896,7 @@ def _event_opponent_and_scoreline(event: dict) -> Tuple[str, str, str, str]:
 
 
 def extract_what_you_missed(espn_schedule_payload: Optional[dict] = None) -> dict:
-    _ = espn_schedule_payload  # Selection is scoreboard-based; schedule is intentionally not used.
-    completed_event = _latest_completed_pacers_event_from_scoreboard()
+    completed_event = _latest_completed_pacers_event(espn_schedule_payload, days_back=14)
     if not completed_event:
         return {"summary": "Latest completed game not available.", "leaders": [], "_error": "no_completed_game_found"}
 
@@ -3129,7 +3147,11 @@ def main() -> int:
             existing_missed = existing_payload.get("whatYouMissed", {})
             existing_leaders = existing_missed.get("leaders", []) if isinstance(existing_missed, dict) else []
             if isinstance(existing_leaders, list) and len(existing_leaders) > 0:
-                payload["whatYouMissed"] = existing_missed
+                # Keep fresh summary/opponent/date when available; only backfill missing leaders.
+                payload["whatYouMissed"]["leaders"] = existing_leaders
+                current_summary = str(payload["whatYouMissed"].get("summary") or "").strip()
+                if not current_summary or "not available" in current_summary.lower():
+                    payload["whatYouMissed"]["summary"] = existing_missed.get("summary") or current_summary
         elif is_unavailable:
             existing_missed = existing_payload.get("whatYouMissed", {})
             existing_leaders = existing_missed.get("leaders", []) if isinstance(existing_missed, dict) else []
