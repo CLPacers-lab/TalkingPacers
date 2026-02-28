@@ -117,7 +117,8 @@ function injectStyles() {
       display: flex;
       align-items: center;
       gap: 8px;
-      justify-content: space-between;
+      justify-content: flex-end;
+      flex-wrap: wrap;
     }
 
     .remember-this-chip {
@@ -137,10 +138,15 @@ function injectStyles() {
       border: 0;
       border-radius: 999px;
       padding: 8px 14px;
+      min-width: 112px;
       font-weight: 700;
       background: #fdbb30;
       color: #1a2b4f;
       cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .remember-this-btn:disabled {
@@ -212,6 +218,9 @@ function renderEntry(root, entry) {
   }
 
   const chip = entry.trauma ? `TRAUMA: ${entry.trauma_level || 'HIGH'}` : String(entry.category || 'MOMENT');
+  const recapLink = entry.recap_url
+    ? `<a class="remember-this-btn" href="${entry.recap_url}" target="_blank" rel="noopener noreferrer">Recap</a>`
+    : '';
 
   root.innerHTML = `
     <h3 class="remember-this-title">REMEMBER THIS?</h3>
@@ -226,6 +235,7 @@ function renderEntry(root, entry) {
     </div>
     <div class="remember-this-footer">
       <span class="remember-this-chip">${chip}</span>
+      ${recapLink}
       <button type="button" class="remember-this-btn" data-remember-refresh>Another one</button>
     </div>
     <p class="remember-this-status" data-remember-status></p>

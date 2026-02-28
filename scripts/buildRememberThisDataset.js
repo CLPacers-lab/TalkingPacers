@@ -132,9 +132,27 @@ function statMapForAthlete(athleteRow, labels) {
   return out;
 }
 
+function getRecapUrl(summary, context) {
+  const competition = (((summary || {}).header || {}).competitions || [])[0] || {};
+  const links = Array.isArray(competition.links) ? competition.links : [];
+  const direct = links.find((link) => {
+    const rel = Array.isArray(link.rel) ? link.rel : [];
+    return rel.includes('summary') && rel.includes('desktop') && rel.includes('event') && typeof link.href === 'string';
+  });
+  if (direct && direct.href) {
+    return direct.href;
+  }
+  if (competition.id) {
+    const opp = String((context && context.opponent) || '').toLowerCase();
+    return `https://www.espn.com/nba/game/_/gameId/${competition.id}/pacers-${opp || 'opponent'}`;
+  }
+  return '';
+}
+
 function createBaseEntry(context, summary, player, statLine, category, why) {
   const hasPlayerHeadshot = Boolean(player && player.id && player.id !== '0');
   const opponentLogo = getOpponentLogo(context);
+  const recapUrl = getRecapUrl(summary, context);
   return {
     date: String((((summary || {}).header || {}).competitions || [])[0]?.date || '').slice(0, 10),
     season: seasonLabelFromDate((((summary || {}).header || {}).competitions || [])[0]?.date || ''),
@@ -147,7 +165,8 @@ function createBaseEntry(context, summary, player, statLine, category, why) {
     category,
     trauma: false,
     why,
-    image: hasPlayerHeadshot ? `https://a.espncdn.com/i/headshots/nba/players/full/${player.id}.png` : opponentLogo
+    image: hasPlayerHeadshot ? `https://a.espncdn.com/i/headshots/nba/players/full/${player.id}.png` : opponentLogo,
+    recap_url: recapUrl
   };
 }
 

@@ -11,7 +11,8 @@
     "category": "TEAM_WEIRDNESS",
     "trauma": false,
     "why": "Dropped 130+ and still lost. Defense dissolved completely.",
-    "image": "https://a.espncdn.com/i/teamlogos/nba/500/dal.png"
+    "image": "https://a.espncdn.com/i/teamlogos/nba/500/dal.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401810676/pacers-dal"
   },
   {
     "date": "2025-11-12",
@@ -25,7 +26,8 @@
     "category": "TEAM_WEIRDNESS",
     "trauma": false,
     "why": "Allowed 150+. Historical nonsense occurred.",
-    "image": "https://a.espncdn.com/i/teamlogos/nba/500/utah.png"
+    "image": "https://a.espncdn.com/i/teamlogos/nba/500/utah.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401810066/pacers-utah"
   },
   {
     "date": "2025-10-23",
@@ -39,7 +41,8 @@
     "category": "TEAM_WEIRDNESS",
     "trauma": false,
     "why": "Dropped 130+ and still lost. Defense dissolved completely.",
-    "image": "https://a.espncdn.com/i/teamlogos/nba/500/okc.png"
+    "image": "https://a.espncdn.com/i/teamlogos/nba/500/okc.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401809236/pacers-okc"
   },
   {
     "date": "2025-06-23",
@@ -54,6 +57,7 @@
     "trauma": true,
     "why": "Playoff elimination confirmed. Remote tossed.",
     "image": "https://a.espncdn.com/i/teamlogos/nba/500/okc.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401766128/pacers-okc",
     "trauma_level": "HIGH"
   },
   {
@@ -69,6 +73,7 @@
     "trauma": true,
     "why": "ECF/Finals loss. Banner-adjacent heartbreak.",
     "image": "https://a.espncdn.com/i/teamlogos/nba/500/okc.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401766126/pacers-okc",
     "trauma_level": "HIGH"
   },
   {
@@ -84,6 +89,7 @@
     "trauma": true,
     "why": "ECF/Finals loss. Banner-adjacent heartbreak.",
     "image": "https://a.espncdn.com/i/teamlogos/nba/500/okc.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401766125/pacers-okc",
     "trauma_level": "HIGH"
   },
   {
@@ -98,7 +104,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Bennedict Mathurin scored 27 in 22.0 minutes.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4683634.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4683634.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401766124/pacers-okc"
   },
   {
     "date": "2025-06-09",
@@ -113,6 +120,7 @@
     "trauma": true,
     "why": "ECF/Finals loss. Banner-adjacent heartbreak.",
     "image": "https://a.espncdn.com/i/teamlogos/nba/500/okc.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401766123/pacers-okc",
     "trauma_level": "HIGH"
   },
   {
@@ -127,7 +135,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Andrew Nembhard ripped 6 steals in one night.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4395712.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4395712.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401772994/pacers-ny"
   },
   {
     "date": "2025-05-30",
@@ -142,6 +151,7 @@
     "trauma": true,
     "why": "NY playoff loss. Annual emotional tax paid.",
     "image": "https://a.espncdn.com/i/teamlogos/nba/500/ny.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401772993/pacers-ny",
     "trauma_level": "HIGH"
   },
   {
@@ -156,7 +166,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Tyrese Haliburton posted 15 assists with 0 turnovers. Surgical control.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4396993.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4396993.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401772992/pacers-ny"
   },
   {
     "date": "2025-05-26",
@@ -171,6 +182,7 @@
     "trauma": true,
     "why": "NY playoff loss. Annual emotional tax paid.",
     "image": "https://a.espncdn.com/i/teamlogos/nba/500/ny.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401772991/pacers-ny",
     "trauma_level": "HIGH"
   },
   {
@@ -185,7 +197,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Tyrese Haliburton posted 15 assists with 0 turnovers. Surgical control.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4396993.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4396993.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401705538/pacers-mil"
   },
   {
     "date": "2025-03-09",
@@ -199,7 +212,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Bench detonation: Bennedict Mathurin dropped 30 off the bench.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4683634.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4683634.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401705480/pacers-atl"
   },
   {
     "date": "2025-02-21",
@@ -213,7 +227,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Myles Turner rejected 7 shots like a bouncer.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3133628.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3133628.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401705354/pacers-mem"
   },
   {
     "date": "2025-02-13",
@@ -227,7 +242,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Bench detonation: Obi Toppin dropped 31 off the bench.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4278355.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4278355.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401705337/pacers-wsh"
   },
   {
     "date": "2025-01-03",
@@ -241,7 +257,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Tyrese Haliburton posted 15 assists with 0 turnovers. Surgical control.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4396993.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4396993.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401705029/pacers-mia"
   },
   {
     "date": "2024-12-08",
@@ -255,7 +272,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Bench detonation: T.J. McConnell dropped 30 off the bench.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/2530530.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/2530530.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401704915/pacers-cha"
   },
   {
     "date": "2024-10-30",
@@ -269,7 +287,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Bench detonation: Bennedict Mathurin dropped 30 off the bench.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4683634.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4683634.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401704685/pacers-bos"
   },
   {
     "date": "2024-05-28",
@@ -284,6 +303,7 @@
     "trauma": true,
     "why": "Playoff elimination confirmed. Remote tossed.",
     "image": "https://a.espncdn.com/i/teamlogos/nba/500/bos.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401672001/pacers-bos",
     "trauma_level": "HIGH"
   },
   {
@@ -299,6 +319,7 @@
     "trauma": true,
     "why": "NY playoff loss. Annual emotional tax paid.",
     "image": "https://a.espncdn.com/i/teamlogos/nba/500/ny.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401658196/pacers-ny",
     "trauma_level": "HIGH"
   },
   {
@@ -314,6 +335,7 @@
     "trauma": true,
     "why": "NY playoff loss. Annual emotional tax paid.",
     "image": "https://a.espncdn.com/i/teamlogos/nba/500/ny.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401657421/pacers-ny",
     "trauma_level": "HIGH"
   },
   {
@@ -329,6 +351,7 @@
     "trauma": true,
     "why": "NY playoff loss. Annual emotional tax paid.",
     "image": "https://a.espncdn.com/i/teamlogos/nba/500/ny.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401657420/pacers-ny",
     "trauma_level": "HIGH"
   },
   {
@@ -343,7 +366,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Myles Turner scored 31 in 22.0 minutes.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3133628.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3133628.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401585816/pacers-atl"
   },
   {
     "date": "2024-03-25",
@@ -357,7 +381,8 @@
     "category": "TEAM_WEIRDNESS",
     "trauma": false,
     "why": "Dropped 130+ and still lost. Defense dissolved completely.",
-    "image": "https://a.espncdn.com/i/teamlogos/nba/500/lal.png"
+    "image": "https://a.espncdn.com/i/teamlogos/nba/500/lal.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401585660/pacers-lal"
   },
   {
     "date": "2024-03-25",
@@ -371,7 +396,8 @@
     "category": "TEAM_WEIRDNESS",
     "trauma": false,
     "why": "Allowed 150+. Historical nonsense occurred.",
-    "image": "https://a.espncdn.com/i/teamlogos/nba/500/lal.png"
+    "image": "https://a.espncdn.com/i/teamlogos/nba/500/lal.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401585660/pacers-lal"
   },
   {
     "date": "2024-01-20",
@@ -385,7 +411,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Tyrese Haliburton posted 17 assists with 0 turnovers. Surgical control.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4396993.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4396993.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401585218/pacers-por"
   },
   {
     "date": "2024-01-06",
@@ -399,7 +426,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Myles Turner scored 27 in 22.0 minutes.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3133628.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3133628.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401585108/pacers-atl"
   },
   {
     "date": "2023-12-29",
@@ -413,7 +441,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Tyrese Haliburton posted 20 assists with 0 turnovers. Surgical control.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4396993.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4396993.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401585050/pacers-chi"
   },
   {
     "date": "2023-12-19",
@@ -427,7 +456,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Bench detonation: Bennedict Mathurin dropped 34 off the bench.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4683634.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4683634.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401584978/pacers-lac"
   },
   {
     "date": "2023-12-19",
@@ -441,7 +471,8 @@
     "category": "TEAM_WEIRDNESS",
     "trauma": false,
     "why": "Allowed 150+. Historical nonsense occurred.",
-    "image": "https://a.espncdn.com/i/teamlogos/nba/500/lac.png"
+    "image": "https://a.espncdn.com/i/teamlogos/nba/500/lac.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401584978/pacers-lac"
   },
   {
     "date": "2023-12-12",
@@ -455,7 +486,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Bench detonation: Bennedict Mathurin dropped 30 off the bench.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4683634.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4683634.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401584921/pacers-det"
   },
   {
     "date": "2023-12-07",
@@ -469,7 +501,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Tyrese Haliburton posted 15 assists with 0 turnovers. Surgical control.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4396993.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4396993.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401607494/pacers-mil"
   },
   {
     "date": "2023-12-01",
@@ -483,7 +516,8 @@
     "category": "TEAM_WEIRDNESS",
     "trauma": false,
     "why": "Dropped 130+ and still lost. Defense dissolved completely.",
-    "image": "https://a.espncdn.com/i/teamlogos/nba/500/mia.png"
+    "image": "https://a.espncdn.com/i/teamlogos/nba/500/mia.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401584895/pacers-mia"
   },
   {
     "date": "2023-11-23",
@@ -497,7 +531,8 @@
     "category": "TEAM_WEIRDNESS",
     "trauma": false,
     "why": "Dropped 130+ and still lost. Defense dissolved completely.",
-    "image": "https://a.espncdn.com/i/teamlogos/nba/500/tor.png"
+    "image": "https://a.espncdn.com/i/teamlogos/nba/500/tor.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401584858/pacers-tor"
   },
   {
     "date": "2023-11-22",
@@ -511,7 +546,8 @@
     "category": "TEAM_WEIRDNESS",
     "trauma": false,
     "why": "Allowed 150+. Historical nonsense occurred.",
-    "image": "https://a.espncdn.com/i/teamlogos/nba/500/atl.png"
+    "image": "https://a.espncdn.com/i/teamlogos/nba/500/atl.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401584127/pacers-atl"
   },
   {
     "date": "2023-11-15",
@@ -525,7 +561,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Tyrese Haliburton posted 15 assists with 0 turnovers. Surgical control.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4396993.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4396993.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401584107/pacers-phi"
   },
   {
     "date": "2023-11-12",
@@ -539,7 +576,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Tyrese Haliburton posted 17 assists with 0 turnovers. Surgical control.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4396993.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4396993.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401584808/pacers-phi"
   },
   {
     "date": "2023-11-01",
@@ -553,7 +591,8 @@
     "category": "TEAM_WEIRDNESS",
     "trauma": false,
     "why": "Allowed 150+. Historical nonsense occurred.",
-    "image": "https://a.espncdn.com/i/teamlogos/nba/500/bos.png"
+    "image": "https://a.espncdn.com/i/teamlogos/nba/500/bos.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401584746/pacers-bos"
   },
   {
     "date": "2023-03-29",
@@ -567,7 +606,8 @@
     "category": "TEAM_WEIRDNESS",
     "trauma": false,
     "why": "Dropped 130+ and still lost. Defense dissolved completely.",
-    "image": "https://a.espncdn.com/i/teamlogos/nba/500/mil.png"
+    "image": "https://a.espncdn.com/i/teamlogos/nba/500/mil.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401469291/pacers-mil"
   },
   {
     "date": "2023-03-25",
@@ -581,7 +621,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Bench detonation: Jordan Nwora dropped 33 off the bench.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4277883.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4277883.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401469262/pacers-atl"
   },
   {
     "date": "2023-03-25",
@@ -595,7 +636,8 @@
     "category": "TEAM_WEIRDNESS",
     "trauma": false,
     "why": "Dropped 130+ and still lost. Defense dissolved completely.",
-    "image": "https://a.espncdn.com/i/teamlogos/nba/500/atl.png"
+    "image": "https://a.espncdn.com/i/teamlogos/nba/500/atl.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401469262/pacers-atl"
   },
   {
     "date": "2023-03-10",
@@ -609,7 +651,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Myles Turner rejected 7 shots like a bouncer.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3133628.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3133628.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401469148/pacers-hou"
   },
   {
     "date": "2023-03-07",
@@ -623,7 +666,8 @@
     "category": "TEAM_WEIRDNESS",
     "trauma": false,
     "why": "Dropped 130+ and still lost. Defense dissolved completely.",
-    "image": "https://a.espncdn.com/i/teamlogos/nba/500/phi.png"
+    "image": "https://a.espncdn.com/i/teamlogos/nba/500/phi.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401469127/pacers-phi"
   },
   {
     "date": "2023-02-24",
@@ -637,7 +681,8 @@
     "category": "TEAM_WEIRDNESS",
     "trauma": false,
     "why": "Dropped 130+ and still lost. Defense dissolved completely.",
-    "image": "https://a.espncdn.com/i/teamlogos/nba/500/bos.png"
+    "image": "https://a.espncdn.com/i/teamlogos/nba/500/bos.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401469042/pacers-bos"
   },
   {
     "date": "2023-02-05",
@@ -651,7 +696,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Myles Turner scored 27 in 24.0 minutes.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3133628.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3133628.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401468958/pacers-cle"
   },
   {
     "date": "2023-01-28",
@@ -665,7 +711,8 @@
     "category": "TEAM_WEIRDNESS",
     "trauma": false,
     "why": "Dropped 130+ and still lost. Defense dissolved completely.",
-    "image": "https://a.espncdn.com/i/teamlogos/nba/500/mil.png"
+    "image": "https://a.espncdn.com/i/teamlogos/nba/500/mil.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401468891/pacers-mil"
   },
   {
     "date": "2023-01-26",
@@ -679,7 +726,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Chris Duarte ripped 6 steals in one night.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4592402.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4592402.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401468875/pacers-orl"
   },
   {
     "date": "2023-01-14",
@@ -693,7 +741,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Isaiah Jackson rejected 7 shots like a bouncer.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4432170.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4432170.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401468788/pacers-atl"
   },
   {
     "date": "2022-12-11",
@@ -707,7 +756,8 @@
     "category": "TEAM_WEIRDNESS",
     "trauma": false,
     "why": "Dropped 130+ and still lost. Defense dissolved completely.",
-    "image": "https://a.espncdn.com/i/teamlogos/nba/500/bkn.png"
+    "image": "https://a.espncdn.com/i/teamlogos/nba/500/bkn.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401468543/pacers-bkn"
   },
   {
     "date": "2022-11-26",
@@ -721,7 +771,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Tyrese Haliburton posted 15 assists with 0 turnovers. Surgical control.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4396993.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4396993.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401468431/pacers-bkn"
   },
   {
     "date": "2022-11-10",
@@ -735,7 +786,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Bench detonation: Bennedict Mathurin dropped 30 off the bench.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4683634.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4683634.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401468315/pacers-den"
   },
   {
     "date": "2022-11-08",
@@ -749,7 +801,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Myles Turner averaged 6.1 then exploded for 37.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3133628.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3133628.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401468302/pacers-no"
   },
   {
     "date": "2022-10-29",
@@ -763,7 +816,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Bench detonation: Bennedict Mathurin dropped 32 off the bench.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4683634.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4683634.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401468238/pacers-bkn"
   },
   {
     "date": "2022-10-21",
@@ -777,7 +831,8 @@
     "category": "TEAM_WEIRDNESS",
     "trauma": false,
     "why": "Dropped 130+ and still lost. Defense dissolved completely.",
-    "image": "https://a.espncdn.com/i/teamlogos/nba/500/sa.png"
+    "image": "https://a.espncdn.com/i/teamlogos/nba/500/sa.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401468173/pacers-sa"
   },
   {
     "date": "2022-04-03",
@@ -791,7 +846,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Tyrese Haliburton posted 17 assists with 0 turnovers. Surgical control.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4396993.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4396993.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401360988/pacers-det"
   },
   {
     "date": "2022-03-25",
@@ -805,7 +861,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Lance Stephenson scored 25 in 23.0 minutes.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4244.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4244.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401360915/pacers-mem"
   },
   {
     "date": "2022-03-23",
@@ -819,7 +876,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Tyrese Haliburton posted 15 assists with 0 turnovers. Surgical control.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4396993.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4396993.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401360905/pacers-sac"
   },
   {
     "date": "2022-03-23",
@@ -833,7 +891,8 @@
     "category": "TEAM_WEIRDNESS",
     "trauma": false,
     "why": "Blew a 20-point lead.",
-    "image": "https://a.espncdn.com/i/teamlogos/nba/500/sac.png"
+    "image": "https://a.espncdn.com/i/teamlogos/nba/500/sac.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401360905/pacers-sac"
   },
   {
     "date": "2022-03-23",
@@ -848,6 +907,7 @@
     "trauma": true,
     "why": "Led by 20 and still lost. Hope briefly existed.",
     "image": "https://a.espncdn.com/i/teamlogos/nba/500/sac.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401360905/pacers-sac",
     "trauma_level": "HIGH"
   },
   {
@@ -862,7 +922,8 @@
     "category": "TEAM_WEIRDNESS",
     "trauma": false,
     "why": "Allowed 150+. Historical nonsense occurred.",
-    "image": "https://a.espncdn.com/i/teamlogos/nba/500/cha.png"
+    "image": "https://a.espncdn.com/i/teamlogos/nba/500/cha.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401360542/pacers-cha"
   },
   {
     "date": "2022-01-17",
@@ -876,7 +937,8 @@
     "category": "TEAM_WEIRDNESS",
     "trauma": false,
     "why": "Dropped 130+ and still lost. Defense dissolved completely.",
-    "image": "https://a.espncdn.com/i/teamlogos/nba/500/lac.png"
+    "image": "https://a.espncdn.com/i/teamlogos/nba/500/lac.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401360478/pacers-lac"
   },
   {
     "date": "2022-01-06",
@@ -890,7 +952,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Bench detonation: Lance Stephenson dropped 30 off the bench.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4244.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4244.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401360390/pacers-bkn"
   },
   {
     "date": "2021-10-22",
@@ -904,7 +967,8 @@
     "category": "TEAM_WEIRDNESS",
     "trauma": false,
     "why": "Dropped 130+ and still lost. Defense dissolved completely.",
-    "image": "https://a.espncdn.com/i/teamlogos/nba/500/wsh.png"
+    "image": "https://a.espncdn.com/i/teamlogos/nba/500/wsh.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401359845/pacers-wsh"
   },
   {
     "date": "2021-10-22",
@@ -918,7 +982,8 @@
     "category": "TEAM_WEIRDNESS",
     "trauma": false,
     "why": "Overtime loss by 1. Painfully precise.",
-    "image": "https://a.espncdn.com/i/teamlogos/nba/500/wsh.png"
+    "image": "https://a.espncdn.com/i/teamlogos/nba/500/wsh.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401359845/pacers-wsh"
   },
   {
     "date": "2021-05-13",
@@ -932,7 +997,8 @@
     "category": "TEAM_WEIRDNESS",
     "trauma": false,
     "why": "Dropped 130+ and still lost. Defense dissolved completely.",
-    "image": "https://a.espncdn.com/i/teamlogos/nba/500/mil.png"
+    "image": "https://a.espncdn.com/i/teamlogos/nba/500/mil.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401307858/pacers-mil"
   },
   {
     "date": "2021-05-08",
@@ -946,7 +1012,8 @@
     "category": "TEAM_WEIRDNESS",
     "trauma": false,
     "why": "Dropped 130+ and still lost. Defense dissolved completely.",
-    "image": "https://a.espncdn.com/i/teamlogos/nba/500/wsh.png"
+    "image": "https://a.espncdn.com/i/teamlogos/nba/500/wsh.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401307820/pacers-wsh"
   },
   {
     "date": "2021-05-08",
@@ -960,7 +1027,8 @@
     "category": "TEAM_WEIRDNESS",
     "trauma": false,
     "why": "Overtime loss by 1. Painfully precise.",
-    "image": "https://a.espncdn.com/i/teamlogos/nba/500/wsh.png"
+    "image": "https://a.espncdn.com/i/teamlogos/nba/500/wsh.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401307820/pacers-wsh"
   },
   {
     "date": "2021-05-03",
@@ -974,7 +1042,8 @@
     "category": "TEAM_WEIRDNESS",
     "trauma": false,
     "why": "Dropped 130+ and still lost. Defense dissolved completely.",
-    "image": "https://a.espncdn.com/i/teamlogos/nba/500/wsh.png"
+    "image": "https://a.espncdn.com/i/teamlogos/nba/500/wsh.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401307779/pacers-wsh"
   },
   {
     "date": "2021-05-03",
@@ -988,7 +1057,8 @@
     "category": "TEAM_WEIRDNESS",
     "trauma": false,
     "why": "Allowed 150+. Historical nonsense occurred.",
-    "image": "https://a.espncdn.com/i/teamlogos/nba/500/wsh.png"
+    "image": "https://a.espncdn.com/i/teamlogos/nba/500/wsh.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401307779/pacers-wsh"
   },
   {
     "date": "2021-04-06",
@@ -1002,7 +1072,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Jeremy Lamb ripped 6 steals in one night.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/6603.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/6603.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401307560/pacers-chi"
   },
   {
     "date": "2021-03-27",
@@ -1016,7 +1087,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Myles Turner rejected 7 shots like a bouncer.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3133628.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3133628.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401307479/pacers-dal"
   },
   {
     "date": "2021-03-04",
@@ -1030,7 +1102,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "T.J. McConnell ripped 10 steals in one night.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/2530530.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/2530530.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401267703/pacers-cle"
   },
   {
     "date": "2021-02-01",
@@ -1044,7 +1117,8 @@
     "category": "TEAM_WEIRDNESS",
     "trauma": false,
     "why": "Blew a 20-point lead.",
-    "image": "https://a.espncdn.com/i/teamlogos/nba/500/phi.png"
+    "image": "https://a.espncdn.com/i/teamlogos/nba/500/phi.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401267467/pacers-phi"
   },
   {
     "date": "2021-02-01",
@@ -1059,6 +1133,7 @@
     "trauma": true,
     "why": "Led by 20 and still lost. Hope briefly existed.",
     "image": "https://a.espncdn.com/i/teamlogos/nba/500/phi.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401267467/pacers-phi",
     "trauma_level": "HIGH"
   },
   {
@@ -1073,7 +1148,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Victor Oladipo ripped 6 steals in one night.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/2527963.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/2527963.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401267316/pacers-sac"
   },
   {
     "date": "2021-01-07",
@@ -1087,7 +1163,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Myles Turner rejected 8 shots like a bouncer.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3133628.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3133628.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401267267/pacers-hou"
   },
   {
     "date": "2020-12-24",
@@ -1101,7 +1178,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Myles Turner rejected 8 shots like a bouncer.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3133628.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3133628.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401267151/pacers-ny"
   },
   {
     "date": "2020-08-24",
@@ -1116,6 +1194,7 @@
     "trauma": true,
     "why": "MIA playoff loss. Annual emotional tax paid.",
     "image": "https://a.espncdn.com/i/teamlogos/nba/500/mia.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401236318/pacers-mia",
     "trauma_level": "HIGH"
   },
   {
@@ -1131,6 +1210,7 @@
     "trauma": true,
     "why": "MIA playoff loss. Annual emotional tax paid.",
     "image": "https://a.espncdn.com/i/teamlogos/nba/500/mia.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401236317/pacers-mia",
     "trauma_level": "HIGH"
   },
   {
@@ -1146,6 +1226,7 @@
     "trauma": true,
     "why": "MIA playoff loss. Annual emotional tax paid.",
     "image": "https://a.espncdn.com/i/teamlogos/nba/500/mia.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401236316/pacers-mia",
     "trauma_level": "HIGH"
   },
   {
@@ -1161,6 +1242,7 @@
     "trauma": true,
     "why": "MIA playoff loss. Annual emotional tax paid.",
     "image": "https://a.espncdn.com/i/teamlogos/nba/500/mia.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401236315/pacers-mia",
     "trauma_level": "HIGH"
   },
   {
@@ -1175,7 +1257,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "T.J. Warren went for 53. Full orbital launch.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/2982334.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/2982334.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401224717/pacers-phi"
   },
   {
     "date": "2020-02-26",
@@ -1189,7 +1272,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Myles Turner rejected 8 shots like a bouncer.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3133628.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3133628.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401161499/pacers-cha"
   },
   {
     "date": "2020-02-06",
@@ -1203,7 +1287,8 @@
     "category": "TEAM_WEIRDNESS",
     "trauma": false,
     "why": "Blew a 20-point lead.",
-    "image": "https://a.espncdn.com/i/teamlogos/nba/500/tor.png"
+    "image": "https://a.espncdn.com/i/teamlogos/nba/500/tor.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401161400/pacers-tor"
   },
   {
     "date": "2020-02-06",
@@ -1218,6 +1303,7 @@
     "trauma": true,
     "why": "Led by 20 and still lost. Hope briefly existed.",
     "image": "https://a.espncdn.com/i/teamlogos/nba/500/tor.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401161400/pacers-tor",
     "trauma_level": "HIGH"
   },
   {
@@ -1232,7 +1318,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Myles Turner ripped 6 steals in one night.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3133628.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3133628.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401161293/pacers-utah"
   },
   {
     "date": "2019-11-30",
@@ -1246,7 +1333,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Justin Holiday ripped 6 steals in one night.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/2284101.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/2284101.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401160914/pacers-atl"
   },
   {
     "date": "2019-11-06",
@@ -1260,7 +1348,8 @@
     "category": "TEAM_WEIRDNESS",
     "trauma": false,
     "why": "Overtime loss by 2. Painfully precise.",
-    "image": "https://a.espncdn.com/i/teamlogos/nba/500/cha.png"
+    "image": "https://a.espncdn.com/i/teamlogos/nba/500/cha.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401160739/pacers-cha"
   },
   {
     "date": "2019-03-06",
@@ -1274,7 +1363,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Myles Turner rejected 7 shots like a bouncer.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3133628.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3133628.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401071632/pacers-chi"
   },
   {
     "date": "2018-12-19",
@@ -1288,7 +1378,8 @@
     "category": "TEAM_WEIRDNESS",
     "trauma": false,
     "why": "Blew a 20-point lead.",
-    "image": "https://a.espncdn.com/i/teamlogos/nba/500/cle.png"
+    "image": "https://a.espncdn.com/i/teamlogos/nba/500/cle.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401071132/pacers-cle"
   },
   {
     "date": "2018-12-19",
@@ -1303,6 +1394,7 @@
     "trauma": true,
     "why": "Led by 20 and still lost. Hope briefly existed.",
     "image": "https://a.espncdn.com/i/teamlogos/nba/500/cle.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401071132/pacers-cle",
     "trauma_level": "HIGH"
   },
   {
@@ -1317,7 +1409,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Darren Collison ripped 6 steals in one night.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3973.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3973.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401071017/pacers-sac"
   },
   {
     "date": "2018-11-01",
@@ -1331,7 +1424,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Bench detonation: Domantas Sabonis dropped 30 off the bench.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3155942.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3155942.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401070786/pacers-ny"
   },
   {
     "date": "2018-04-29",
@@ -1346,6 +1440,7 @@
     "trauma": true,
     "why": "Playoff elimination confirmed. Remote tossed.",
     "image": "https://a.espncdn.com/i/teamlogos/nba/500/cle.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/401029433/pacers-cle",
     "trauma_level": "HIGH"
   },
   {
@@ -1360,7 +1455,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Bench detonation: Domantas Sabonis dropped 30 off the bench.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3155942.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3155942.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/400975943/pacers-cha"
   },
   {
     "date": "2018-03-06",
@@ -1374,7 +1470,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Victor Oladipo turned it over 10 times and somehow it was still a game.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/2527963.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/2527963.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/400975697/pacers-mil"
   },
   {
     "date": "2018-03-01",
@@ -1388,7 +1485,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Victor Oladipo ripped 6 steals in one night.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/2527963.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/2527963.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/400975661/pacers-atl"
   },
   {
     "date": "2018-02-11",
@@ -1402,7 +1500,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Victor Oladipo ripped 6 steals in one night.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/2527963.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/2527963.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/400975582/pacers-ny"
   },
   {
     "date": "2018-01-27",
@@ -1416,7 +1515,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Darren Collison ripped 6 steals in one night.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3973.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3973.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/400975461/pacers-cle"
   },
   {
     "date": "2017-12-14",
@@ -1430,7 +1530,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Thaddeus Young ripped 7 steals in one night.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3244.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3244.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/400975155/pacers-okc"
   },
   {
     "date": "2017-12-10",
@@ -1444,7 +1545,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Victor Oladipo went for 47. Full orbital launch.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/2527963.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/2527963.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/400975138/pacers-den"
   },
   {
     "date": "2017-11-21",
@@ -1458,7 +1560,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Victor Oladipo ripped 7 steals in one night.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/2527963.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/2527963.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/400974994/pacers-orl"
   },
   {
     "date": "2017-04-17",
@@ -1472,7 +1575,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Thaddeus Young ripped 6 steals in one night.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3244.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3244.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/400950394/pacers-cle"
   },
   {
     "date": "2017-04-02",
@@ -1486,7 +1590,8 @@
     "category": "TEAM_WEIRDNESS",
     "trauma": false,
     "why": "Dropped 130+ and still lost. Defense dissolved completely.",
-    "image": "https://a.espncdn.com/i/teamlogos/nba/500/cle.png"
+    "image": "https://a.espncdn.com/i/teamlogos/nba/500/cle.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/400899471/pacers-cle"
   },
   {
     "date": "2017-01-08",
@@ -1500,7 +1605,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Thaddeus Young ripped 6 steals in one night.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3244.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3244.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/400899973/pacers-ny"
   },
   {
     "date": "2016-12-29",
@@ -1514,7 +1620,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Thaddeus Young ripped 6 steals in one night.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3244.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3244.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/400899918/pacers-wsh"
   },
   {
     "date": "2016-11-21",
@@ -1528,7 +1635,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Jeff Teague ripped 6 steals in one night.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4015.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4015.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/400899645/pacers-okc"
   },
   {
     "date": "2016-05-02",
@@ -1543,6 +1651,7 @@
     "trauma": true,
     "why": "Playoff elimination confirmed. Remote tossed.",
     "image": "https://a.espncdn.com/i/teamlogos/nba/500/tor.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/400874411/pacers-tor",
     "trauma_level": "HIGH"
   },
   {
@@ -1557,7 +1666,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "CJ Miles scored 25 in 21.0 minutes.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/2778.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/2778.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/400829025/pacers-phi"
   },
   {
     "date": "2016-03-19",
@@ -1571,7 +1681,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Paul George went for 45. Full orbital launch.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4251.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4251.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/400828918/pacers-okc"
   },
   {
     "date": "2016-02-04",
@@ -1585,7 +1696,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "CJ Miles scored 27 in 22.0 minutes.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/2778.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/2778.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/400828625/pacers-bkn"
   },
   {
     "date": "2016-01-23",
@@ -1599,7 +1711,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Bench detonation: Myles Turner dropped 31 off the bench.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3133628.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3133628.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/400828539/pacers-gs"
   },
   {
     "date": "2016-01-11",
@@ -1613,7 +1726,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Paul George ripped 7 steals in one night.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4251.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4251.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/400828448/pacers-hou"
   },
   {
     "date": "2015-12-31",
@@ -1627,7 +1741,8 @@
     "category": "TEAM_WEIRDNESS",
     "trauma": false,
     "why": "Overtime loss by 2. Painfully precise.",
-    "image": "https://a.espncdn.com/i/teamlogos/nba/500/chi.png"
+    "image": "https://a.espncdn.com/i/teamlogos/nba/500/chi.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/400828365/pacers-chi"
   },
   {
     "date": "2015-12-12",
@@ -1641,7 +1756,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Monta Ellis ripped 6 steals in one night.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/2751.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/2751.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/400828220/pacers-mia"
   },
   {
     "date": "2015-12-06",
@@ -1655,7 +1771,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Paul George went for 48. Full orbital launch.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4251.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4251.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/400828184/pacers-utah"
   },
   {
     "date": "2015-03-10",
@@ -1669,7 +1786,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Bench detonation: Rodney Stuckey dropped 34 off the bench.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3235.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3235.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/400579238/pacers-orl"
   },
   {
     "date": "2015-02-22",
@@ -1683,7 +1801,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Bench detonation: Rodney Stuckey dropped 30 off the bench.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3235.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3235.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/400579116/pacers-gs"
   },
   {
     "date": "2015-02-21",
@@ -1697,7 +1816,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Bench detonation: Rodney Stuckey dropped 30 off the bench.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3235.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3235.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/400579096/pacers-phi"
   },
   {
     "date": "2014-12-11",
@@ -1711,7 +1831,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Bench detonation: CJ Miles dropped 30 off the bench.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/2778.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/2778.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/400578609/pacers-lac"
   },
   {
     "date": "2014-12-06",
@@ -1725,7 +1846,8 @@
     "category": "TEAM_WEIRDNESS",
     "trauma": false,
     "why": "Overtime loss by 1. Painfully precise.",
-    "image": "https://a.espncdn.com/i/teamlogos/nba/500/sac.png"
+    "image": "https://a.espncdn.com/i/teamlogos/nba/500/sac.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/400578579/pacers-sac"
   },
   {
     "date": "2014-11-06",
@@ -1739,7 +1861,8 @@
     "category": "TEAM_WEIRDNESS",
     "trauma": false,
     "why": "Overtime loss by 2. Painfully precise.",
-    "image": "https://a.espncdn.com/i/teamlogos/nba/500/wsh.png"
+    "image": "https://a.espncdn.com/i/teamlogos/nba/500/wsh.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/400578355/pacers-wsh"
   },
   {
     "date": "2014-10-29",
@@ -1753,7 +1876,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Roy Hibbert rejected 7 shots like a bouncer.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3436.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3436.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/400578297/pacers-phi"
   },
   {
     "date": "2014-05-31",
@@ -1768,6 +1892,7 @@
     "trauma": true,
     "why": "ECF/Finals loss. Banner-adjacent heartbreak.",
     "image": "https://a.espncdn.com/i/teamlogos/nba/500/mia.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/400558919/pacers-mia",
     "trauma_level": "HIGH"
   },
   {
@@ -1782,7 +1907,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Paul George ripped 6 steals in one night.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4251.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4251.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/400558918/pacers-mia"
   },
   {
     "date": "2014-05-27",
@@ -1797,6 +1923,7 @@
     "trauma": true,
     "why": "ECF/Finals loss. Banner-adjacent heartbreak.",
     "image": "https://a.espncdn.com/i/teamlogos/nba/500/mia.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/400558917/pacers-mia",
     "trauma_level": "HIGH"
   },
   {
@@ -1812,6 +1939,7 @@
     "trauma": true,
     "why": "ECF/Finals loss. Banner-adjacent heartbreak.",
     "image": "https://a.espncdn.com/i/teamlogos/nba/500/mia.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/400558916/pacers-mia",
     "trauma_level": "HIGH"
   },
   {
@@ -1827,6 +1955,7 @@
     "trauma": true,
     "why": "ECF/Finals loss. Banner-adjacent heartbreak.",
     "image": "https://a.espncdn.com/i/teamlogos/nba/500/mia.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/400558915/pacers-mia",
     "trauma_level": "HIGH"
   },
   {
@@ -1841,7 +1970,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Paul George ripped 6 steals in one night.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4251.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4251.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/400553064/pacers-atl"
   },
   {
     "date": "2014-04-06",
@@ -1855,7 +1985,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Paul George ripped 6 steals in one night.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4251.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4251.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/400490025/pacers-atl"
   },
   {
     "date": "2014-02-08",
@@ -1869,7 +2000,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "George Hill averaged 8.8 then exploded for 37.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3438.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3438.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/400489612/pacers-por"
   },
   {
     "date": "2013-11-16",
@@ -1883,7 +2015,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Roy Hibbert rejected 8 shots like a bouncer.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3436.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3436.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/400488998/pacers-mil"
   },
   {
     "date": "2013-11-06",
@@ -1897,7 +2030,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Roy Hibbert rejected 7 shots like a bouncer.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3436.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3436.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/400488926/pacers-det"
   },
   {
     "date": "2013-10-29",
@@ -1911,7 +2045,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Roy Hibbert rejected 7 shots like a bouncer.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3436.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3436.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/400488874/pacers-orl"
   },
   {
     "date": "2013-06-04",
@@ -1926,6 +2061,7 @@
     "trauma": true,
     "why": "Playoff elimination confirmed. Remote tossed.",
     "image": "https://a.espncdn.com/i/teamlogos/nba/500/mia.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/400466600/pacers-mia",
     "trauma_level": "HIGH"
   },
   {
@@ -1941,6 +2077,7 @@
     "trauma": true,
     "why": "ECF/Finals loss. Banner-adjacent heartbreak.",
     "image": "https://a.espncdn.com/i/teamlogos/nba/500/mia.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/400466598/pacers-mia",
     "trauma_level": "HIGH"
   },
   {
@@ -1956,6 +2093,7 @@
     "trauma": true,
     "why": "ECF/Finals loss. Banner-adjacent heartbreak.",
     "image": "https://a.espncdn.com/i/teamlogos/nba/500/mia.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/400466596/pacers-mia",
     "trauma_level": "HIGH"
   },
   {
@@ -1970,7 +2108,8 @@
     "category": "TEAM_WEIRDNESS",
     "trauma": false,
     "why": "Overtime loss by 1. Painfully precise.",
-    "image": "https://a.espncdn.com/i/teamlogos/nba/500/mia.png"
+    "image": "https://a.espncdn.com/i/teamlogos/nba/500/mia.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/400466594/pacers-mia"
   },
   {
     "date": "2013-05-23",
@@ -1985,6 +2124,7 @@
     "trauma": true,
     "why": "ECF/Finals loss. Banner-adjacent heartbreak.",
     "image": "https://a.espncdn.com/i/teamlogos/nba/500/mia.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/400466594/pacers-mia",
     "trauma_level": "HIGH"
   },
   {
@@ -2000,6 +2140,7 @@
     "trauma": true,
     "why": "NY playoff loss. Annual emotional tax paid.",
     "image": "https://a.espncdn.com/i/teamlogos/nba/500/ny.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/400464468/pacers-ny",
     "trauma_level": "HIGH"
   },
   {
@@ -2015,6 +2156,7 @@
     "trauma": true,
     "why": "NY playoff loss. Annual emotional tax paid.",
     "image": "https://a.espncdn.com/i/teamlogos/nba/500/ny.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/400464340/pacers-ny",
     "trauma_level": "HIGH"
   },
   {
@@ -2029,7 +2171,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Roy Hibbert rejected 7 shots like a bouncer.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3436.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3436.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/400278744/pacers-mil"
   },
   {
     "date": "2013-02-09",
@@ -2043,7 +2186,8 @@
     "category": "TEAM_WEIRDNESS",
     "trauma": false,
     "why": "Overtime loss by 2. Painfully precise.",
-    "image": "https://a.espncdn.com/i/teamlogos/nba/500/tor.png"
+    "image": "https://a.espncdn.com/i/teamlogos/nba/500/tor.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/400278457/pacers-tor"
   },
   {
     "date": "2013-01-13",
@@ -2057,7 +2201,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Paul George ripped 6 steals in one night.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4251.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4251.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/400278271/pacers-bkn"
   },
   {
     "date": "2013-01-11",
@@ -2071,7 +2216,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Paul George ripped 6 steals in one night.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4251.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/4251.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/400278247/pacers-ny"
   },
   {
     "date": "2012-05-25",
@@ -2086,6 +2232,7 @@
     "trauma": true,
     "why": "MIA playoff loss. Annual emotional tax paid.",
     "image": "https://a.espncdn.com/i/teamlogos/nba/500/mia.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/320524011/pacers-mia",
     "trauma_level": "HIGH"
   },
   {
@@ -2101,6 +2248,7 @@
     "trauma": true,
     "why": "MIA playoff loss. Annual emotional tax paid.",
     "image": "https://a.espncdn.com/i/teamlogos/nba/500/mia.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/320522014/pacers-mia",
     "trauma_level": "HIGH"
   },
   {
@@ -2116,6 +2264,7 @@
     "trauma": true,
     "why": "MIA playoff loss. Annual emotional tax paid.",
     "image": "https://a.espncdn.com/i/teamlogos/nba/500/mia.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/320520011/pacers-mia",
     "trauma_level": "HIGH"
   },
   {
@@ -2131,6 +2280,7 @@
     "trauma": true,
     "why": "MIA playoff loss. Annual emotional tax paid.",
     "image": "https://a.espncdn.com/i/teamlogos/nba/500/mia.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/320513014/pacers-mia",
     "trauma_level": "HIGH"
   },
   {
@@ -2145,7 +2295,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Roy Hibbert rejected 9 shots like a bouncer.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3436.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/3436.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/320428011/pacers-orl"
   },
   {
     "date": "2012-03-11",
@@ -2159,7 +2310,8 @@
     "category": "TEAM_WEIRDNESS",
     "trauma": false,
     "why": "Overtime loss by 2. Painfully precise.",
-    "image": "https://a.espncdn.com/i/teamlogos/nba/500/mia.png"
+    "image": "https://a.espncdn.com/i/teamlogos/nba/500/mia.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/320310014/pacers-mia"
   },
   {
     "date": "2011-04-06",
@@ -2173,7 +2325,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Danny Granger scored 25 in 24.0 minutes.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/2760.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/2760.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/310406011/pacers-wsh"
   },
   {
     "date": "2011-02-27",
@@ -2187,7 +2340,8 @@
     "category": "TEAM_WEIRDNESS",
     "trauma": false,
     "why": "Overtime loss by 2. Painfully precise.",
-    "image": "https://a.espncdn.com/i/teamlogos/nba/500/phx.png"
+    "image": "https://a.espncdn.com/i/teamlogos/nba/500/phx.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/310227011/pacers-phx"
   },
   {
     "date": "2010-11-10",
@@ -2201,7 +2355,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Mike Dunleavy scored 31 in 24.0 minutes.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/1708.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/1708.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/301109011/pacers-den"
   },
   {
     "date": "2010-01-21",
@@ -2215,7 +2370,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Earl Watson ripped 6 steals in one night.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/1027.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/1027.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/300120019/pacers-orl"
   },
   {
     "date": "2010-01-14",
@@ -2229,7 +2385,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Bench detonation: Mike Dunleavy dropped 30 off the bench.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/1708.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/1708.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/300113011/pacers-phx"
   },
   {
     "date": "2008-11-22",
@@ -2243,7 +2400,8 @@
     "category": "TEAM_WEIRDNESS",
     "trauma": false,
     "why": "Overtime loss by 2. Painfully precise.",
-    "image": "https://a.espncdn.com/i/teamlogos/nba/500/orl.png"
+    "image": "https://a.espncdn.com/i/teamlogos/nba/500/orl.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/281121011/pacers-orl"
   },
   {
     "date": "2008-03-07",
@@ -2257,7 +2415,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Danny Granger ripped 6 steals in one night.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/2760.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/2760.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/280306024/pacers-sa"
   },
   {
     "date": "2007-11-25",
@@ -2271,7 +2430,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Marquis Daniels scored 25 in 24.0 minutes.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/2200.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/2200.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/271125011/pacers-cle"
   },
   {
     "date": "2007-01-13",
@@ -2285,7 +2445,8 @@
     "category": "TEAM_WEIRDNESS",
     "trauma": false,
     "why": "Overtime loss by 2. Painfully precise.",
-    "image": "https://a.espncdn.com/i/teamlogos/nba/500/dal.png"
+    "image": "https://a.espncdn.com/i/teamlogos/nba/500/dal.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/270112011/pacers-dal"
   },
   {
     "date": "2006-11-19",
@@ -2299,7 +2460,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Jermaine O'Neal rejected 8 shots like a bouncer.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/615.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/615.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/261118015/pacers-mil"
   },
   {
     "date": "2006-05-04",
@@ -2313,7 +2475,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Bench detonation: Anthony Johnson dropped 40 off the bench.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/396.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/396.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/260504011/pacers-nj"
   },
   {
     "date": "2006-04-27",
@@ -2327,7 +2490,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Bench detonation: Jermaine O'Neal dropped 37 off the bench.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/615.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/615.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/260427011/pacers-nj"
   },
   {
     "date": "2006-04-15",
@@ -2341,7 +2505,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Bench detonation: Jermaine O'Neal dropped 30 off the bench.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/615.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/615.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/260415030/pacers-cha"
   },
   {
     "date": "2006-04-15",
@@ -2355,7 +2520,8 @@
     "category": "TEAM_WEIRDNESS",
     "trauma": false,
     "why": "Overtime loss by 1. Painfully precise.",
-    "image": "https://a.espncdn.com/guid/377633c2-0dd1-91a1-83c0-9ed2d0c00ea1/logos/default.png"
+    "image": "https://a.espncdn.com/guid/377633c2-0dd1-91a1-83c0-9ed2d0c00ea1/logos/default.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/260415030/pacers-cha"
   },
   {
     "date": "2006-04-08",
@@ -2369,7 +2535,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Bench detonation: Peja Stojakovic dropped 32 off the bench.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/813.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/813.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/260407018/pacers-ny"
   },
   {
     "date": "2006-03-30",
@@ -2383,7 +2550,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Bench detonation: Peja Stojakovic dropped 31 off the bench.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/813.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/813.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/260329001/pacers-atl"
   },
   {
     "date": "2006-02-25",
@@ -2397,7 +2565,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Bench detonation: Fred Jones dropped 31 off the bench.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/1718.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/1718.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/260224011/pacers-atl"
   },
   {
     "date": "2005-12-24",
@@ -2411,7 +2580,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Bench detonation: Jermaine O'Neal dropped 34 off the bench.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/615.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/615.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/251223005/pacers-cle"
   },
   {
     "date": "2005-12-18",
@@ -2425,7 +2595,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Bench detonation: Jermaine O'Neal dropped 31 off the bench.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/615.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/615.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/251217018/pacers-ny"
   },
   {
     "date": "2005-12-09",
@@ -2439,7 +2610,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Bench detonation: Stephen Jackson dropped 30 off the bench.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/378.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/378.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/251208011/pacers-wsh"
   },
   {
     "date": "2005-12-04",
@@ -2453,7 +2625,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Bench detonation: Metta World Peace dropped 30 off the bench.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/25.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/25.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/251204025/pacers-sea"
   },
   {
     "date": "2005-11-26",
@@ -2467,7 +2640,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Bench detonation: Jermaine O'Neal dropped 30 off the bench.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/615.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/615.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/251125011/pacers-atl"
   },
   {
     "date": "2005-11-12",
@@ -2481,7 +2655,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Bench detonation: Metta World Peace dropped 30 off the bench.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/25.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/25.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/251111011/pacers-nj"
   },
   {
     "date": "2005-04-28",
@@ -2495,7 +2670,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Bench detonation: Reggie Miller dropped 33 off the bench.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/552.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/552.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/250428011/pacers-bos"
   },
   {
     "date": "2005-04-10",
@@ -2509,7 +2685,8 @@
     "category": "TEAM_WEIRDNESS",
     "trauma": false,
     "why": "Overtime loss by 1. Painfully precise.",
-    "image": "https://a.espncdn.com/i/teamlogos/nba/500/ny.png"
+    "image": "https://a.espncdn.com/i/teamlogos/nba/500/ny.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/250410011/pacers-ny"
   },
   {
     "date": "2005-04-01",
@@ -2523,7 +2700,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Bench detonation: Reggie Miller dropped 31 off the bench.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/552.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/552.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/250331011/pacers-mia"
   },
   {
     "date": "2005-02-17",
@@ -2537,7 +2715,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Bench detonation: Reggie Miller dropped 36 off the bench.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/552.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/552.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/250216011/pacers-por"
   },
   {
     "date": "2005-02-08",
@@ -2551,7 +2730,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Bench detonation: Jermaine O'Neal dropped 30 off the bench.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/615.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/615.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/250207027/pacers-wsh"
   },
   {
     "date": "2005-02-06",
@@ -2565,7 +2745,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Bench detonation: Jermaine O'Neal dropped 38 off the bench.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/615.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/615.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/250205001/pacers-atl"
   },
   {
     "date": "2005-01-23",
@@ -2579,7 +2760,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Bench detonation: Jermaine O'Neal dropped 38 off the bench.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/615.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/615.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/250122011/pacers-wsh"
   },
   {
     "date": "2005-01-22",
@@ -2593,7 +2775,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Bench detonation: Jamaal Tinsley dropped 30 off the bench.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/1024.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/1024.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/250121014/pacers-mia"
   },
   {
     "date": "2005-01-16",
@@ -2607,7 +2790,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Bench detonation: Jermaine O'Neal dropped 38 off the bench.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/615.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/615.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/250115011/pacers-orl"
   },
   {
     "date": "2005-01-12",
@@ -2621,7 +2805,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Bench detonation: Jermaine O'Neal dropped 35 off the bench.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/615.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/615.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/250111029/pacers-mem"
   },
   {
     "date": "2005-01-05",
@@ -2635,7 +2820,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Jermaine O'Neal went for 55. Full orbital launch.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/615.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/615.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/250104011/pacers-mil"
   },
   {
     "date": "2004-12-31",
@@ -2649,7 +2835,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Bench detonation: Jermaine O'Neal dropped 31 off the bench.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/615.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/615.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/241230017/pacers-nj"
   },
   {
     "date": "2004-11-20",
@@ -2663,7 +2850,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Jamaal Tinsley ripped 8 steals in one night.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/1024.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/1024.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/241119008/pacers-det"
   },
   {
     "date": "2004-11-13",
@@ -2677,7 +2865,8 @@
     "category": "TEAM_WEIRDNESS",
     "trauma": false,
     "why": "Overtime loss by 2. Painfully precise.",
-    "image": "https://a.espncdn.com/i/teamlogos/nba/500/phi.png"
+    "image": "https://a.espncdn.com/i/teamlogos/nba/500/phi.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/241112020/pacers-phi"
   },
   {
     "date": "2004-05-13",
@@ -2692,6 +2881,7 @@
     "trauma": true,
     "why": "MIA playoff loss. Annual emotional tax paid.",
     "image": "https://a.espncdn.com/i/teamlogos/nba/500/mia.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/240512014/pacers-mia",
     "trauma_level": "HIGH"
   },
   {
@@ -2707,6 +2897,7 @@
     "trauma": true,
     "why": "MIA playoff loss. Annual emotional tax paid.",
     "image": "https://a.espncdn.com/i/teamlogos/nba/500/mia.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/240510014/pacers-mia",
     "trauma_level": "HIGH"
   },
   {
@@ -2721,7 +2912,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Metta World Peace ripped 6 steals in one night.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/25.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/25.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/240328011/pacers-mia"
   },
   {
     "date": "2004-03-25",
@@ -2735,7 +2927,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Metta World Peace ripped 8 steals in one night.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/25.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/25.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/240324011/pacers-dal"
   },
   {
     "date": "2004-02-22",
@@ -2749,7 +2942,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Jermaine O'Neal rejected 7 shots like a bouncer.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/615.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/615.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/240222011/pacers-utah"
   },
   {
     "date": "2004-01-11",
@@ -2763,7 +2957,8 @@
     "category": "TEAM_WEIRDNESS",
     "trauma": false,
     "why": "Overtime loss by 1. Painfully precise.",
-    "image": "https://a.espncdn.com/i/teamlogos/nba/500/sa.png"
+    "image": "https://a.espncdn.com/i/teamlogos/nba/500/sa.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/240110024/pacers-sa"
   },
   {
     "date": "2003-12-04",
@@ -2777,7 +2972,8 @@
     "category": "TEAM_WEIRDNESS",
     "trauma": false,
     "why": "Overtime loss by 2. Painfully precise.",
-    "image": "https://a.espncdn.com/i/teamlogos/nba/500/por.png"
+    "image": "https://a.espncdn.com/i/teamlogos/nba/500/por.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/231203022/pacers-por"
   },
   {
     "date": "2003-12-02",
@@ -2791,7 +2987,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Jermaine O'Neal rejected 8 shots like a bouncer.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/615.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/615.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/231201021/pacers-phx"
   },
   {
     "date": "2003-01-26",
@@ -2805,7 +3002,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Jermaine O'Neal rejected 8 shots like a bouncer.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/615.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/615.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/230126011/pacers-lac"
   },
   {
     "date": "2003-01-23",
@@ -2819,7 +3017,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Jermaine O'Neal rejected 10 shots like a bouncer.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/615.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/615.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/230122011/pacers-tor"
   },
   {
     "date": "2003-01-05",
@@ -2833,7 +3032,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Bench detonation: Al Harrington dropped 33 off the bench.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/308.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/308.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/230104027/pacers-wsh"
   },
   {
     "date": "2002-12-24",
@@ -2847,7 +3047,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Al Harrington averaged 10.9 then exploded for 40.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/308.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/308.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/221223011/pacers-atl"
   },
   {
     "date": "2002-03-31",
@@ -2861,7 +3062,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Metta World Peace ripped 8 steals in one night.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/25.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/25.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/220331011/pacers-mia"
   },
   {
     "date": "2002-03-08",
@@ -2875,7 +3077,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Jamaal Tinsley ripped 6 steals in one night.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/1024.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/1024.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/220307029/pacers-mem"
   },
   {
     "date": "2002-02-26",
@@ -2889,7 +3092,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Jermaine O'Neal rejected 7 shots like a bouncer.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/615.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/615.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/220225009/pacers-gs"
   },
   {
     "date": "2002-02-06",
@@ -2903,7 +3107,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Bench detonation: Austin Croshere dropped 32 off the bench.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/167.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/167.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/220205011/pacers-dal"
   },
   {
     "date": "2002-02-06",
@@ -2917,7 +3122,8 @@
     "category": "TEAM_WEIRDNESS",
     "trauma": false,
     "why": "Dropped 130+ and still lost. Defense dissolved completely.",
-    "image": "https://a.espncdn.com/i/teamlogos/nba/500/dal.png"
+    "image": "https://a.espncdn.com/i/teamlogos/nba/500/dal.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/220205011/pacers-dal"
   },
   {
     "date": "2002-02-06",
@@ -2931,7 +3137,8 @@
     "category": "TEAM_WEIRDNESS",
     "trauma": false,
     "why": "Overtime loss by 1. Painfully precise.",
-    "image": "https://a.espncdn.com/i/teamlogos/nba/500/dal.png"
+    "image": "https://a.espncdn.com/i/teamlogos/nba/500/dal.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/220205011/pacers-dal"
   },
   {
     "date": "2002-01-31",
@@ -2945,7 +3152,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Jermaine O'Neal rejected 7 shots like a bouncer.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/615.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/615.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/220130011/pacers-mem"
   },
   {
     "date": "2002-01-01",
@@ -2959,7 +3167,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Al Harrington ripped 7 steals in one night.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/308.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/308.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/211231011/pacers-mia"
   },
   {
     "date": "2001-12-30",
@@ -2973,7 +3182,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Jermaine O'Neal rejected 7 shots like a bouncer.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/615.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/615.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/211229017/pacers-nj"
   },
   {
     "date": "2001-11-17",
@@ -2987,7 +3197,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Jamaal Tinsley ripped 6 steals in one night.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/1024.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/1024.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/211116011/pacers-min"
   },
   {
     "date": "2001-04-06",
@@ -3001,7 +3212,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Travis Best ripped 6 steals in one night.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/58.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/58.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/210406011/pacers-chi"
   },
   {
     "date": "2001-03-31",
@@ -3015,7 +3227,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Bench detonation: Austin Croshere dropped 32 off the bench.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/167.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/167.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/210330002/pacers-bos"
   },
   {
     "date": "2001-03-14",
@@ -3029,7 +3242,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Jermaine O'Neal rejected 8 shots like a bouncer.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/615.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/615.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/210313010/pacers-hou"
   },
   {
     "date": "2001-03-10",
@@ -3043,7 +3257,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Jermaine O'Neal rejected 7 shots like a bouncer.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/615.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/615.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/210309011/pacers-cle"
   },
   {
     "date": "2001-03-08",
@@ -3057,7 +3272,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Jermaine O'Neal rejected 7 shots like a bouncer.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/615.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/615.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/210307011/pacers-ny"
   },
   {
     "date": "2000-12-21",
@@ -3071,7 +3287,8 @@
     "category": "TEAM_WEIRDNESS",
     "trauma": false,
     "why": "Overtime loss by 1. Painfully precise.",
-    "image": "https://a.espncdn.com/i/teamlogos/nba/500/tor.png"
+    "image": "https://a.espncdn.com/i/teamlogos/nba/500/tor.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/201220011/pacers-tor"
   },
   {
     "date": "2000-12-10",
@@ -3085,7 +3302,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Jalen Rose averaged 9.7 then exploded for 36.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/738.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/738.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/201209011/pacers-cha"
   },
   {
     "date": "2000-05-29",
@@ -3100,6 +3318,7 @@
     "trauma": true,
     "why": "NY playoff loss. Annual emotional tax paid.",
     "image": "https://a.espncdn.com/i/teamlogos/nba/500/ny.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/200529018/pacers-ny",
     "trauma_level": "HIGH"
   },
   {
@@ -3115,6 +3334,7 @@
     "trauma": true,
     "why": "NY playoff loss. Annual emotional tax paid.",
     "image": "https://a.espncdn.com/i/teamlogos/nba/500/ny.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/200527018/pacers-ny",
     "trauma_level": "HIGH"
   },
   {
@@ -3129,7 +3349,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Travis Best ripped 6 steals in one night.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/58.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/58.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/200305009/pacers-gs"
   },
   {
     "date": "1999-12-11",
@@ -3143,7 +3364,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Rik Smits scored 25 in 24.0 minutes.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/795.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/795.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/191210011/pacers-cle"
   },
   {
     "date": "1999-06-12",
@@ -3158,6 +3380,7 @@
     "trauma": true,
     "why": "NY playoff loss. Annual emotional tax paid.",
     "image": "https://a.espncdn.com/i/teamlogos/nba/500/ny.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/190611018/pacers-ny",
     "trauma_level": "HIGH"
   },
   {
@@ -3173,6 +3396,7 @@
     "trauma": true,
     "why": "NY playoff loss. Annual emotional tax paid.",
     "image": "https://a.espncdn.com/i/teamlogos/nba/500/ny.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/190609011/pacers-ny",
     "trauma_level": "HIGH"
   },
   {
@@ -3187,7 +3411,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Rik Smits scored 25 in 24.0 minutes.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/795.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/795.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/190605018/pacers-ny"
   },
   {
     "date": "1999-06-05",
@@ -3202,6 +3427,7 @@
     "trauma": true,
     "why": "NY playoff loss. Annual emotional tax paid.",
     "image": "https://a.espncdn.com/i/teamlogos/nba/500/ny.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/190605018/pacers-ny",
     "trauma_level": "HIGH"
   },
   {
@@ -3217,6 +3443,7 @@
     "trauma": true,
     "why": "NY playoff loss. Annual emotional tax paid.",
     "image": "https://a.espncdn.com/i/teamlogos/nba/500/ny.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/190530011/pacers-ny",
     "trauma_level": "HIGH"
   },
   {
@@ -3232,6 +3459,7 @@
     "trauma": true,
     "why": "Playoff elimination confirmed. Remote tossed.",
     "image": "https://a.espncdn.com/i/teamlogos/nba/500/chi.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/180531004/pacers-chi",
     "trauma_level": "HIGH"
   },
   {
@@ -3247,6 +3475,7 @@
     "trauma": true,
     "why": "NY playoff loss. Annual emotional tax paid.",
     "image": "https://a.espncdn.com/i/teamlogos/nba/500/ny.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/180509018/pacers-ny",
     "trauma_level": "HIGH"
   },
   {
@@ -3261,7 +3490,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Mark Jackson turned it over 10 times and somehow it was still a game.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/370.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/370.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/180412002/pacers-bos"
   },
   {
     "date": "1998-04-12",
@@ -3275,7 +3505,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Reggie Miller ripped 6 steals in one night.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/552.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/552.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/180412002/pacers-bos"
   },
   {
     "date": "1998-01-29",
@@ -3289,7 +3520,8 @@
     "category": "CHAOS",
     "trauma": false,
     "why": "Travis Best ripped 6 steals in one night.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/58.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/58.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/180128020/pacers-phi"
   },
   {
     "date": "1995-06-04",
@@ -3304,6 +3536,7 @@
     "trauma": true,
     "why": "Playoff elimination confirmed. Remote tossed.",
     "image": "https://a.espncdn.com/i/teamlogos/nba/500/orl.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/150604019/pacers-orl",
     "trauma_level": "HIGH"
   },
   {
@@ -3319,6 +3552,7 @@
     "trauma": true,
     "why": "NY playoff loss. Annual emotional tax paid.",
     "image": "https://a.espncdn.com/i/teamlogos/nba/500/ny.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/150519011/pacers-ny",
     "trauma_level": "HIGH"
   },
   {
@@ -3334,6 +3568,7 @@
     "trauma": true,
     "why": "NY playoff loss. Annual emotional tax paid.",
     "image": "https://a.espncdn.com/i/teamlogos/nba/500/ny.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/150517018/pacers-ny",
     "trauma_level": "HIGH"
   },
   {
@@ -3349,6 +3584,7 @@
     "trauma": true,
     "why": "NY playoff loss. Annual emotional tax paid.",
     "image": "https://a.espncdn.com/i/teamlogos/nba/500/ny.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/150509018/pacers-ny",
     "trauma_level": "HIGH"
   },
   {
@@ -3363,7 +3599,8 @@
     "category": "RANDOM_EXPLOSION",
     "trauma": false,
     "why": "Reggie Miller scored 27 in 24.0 minutes.",
-    "image": "https://a.espncdn.com/i/headshots/nba/players/full/552.png"
+    "image": "https://a.espncdn.com/i/headshots/nba/players/full/552.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/150222017/pacers-nj"
   },
   {
     "date": "1995-01-16",
@@ -3377,6 +3614,7 @@
     "category": "TEAM_WEIRDNESS",
     "trauma": false,
     "why": "Overtime loss by 1. Painfully precise.",
-    "image": "https://a.espncdn.com/i/teamlogos/nba/500/utah.png"
+    "image": "https://a.espncdn.com/i/teamlogos/nba/500/utah.png",
+    "recap_url": "https://www.espn.com/nba/game/_/gameId/150116011/pacers-utah"
   }
 ]
