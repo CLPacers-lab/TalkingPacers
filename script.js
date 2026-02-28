@@ -379,7 +379,7 @@ function buildStandingsTable(data) {
           <th>Record</th>
           <th>Top-4 Odds</th>
           <th>No. 1 Odds</th>
-          <th>NBADraft.net Mock</th>
+          <th>Mock</th>
         </tr>
       </thead>
       <tbody>${rows}</tbody>
