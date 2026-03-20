@@ -47,7 +47,7 @@
     {
       "slot": 2,
       "team": "WSH",
-      "record": "16-52",
+      "record": "16-53",
       "top4": 52.1,
       "first": 14.0,
       "mockPlayerName": "Cameron Boozer",
@@ -65,7 +65,7 @@
     {
       "slot": 4,
       "team": "SAC",
-      "record": "18-52",
+      "record": "18-53",
       "top4": 48.1,
       "first": 12.5,
       "mockPlayerName": "Kingston Flemings",
@@ -74,7 +74,7 @@
     {
       "slot": 5,
       "team": "UTAH",
-      "record": "20-49",
+      "record": "21-49",
       "top4": 42.1,
       "first": 10.5,
       "mockPlayerName": "Caleb Wilson",
@@ -92,7 +92,7 @@
     {
       "slot": 7,
       "team": "NO",
-      "record": "24-46",
+      "record": "25-46",
       "top4": 32.0,
       "first": 7.5,
       "mockPlayerName": "Nate Ament",
@@ -110,7 +110,7 @@
     {
       "slot": 9,
       "team": "CHI",
-      "record": "28-41",
+      "record": "28-42",
       "top4": 20.3,
       "first": 4.5,
       "mockPlayerName": "Keaton Wagler",
@@ -119,7 +119,7 @@
     {
       "slot": 10,
       "team": "MIL",
-      "record": "28-40",
+      "record": "28-41",
       "top4": 13.9,
       "first": 3.0,
       "mockPlayerName": "Braylon Mullins",
@@ -136,7 +136,7 @@
     },
     {
       "slot": 12,
-      "team": "POR",
+      "team": "LAC",
       "record": "34-36",
       "top4": 7.1,
       "first": 1.5,
@@ -145,8 +145,8 @@
     },
     {
       "slot": 13,
-      "team": "LAC",
-      "record": "34-35",
+      "team": "POR",
+      "record": "34-36",
       "top4": 4.8,
       "first": 1.0,
       "mockPlayerName": "Darius Acuff",
@@ -155,7 +155,7 @@
     {
       "slot": 14,
       "team": "CHA",
-      "record": "35-34",
+      "record": "36-34",
       "top4": 2.4,
       "first": 0.5,
       "mockPlayerName": "Labaron Philon",
@@ -192,11 +192,11 @@
   },
   "pickProtectionImpact": {
     "sourceTeam": "LAC",
-    "currentSlot": 13,
-    "currentTop4": 4.8,
-    "currentFirst": 1.0,
-    "conveyProbability": 0.1,
-    "protectProbability": 99.9,
+    "currentSlot": 12,
+    "currentTop4": 7.1,
+    "currentFirst": 1.5,
+    "conveyProbability": 0.0,
+    "protectProbability": 100.1,
     "note": "Auto-calculated from standings + fixed lottery odds table"
   },
   "upcomingGames": [
@@ -274,7 +274,7 @@
   "keyGames": [],
   "meta": {
     "pacersSlot": 1,
-    "updatedAtUtc": "2026-03-20T00:02:20.078023Z",
+    "updatedAtUtc": "2026-03-20T05:14:41.515811Z",
     "sources": {
       "draftStandings": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/standings",
       "draftSchedule": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/11/schedule",
@@ -288,7 +288,7 @@
         "url": "https://site.web.api.espn.com/apis/v2/sports/basketball/nba/standings",
         "http_status": 200,
         "source": "network",
-        "fetched_at_utc": "2026-03-20T00:02:16.123081Z",
+        "fetched_at_utc": "2026-03-20T05:14:38.324537Z",
         "ok": true,
         "validated_rows": 14
       }
@@ -299,63 +299,63 @@
     },
     "stale": true,
     "schema_version": 1,
-    "generated_at_utc": "2026-03-20T00:02:22.209895Z",
+    "generated_at_utc": "2026-03-20T05:14:43.447620Z",
     "sections": {
       "standings": {
         "status": "ok",
         "source": "espn_api",
-        "fetched_at_utc": "2026-03-20T00:02:22.209909Z",
-        "last_ok_at_utc": "2026-03-20T00:02:22.209909Z"
+        "fetched_at_utc": "2026-03-20T05:14:43.447632Z",
+        "last_ok_at_utc": "2026-03-20T05:14:43.447632Z"
       },
       "schedule": {
         "status": "ok",
         "source": "espn_api",
-        "fetched_at_utc": "2026-03-20T00:02:22.209914Z",
-        "last_ok_at_utc": "2026-03-20T00:02:22.209914Z"
+        "fetched_at_utc": "2026-03-20T05:14:43.447636Z",
+        "last_ok_at_utc": "2026-03-20T05:14:43.447636Z"
       },
       "scoreboard": {
         "status": "ok",
         "source": "espn_api",
-        "fetched_at_utc": "2026-03-20T00:02:22.209917Z",
-        "last_ok_at_utc": "2026-03-20T00:02:22.209917Z"
+        "fetched_at_utc": "2026-03-20T05:14:43.447640Z",
+        "last_ok_at_utc": "2026-03-20T05:14:43.447640Z"
       },
       "boxscores": {
         "status": "ok",
         "source": "espn_api",
-        "fetched_at_utc": "2026-03-20T00:02:22.209920Z",
-        "last_ok_at_utc": "2026-03-20T00:02:22.209920Z"
+        "fetched_at_utc": "2026-03-20T05:14:43.447643Z",
+        "last_ok_at_utc": "2026-03-20T05:14:43.447643Z"
       },
       "players": {
         "status": "disabled",
         "source": "none",
-        "fetched_at_utc": "2026-03-20T00:02:22.209922Z",
+        "fetched_at_utc": "2026-03-20T05:14:43.447645Z",
         "last_ok_at_utc": "2026-02-24T17:51:48.566416Z",
         "reason": "no_compliant_source"
       },
       "draft": {
         "status": "ok",
         "source": "espn_api+odds_table+manual_override",
-        "fetched_at_utc": "2026-03-20T00:02:22.209925Z",
-        "last_ok_at_utc": "2026-03-20T00:02:22.209978Z",
+        "fetched_at_utc": "2026-03-20T05:14:43.447649Z",
+        "last_ok_at_utc": "2026-03-20T05:14:43.447705Z",
         "reason": null
       },
       "videos": {
         "status": "ok",
         "source": "youtube_embed_official",
-        "fetched_at_utc": "2026-03-20T00:02:22.209927Z",
-        "last_ok_at_utc": "2026-03-20T00:02:22.209927Z"
+        "fetched_at_utc": "2026-03-20T05:14:43.447651Z",
+        "last_ok_at_utc": "2026-03-20T05:14:43.447651Z"
       },
       "whatYouMissed": {
         "status": "ok",
         "source": "espn_api",
-        "fetched_at_utc": "2026-03-20T00:02:22.209931Z",
-        "last_ok_at_utc": "2026-03-20T00:02:22.209931Z"
+        "fetched_at_utc": "2026-03-20T05:14:43.447656Z",
+        "last_ok_at_utc": "2026-03-20T05:14:43.447656Z"
       },
       "pickProtection": {
         "status": "ok",
         "source": "static",
-        "fetched_at_utc": "2026-03-20T00:02:22.209934Z",
-        "last_ok_at_utc": "2026-03-20T00:02:22.209934Z"
+        "fetched_at_utc": "2026-03-20T05:14:43.447659Z",
+        "last_ok_at_utc": "2026-03-20T05:14:43.447659Z"
       }
     },
     "requirements": {
