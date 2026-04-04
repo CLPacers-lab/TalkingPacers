@@ -38,7 +38,7 @@
     {
       "slot": 1,
       "team": "WSH",
-      "record": "17-59",
+      "record": "17-60",
       "top4": 52.1,
       "first": 14.0,
       "mockPlayerName": "AJ Dybantsa",
@@ -155,7 +155,7 @@
     {
       "slot": 14,
       "team": "MIA",
-      "record": "40-37",
+      "record": "41-37",
       "top4": 2.4,
       "first": 0.5,
       "mockPlayerName": "Nate Ament",
@@ -243,7 +243,7 @@
   "keyGames": [],
   "meta": {
     "pacersSlot": 2,
-    "updatedAtUtc": "2026-04-04T20:34:24.412349Z",
+    "updatedAtUtc": "2026-04-04T21:33:02.117805Z",
     "sources": {
       "draftStandings": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/standings",
       "draftSchedule": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/11/schedule",
@@ -257,7 +257,7 @@
         "url": "https://site.web.api.espn.com/apis/v2/sports/basketball/nba/standings",
         "http_status": 200,
         "source": "network",
-        "fetched_at_utc": "2026-04-04T20:34:21.532629Z",
+        "fetched_at_utc": "2026-04-04T21:32:59.217444Z",
         "ok": true,
         "validated_rows": 14
       }
@@ -268,63 +268,63 @@
     },
     "stale": true,
     "schema_version": 1,
-    "generated_at_utc": "2026-04-04T20:34:26.293154Z",
+    "generated_at_utc": "2026-04-04T21:33:03.928197Z",
     "sections": {
       "standings": {
         "status": "ok",
         "source": "espn_api",
-        "fetched_at_utc": "2026-04-04T20:34:26.293166Z",
-        "last_ok_at_utc": "2026-04-04T20:34:26.293166Z"
+        "fetched_at_utc": "2026-04-04T21:33:03.928211Z",
+        "last_ok_at_utc": "2026-04-04T21:33:03.928211Z"
       },
       "schedule": {
         "status": "ok",
         "source": "espn_api",
-        "fetched_at_utc": "2026-04-04T20:34:26.293171Z",
-        "last_ok_at_utc": "2026-04-04T20:34:26.293171Z"
+        "fetched_at_utc": "2026-04-04T21:33:03.928216Z",
+        "last_ok_at_utc": "2026-04-04T21:33:03.928216Z"
       },
       "scoreboard": {
         "status": "ok",
         "source": "espn_api",
-        "fetched_at_utc": "2026-04-04T20:34:26.293175Z",
-        "last_ok_at_utc": "2026-04-04T20:34:26.293175Z"
+        "fetched_at_utc": "2026-04-04T21:33:03.928219Z",
+        "last_ok_at_utc": "2026-04-04T21:33:03.928219Z"
       },
       "boxscores": {
         "status": "ok",
         "source": "espn_api",
-        "fetched_at_utc": "2026-04-04T20:34:26.293178Z",
-        "last_ok_at_utc": "2026-04-04T20:34:26.293178Z"
+        "fetched_at_utc": "2026-04-04T21:33:03.928223Z",
+        "last_ok_at_utc": "2026-04-04T21:33:03.928223Z"
       },
       "players": {
         "status": "disabled",
         "source": "none",
-        "fetched_at_utc": "2026-04-04T20:34:26.293181Z",
+        "fetched_at_utc": "2026-04-04T21:33:03.928225Z",
         "last_ok_at_utc": "2026-02-24T17:51:48.566416Z",
         "reason": "no_compliant_source"
       },
       "draft": {
         "status": "ok",
         "source": "espn_api+odds_table+manual_override",
-        "fetched_at_utc": "2026-04-04T20:34:26.293184Z",
-        "last_ok_at_utc": "2026-04-04T20:34:26.293241Z",
+        "fetched_at_utc": "2026-04-04T21:33:03.928229Z",
+        "last_ok_at_utc": "2026-04-04T21:33:03.928291Z",
         "reason": null
       },
       "videos": {
         "status": "ok",
         "source": "youtube_embed_official",
-        "fetched_at_utc": "2026-04-04T20:34:26.293187Z",
-        "last_ok_at_utc": "2026-04-04T20:34:26.293187Z"
+        "fetched_at_utc": "2026-04-04T21:33:03.928231Z",
+        "last_ok_at_utc": "2026-04-04T21:33:03.928231Z"
       },
       "whatYouMissed": {
         "status": "ok",
         "source": "espn_api",
-        "fetched_at_utc": "2026-04-04T20:34:26.293191Z",
-        "last_ok_at_utc": "2026-04-04T20:34:26.293191Z"
+        "fetched_at_utc": "2026-04-04T21:33:03.928236Z",
+        "last_ok_at_utc": "2026-04-04T21:33:03.928236Z"
       },
       "pickProtection": {
         "status": "ok",
         "source": "static",
-        "fetched_at_utc": "2026-04-04T20:34:26.293194Z",
-        "last_ok_at_utc": "2026-04-04T20:34:26.293194Z"
+        "fetched_at_utc": "2026-04-04T21:33:03.928240Z",
+        "last_ok_at_utc": "2026-04-04T21:33:03.928240Z"
       }
     },
     "requirements": {
