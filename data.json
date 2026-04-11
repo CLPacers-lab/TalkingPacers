@@ -1,32 +1,32 @@
 {
-  "asOf": "April 10, 2026",
+  "asOf": "April 11, 2026",
   "whatYouMissed": {
-    "summary": "April 9, 2026 vs Brooklyn Nets: Win (123-94).",
+    "summary": "April 10, 2026 vs Philadelphia 76ers: Loss (94-105).",
     "leaders": [
       {
         "stat": "PTS",
-        "value": "26",
-        "player": "Obi Toppin",
-        "athleteId": "4278355",
-        "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4278355.png"
+        "value": "17",
+        "player": "Jarace Walker",
+        "athleteId": "5106060",
+        "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5106060.png"
       },
       {
         "stat": "REB",
-        "value": "14",
+        "value": "10",
         "player": "Micah Potter",
         "athleteId": "4066399",
         "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4066399.png"
       },
       {
         "stat": "AST",
-        "value": "8",
-        "player": "Jarace Walker",
-        "athleteId": "5106060",
-        "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/5106060.png"
+        "value": "6",
+        "player": "Quenton Jackson",
+        "athleteId": "4592829",
+        "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4592829.png"
       },
       {
         "stat": "MIN",
-        "value": "37",
+        "value": "31",
         "player": "Ethan Thompson",
         "athleteId": "4278516",
         "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4278516.png"
@@ -38,7 +38,7 @@
     {
       "slot": 1,
       "team": "WSH",
-      "record": "17-63",
+      "record": "17-64",
       "top4": 52.1,
       "first": 14.0,
       "mockPlayerName": "AJ Dybantsa",
@@ -47,7 +47,7 @@
     {
       "slot": 2,
       "team": "IND",
-      "record": "19-61",
+      "record": "19-62",
       "top4": 52.1,
       "first": 14.0,
       "mockPlayerName": "Cameron Boozer",
@@ -56,7 +56,7 @@
     {
       "slot": 3,
       "team": "BKN",
-      "record": "20-60",
+      "record": "20-61",
       "top4": 52.1,
       "first": 14.0,
       "mockPlayerName": "Darryn Peterson",
@@ -82,8 +82,8 @@
     },
     {
       "slot": 6,
-      "team": "MEM",
-      "record": "25-55",
+      "team": "DAL",
+      "record": "25-56",
       "top4": 37.2,
       "first": 9.0,
       "mockPlayerName": "Kingston Flemings",
@@ -91,7 +91,7 @@
     },
     {
       "slot": 7,
-      "team": "DAL",
+      "team": "MEM",
       "record": "25-55",
       "top4": 32.0,
       "first": 7.5,
@@ -101,7 +101,7 @@
     {
       "slot": 8,
       "team": "NO",
-      "record": "26-54",
+      "record": "26-55",
       "top4": 26.3,
       "first": 6.0,
       "mockPlayerName": "Mikel Brown",
@@ -109,8 +109,8 @@
     },
     {
       "slot": 9,
-      "team": "MIL",
-      "record": "31-49",
+      "team": "CHI",
+      "record": "31-50",
       "top4": 20.3,
       "first": 4.5,
       "mockPlayerName": "Labaron Philon",
@@ -118,8 +118,8 @@
     },
     {
       "slot": 10,
-      "team": "CHI",
-      "record": "31-49",
+      "team": "MIL",
+      "record": "32-49",
       "top4": 13.9,
       "first": 3.0,
       "mockPlayerName": "Brayden Burries",
@@ -145,7 +145,7 @@
     },
     {
       "slot": 13,
-      "team": "MIA",
+      "team": "LAC",
       "record": "41-39",
       "top4": 4.8,
       "first": 1.0,
@@ -154,8 +154,8 @@
     },
     {
       "slot": 14,
-      "team": "LAC",
-      "record": "41-39",
+      "team": "MIA",
+      "record": "42-39",
       "top4": 2.4,
       "first": 0.5,
       "mockPlayerName": "Nate Ament",
@@ -196,11 +196,11 @@
   },
   "pickProtectionImpact": {
     "sourceTeam": "LAC",
-    "currentSlot": 14,
-    "currentTop4": 2.4,
-    "currentFirst": 0.5,
-    "conveyProbability": 0.0,
-    "protectProbability": 100.0,
+    "currentSlot": 13,
+    "currentTop4": 4.8,
+    "currentFirst": 1.0,
+    "conveyProbability": 0.1,
+    "protectProbability": 99.9,
     "note": "Auto-calculated from standings + fixed lottery odds table"
   },
   "upcomingGames": [
@@ -215,7 +215,7 @@
   "keyGames": [],
   "meta": {
     "pacersSlot": 2,
-    "updatedAtUtc": "2026-04-10T23:36:25.875692Z",
+    "updatedAtUtc": "2026-04-11T02:26:20.451931Z",
     "sources": {
       "draftStandings": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/standings",
       "draftSchedule": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/11/schedule",
@@ -229,7 +229,7 @@
         "url": "https://site.web.api.espn.com/apis/v2/sports/basketball/nba/standings",
         "http_status": 200,
         "source": "network",
-        "fetched_at_utc": "2026-04-10T23:36:21.349234Z",
+        "fetched_at_utc": "2026-04-11T02:26:17.561559Z",
         "ok": true,
         "validated_rows": 14
       }
@@ -240,63 +240,63 @@
     },
     "stale": true,
     "schema_version": 1,
-    "generated_at_utc": "2026-04-10T23:36:29.652323Z",
+    "generated_at_utc": "2026-04-11T02:26:22.718370Z",
     "sections": {
       "standings": {
         "status": "ok",
         "source": "espn_api",
-        "fetched_at_utc": "2026-04-10T23:36:29.652334Z",
-        "last_ok_at_utc": "2026-04-10T23:36:29.652334Z"
+        "fetched_at_utc": "2026-04-11T02:26:22.718385Z",
+        "last_ok_at_utc": "2026-04-11T02:26:22.718385Z"
       },
       "schedule": {
         "status": "ok",
         "source": "espn_api",
-        "fetched_at_utc": "2026-04-10T23:36:29.652339Z",
-        "last_ok_at_utc": "2026-04-10T23:36:29.652339Z"
+        "fetched_at_utc": "2026-04-11T02:26:22.718390Z",
+        "last_ok_at_utc": "2026-04-11T02:26:22.718390Z"
       },
       "scoreboard": {
         "status": "ok",
         "source": "espn_api",
-        "fetched_at_utc": "2026-04-10T23:36:29.652342Z",
-        "last_ok_at_utc": "2026-04-10T23:36:29.652342Z"
+        "fetched_at_utc": "2026-04-11T02:26:22.718394Z",
+        "last_ok_at_utc": "2026-04-11T02:26:22.718394Z"
       },
       "boxscores": {
         "status": "ok",
         "source": "espn_api",
-        "fetched_at_utc": "2026-04-10T23:36:29.652345Z",
-        "last_ok_at_utc": "2026-04-10T23:36:29.652345Z"
+        "fetched_at_utc": "2026-04-11T02:26:22.718398Z",
+        "last_ok_at_utc": "2026-04-11T02:26:22.718398Z"
       },
       "players": {
         "status": "disabled",
         "source": "none",
-        "fetched_at_utc": "2026-04-10T23:36:29.652347Z",
+        "fetched_at_utc": "2026-04-11T02:26:22.718400Z",
         "last_ok_at_utc": "2026-02-24T17:51:48.566416Z",
         "reason": "no_compliant_source"
       },
       "draft": {
         "status": "ok",
         "source": "espn_api+odds_table+manual_override",
-        "fetched_at_utc": "2026-04-10T23:36:29.652350Z",
-        "last_ok_at_utc": "2026-04-10T23:36:29.652401Z",
+        "fetched_at_utc": "2026-04-11T02:26:22.718403Z",
+        "last_ok_at_utc": "2026-04-11T02:26:22.718464Z",
         "reason": null
       },
       "videos": {
         "status": "ok",
         "source": "youtube_embed_official",
-        "fetched_at_utc": "2026-04-10T23:36:29.652352Z",
-        "last_ok_at_utc": "2026-04-10T23:36:29.652352Z"
+        "fetched_at_utc": "2026-04-11T02:26:22.718406Z",
+        "last_ok_at_utc": "2026-04-11T02:26:22.718406Z"
       },
       "whatYouMissed": {
         "status": "ok",
         "source": "espn_api",
-        "fetched_at_utc": "2026-04-10T23:36:29.652356Z",
-        "last_ok_at_utc": "2026-04-10T23:36:29.652356Z"
+        "fetched_at_utc": "2026-04-11T02:26:22.718412Z",
+        "last_ok_at_utc": "2026-04-11T02:26:22.718412Z"
       },
       "pickProtection": {
         "status": "ok",
         "source": "static",
-        "fetched_at_utc": "2026-04-10T23:36:29.652359Z",
-        "last_ok_at_utc": "2026-04-10T23:36:29.652359Z"
+        "fetched_at_utc": "2026-04-11T02:26:22.718415Z",
+        "last_ok_at_utc": "2026-04-11T02:26:22.718415Z"
       }
     },
     "requirements": {
