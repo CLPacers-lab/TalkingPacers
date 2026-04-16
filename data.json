@@ -203,15 +203,7 @@
     "protectProbability": 99.9,
     "note": "Auto-calculated from standings + fixed lottery odds table"
   },
-  "upcomingGames": [
-    {
-      "date": "Sun, Apr 12, 2026",
-      "opponent": "Detroit Pistons",
-      "location": "Home",
-      "isKey": false,
-      "why": ""
-    }
-  ],
+  "upcomingGames": [],
   "keyGames": [],
   "meta": {
     "pacersSlot": 2,
@@ -235,68 +227,68 @@
       }
     },
     "refreshStatus": {
-      "draft": "ok:espn_api+odds_table+manual_override",
+      "draft": "error: espn_standings_missing",
       "whatYouMissed": "ok:espn_boxscore"
     },
     "stale": true,
     "schema_version": 1,
-    "generated_at_utc": "2026-04-16T21:10:23.156196Z",
+    "generated_at_utc": "2026-04-16T22:07:08.030915Z",
     "sections": {
       "standings": {
         "status": "ok",
         "source": "espn_api",
-        "fetched_at_utc": "2026-04-16T21:10:23.156211Z",
-        "last_ok_at_utc": "2026-04-16T21:10:23.156211Z"
+        "fetched_at_utc": "2026-04-16T22:07:08.030932Z",
+        "last_ok_at_utc": "2026-04-16T22:07:08.030932Z"
       },
       "schedule": {
         "status": "stale",
         "source": "espn_api+lkg",
-        "fetched_at_utc": "2026-04-16T21:10:23.156215Z",
+        "fetched_at_utc": "2026-04-16T22:07:08.030937Z",
         "last_ok_at_utc": "2026-04-13T02:49:46.051897Z"
       },
       "scoreboard": {
         "status": "ok",
         "source": "espn_api",
-        "fetched_at_utc": "2026-04-16T21:10:23.156219Z",
-        "last_ok_at_utc": "2026-04-16T21:10:23.156219Z"
+        "fetched_at_utc": "2026-04-16T22:07:08.030941Z",
+        "last_ok_at_utc": "2026-04-16T22:07:08.030941Z"
       },
       "boxscores": {
         "status": "ok",
         "source": "espn_api",
-        "fetched_at_utc": "2026-04-16T21:10:23.156222Z",
-        "last_ok_at_utc": "2026-04-16T21:10:23.156222Z"
+        "fetched_at_utc": "2026-04-16T22:07:08.030945Z",
+        "last_ok_at_utc": "2026-04-16T22:07:08.030945Z"
       },
       "players": {
         "status": "disabled",
         "source": "none",
-        "fetched_at_utc": "2026-04-16T21:10:23.156224Z",
+        "fetched_at_utc": "2026-04-16T22:07:08.030948Z",
         "last_ok_at_utc": "2026-02-24T17:51:48.566416Z",
         "reason": "no_compliant_source"
       },
       "draft": {
         "status": "ok",
         "source": "espn_api+odds_table+manual_override",
-        "fetched_at_utc": "2026-04-16T21:10:23.156227Z",
-        "last_ok_at_utc": "2026-04-16T21:10:23.156395Z",
+        "fetched_at_utc": "2026-04-16T22:07:08.030951Z",
+        "last_ok_at_utc": "2026-04-16T22:07:08.031150Z",
         "reason": null
       },
       "videos": {
         "status": "ok",
         "source": "youtube_embed_official",
-        "fetched_at_utc": "2026-04-16T21:10:23.156230Z",
-        "last_ok_at_utc": "2026-04-16T21:10:23.156230Z"
+        "fetched_at_utc": "2026-04-16T22:07:08.030954Z",
+        "last_ok_at_utc": "2026-04-16T22:07:08.030954Z"
       },
       "whatYouMissed": {
         "status": "ok",
         "source": "espn_api",
-        "fetched_at_utc": "2026-04-16T21:10:23.156234Z",
-        "last_ok_at_utc": "2026-04-16T21:10:23.156234Z"
+        "fetched_at_utc": "2026-04-16T22:07:08.030959Z",
+        "last_ok_at_utc": "2026-04-16T22:07:08.030959Z"
       },
       "pickProtection": {
         "status": "ok",
         "source": "static",
-        "fetched_at_utc": "2026-04-16T21:10:23.156238Z",
-        "last_ok_at_utc": "2026-04-16T21:10:23.156238Z"
+        "fetched_at_utc": "2026-04-16T22:07:08.030962Z",
+        "last_ok_at_utc": "2026-04-16T22:07:08.030962Z"
       }
     },
     "requirements": {
