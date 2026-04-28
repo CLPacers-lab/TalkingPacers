@@ -1,37 +1,8 @@
 {
   "asOf": "April 27, 2026",
   "whatYouMissed": {
-    "summary": "April 12, 2026 vs Detroit Pistons: Loss (121-133).",
-    "leaders": [
-      {
-        "stat": "PTS",
-        "value": "21",
-        "player": "Quenton Jackson",
-        "athleteId": "4592829",
-        "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4592829.png"
-      },
-      {
-        "stat": "REB",
-        "value": "11",
-        "player": "Micah Potter",
-        "athleteId": "4066399",
-        "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4066399.png"
-      },
-      {
-        "stat": "AST",
-        "value": "8",
-        "player": "Quenton Jackson",
-        "athleteId": "4592829",
-        "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4592829.png"
-      },
-      {
-        "stat": "MIN",
-        "value": "38",
-        "player": "Ethan Thompson",
-        "athleteId": "4278516",
-        "headshot": "https://a.espncdn.com/i/headshots/nba/players/full/4278516.png"
-      }
-    ],
+    "summary": "Latest completed game not available.",
+    "leaders": [],
     "highlightVideoUrl": "https://www.youtube.com/embed?listType=playlist&list=UUUQDCnAwU-35cOo8WCzg6zA"
   },
   "lotteryStandings": [
@@ -227,70 +198,70 @@
       }
     },
     "refreshStatus": {
-      "draft": "ok:espn_api+odds_table+manual_override",
+      "draft": "error: espn_standings_missing",
       "whatYouMissed": "error: no_completed_game_found"
     },
     "stale": true,
     "schema_version": 1,
-    "generated_at_utc": "2026-04-28T06:17:53.769660Z",
+    "generated_at_utc": "2026-04-28T08:43:09.356017Z",
     "sections": {
       "standings": {
         "status": "ok",
         "source": "espn_api",
-        "fetched_at_utc": "2026-04-28T06:17:53.769676Z",
-        "last_ok_at_utc": "2026-04-28T06:17:53.769676Z"
+        "fetched_at_utc": "2026-04-28T08:43:09.356030Z",
+        "last_ok_at_utc": "2026-04-28T08:43:09.356030Z"
       },
       "schedule": {
         "status": "stale",
         "source": "espn_api+lkg",
-        "fetched_at_utc": "2026-04-28T06:17:53.769680Z",
+        "fetched_at_utc": "2026-04-28T08:43:09.356035Z",
         "last_ok_at_utc": "2026-04-13T02:49:46.051897Z"
       },
       "scoreboard": {
         "status": "ok",
         "source": "espn_api",
-        "fetched_at_utc": "2026-04-28T06:17:53.769684Z",
-        "last_ok_at_utc": "2026-04-28T06:17:53.769684Z"
+        "fetched_at_utc": "2026-04-28T08:43:09.356038Z",
+        "last_ok_at_utc": "2026-04-28T08:43:09.356038Z"
       },
       "boxscores": {
-        "status": "ok",
+        "status": "stale",
         "source": "espn_api",
-        "fetched_at_utc": "2026-04-28T06:17:53.769687Z",
+        "fetched_at_utc": "2026-04-28T08:43:09.356041Z",
         "last_ok_at_utc": "2026-04-28T06:17:53.769687Z",
         "error": "no_completed_game_found"
       },
       "players": {
         "status": "disabled",
         "source": "none",
-        "fetched_at_utc": "2026-04-28T06:17:53.769690Z",
+        "fetched_at_utc": "2026-04-28T08:43:09.356045Z",
         "last_ok_at_utc": "2026-02-24T17:51:48.566416Z",
         "reason": "no_compliant_source"
       },
       "draft": {
         "status": "ok",
         "source": "espn_api+odds_table+manual_override",
-        "fetched_at_utc": "2026-04-28T06:17:53.769710Z",
-        "last_ok_at_utc": "2026-04-28T06:17:53.769941Z",
+        "fetched_at_utc": "2026-04-28T08:43:09.356047Z",
+        "last_ok_at_utc": "2026-04-28T08:43:09.356234Z",
         "reason": null
       },
       "videos": {
         "status": "ok",
         "source": "youtube_embed_official",
-        "fetched_at_utc": "2026-04-28T06:17:53.769714Z",
-        "last_ok_at_utc": "2026-04-28T06:17:53.769714Z"
+        "fetched_at_utc": "2026-04-28T08:43:09.356050Z",
+        "last_ok_at_utc": "2026-04-28T08:43:09.356050Z"
       },
       "whatYouMissed": {
         "status": "stale",
         "source": "espn_api+lkg",
-        "fetched_at_utc": "2026-04-28T06:17:53.769719Z",
+        "fetched_at_utc": "2026-04-28T08:43:09.356055Z",
         "last_ok_at_utc": "2026-04-27T00:04:58.162360Z",
         "error": "no_completed_game_found"
       },
       "pickProtection": {
         "status": "ok",
         "source": "static",
-        "fetched_at_utc": "2026-04-28T06:17:53.769722Z",
-        "last_ok_at_utc": "2026-04-28T06:17:53.769722Z"
+        "fetched_at_utc": "2026-04-28T08:43:09.356058Z",
+        "last_ok_at_utc": "2026-04-28T08:43:09.356058Z"
       }
     },
     "requirements": {
