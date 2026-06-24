@@ -7,7 +7,9 @@ const BOX_SCORE_HINTS = [
   'points', 'point', 'pts', 'rebounds', 'rebound', 'boards', 'assists', 'assist',
   'steals', 'steal', 'blocks', 'block', 'turnovers', 'turnover', 'minutes', 'minute',
   'score', 'scored', 'result', 'won', 'lost', 'starter', 'starters', 'starting',
-  'playoff', 'playoffs', 'postseason', 'box score', 'game', 'against', 'vs'
+  'playoff', 'playoffs', 'postseason', 'box score', 'game', 'against', 'vs',
+  'highest', 'most', 'fewest', 'lowest', 'career high', 'career low', 'best',
+  'leader', 'leaderboard'
 ];
 const FOLLOW_UP_HINTS = ['he', 'him', 'his', 'that game', 'that one', 'what about', 'what happened next'];
 const UNSUPPORTED_HINTS = [
@@ -17,6 +19,12 @@ const UNSUPPORTED_HINTS = [
   'lineup construction', 'gm', 'general manager', 'president', 'owner',
   'coach think', 'what did they think', 'opinion', 'nba at large', 'league-wide'
 ];
+const PLAYER_MATCH_BLOCKLIST = new Set([
+  ...BOX_SCORE_HINTS.map((item) => normalizeText(item)),
+  ...UNSUPPORTED_HINTS.flatMap((item) => normalizeText(item).split(/\s+/)),
+  'pacers', 'indiana', 'player', 'players', 'team', 'who', 'best', 'most', 'highest',
+  'lowest', 'fewest', 'game', 'season', 'playoff', 'playoffs'
+]);
 const STOPWORDS = new Set([
   'a', 'an', 'and', 'are', 'as', 'at', 'be', 'did', 'do', 'for', 'from', 'game',
   'games', 'had', 'has', 'have', 'he', 'her', 'him', 'how', 'in', 'is', 'it',
@@ -30,8 +38,8 @@ const STAT_ALIASES = {
   FG: ['fg', 'field goal', 'field goals', 'shooting'],
   '3PT': ['3pt', '3pts', 'three', 'three pointers', 'threes'],
   FT: ['ft', 'free throw', 'free throws'],
-  REB: ['reb', 'rebound', 'rebounds', 'boards'],
-  AST: ['ast', 'assist', 'assists'],
+  REB: ['reb', 'rebound', 'rebounds', 'rebounder', 'rebounding', 'boards'],
+  AST: ['ast', 'assist', 'assists', 'assister', 'passing', 'playmaker'],
   TO: ['turnover', 'turnovers'],
   STL: ['steal', 'steals', 'stl'],
   BLK: ['block', 'blocks', 'blk'],
@@ -74,6 +82,41 @@ const OPPONENT_ALIASES = {
 };
 
 let cachedIndex = null;
+
+function collapseInitials(text) {
+  return normalizeText(text)
+    .replace(/\b([a-z])\s+([a-z])\b/g, '$1$2')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function editDistance(a, b) {
+  const left = normalizeText(a);
+  const right = normalizeText(b);
+  const rows = left.length + 1;
+  const cols = right.length + 1;
+  const dp = Array.from({ length: rows }, () => Array(cols).fill(0));
+
+  for (let i = 0; i < rows; i += 1) {
+    dp[i][0] = i;
+  }
+  for (let j = 0; j < cols; j += 1) {
+    dp[0][j] = j;
+  }
+
+  for (let i = 1; i < rows; i += 1) {
+    for (let j = 1; j < cols; j += 1) {
+      const cost = left[i - 1] === right[j - 1] ? 0 : 1;
+      dp[i][j] = Math.min(
+        dp[i - 1][j] + 1,
+        dp[i][j - 1] + 1,
+        dp[i - 1][j - 1] + cost
+      );
+    }
+  }
+
+  return dp[rows - 1][cols - 1];
+}
 
 function extractAnswer(payload) {
   if (typeof payload?.output_text === 'string' && payload.output_text.trim()) {
@@ -203,6 +246,8 @@ function classifyQuestion(question, history, index) {
   const dates = extractDateTerms(question);
   const seasons = extractSeasonTerms(question);
   const phase = detectPhase(question);
+  const requestedStats = detectRequestedStats(question);
+  const aggregation = detectAggregation(question);
   const hasUnsupportedHint = UNSUPPORTED_HINTS.some((hint) => hasPhrase(normalized, hint));
   const hasBoxScoreHint = BOX_SCORE_HINTS.some((hint) => hasPhrase(normalized, hint));
   const hasFollowUpHint = FOLLOW_UP_HINTS.some((hint) => hasPhrase(normalized, hint));
@@ -225,6 +270,10 @@ function classifyQuestion(question, history, index) {
     classification = 'unsupported';
   } else if (hasFollowUpHint && priorResolvedContext) {
     classification = 'likely_supported_followup';
+  } else if (aggregation?.type === 'player-total-leader' && requestedStats.length > 0) {
+    classification = 'box_score_supported';
+  } else if (aggregation?.type === 'single-game-extreme' && requestedStats.length > 0 && (matchedPlayers.length > 0 || priorResolvedContext?.player)) {
+    classification = 'box_score_supported';
   } else if (hasBoxScoreHint && hasStrongAnchor) {
     classification = 'box_score_supported';
   } else if (hasStrongAnchor && dates.length > 0) {
@@ -240,7 +289,9 @@ function classifyQuestion(question, history, index) {
     matchedOpponents,
     dates,
     seasons,
-    phase
+    phase,
+    requestedStats,
+    aggregation
   };
 }
 
@@ -360,6 +411,8 @@ function buildIndex() {
   const byGameId = new Map();
   const byPhase = new Map([['playoffs', []], ['regular', []]]);
   const players = [];
+  const playerFirstNames = new Map();
+  const playerLastNames = new Map();
 
   for (const game of games) {
     const gameRecord = createGameRecord(game);
@@ -386,7 +439,12 @@ function buildIndex() {
       const playerName = normalizeText(playerRecord.player);
       if (playerName) {
         addToIndex(byPlayer, playerName, playerIndex);
-        const lastName = playerName.split(/\s+/).slice(-1)[0];
+        addToIndex(byPlayer, collapseInitials(playerName), playerIndex);
+        const nameParts = playerName.split(/\s+/);
+        const firstName = nameParts[0];
+        const lastName = nameParts.slice(-1)[0];
+        addToIndex(playerFirstNames, firstName, playerName);
+        addToIndex(playerLastNames, lastName, playerName);
         addToIndex(byPlayer, lastName, playerIndex);
         players.push(playerName);
       }
@@ -401,22 +459,71 @@ function buildIndex() {
     byDate,
     byGameId,
     byPhase,
-    players: [...new Set(players)]
+    players: [...new Set(players)],
+    playerFirstNames,
+    playerLastNames
   };
   return cachedIndex;
 }
 
 function detectPlayers(text, index) {
   const normalized = normalizeText(text);
-  const matches = [];
+  const collapsed = collapseInitials(text);
+  const tokens = uniqueTokens(text);
+  const matches = new Set();
 
   for (const name of index.players) {
-    if (normalized.includes(name)) {
-      matches.push(name);
+    if (normalized.includes(name) || collapsed.includes(collapseInitials(name))) {
+      matches.add(name);
     }
   }
 
-  return [...new Set(matches)];
+  for (const token of tokens) {
+    if (PLAYER_MATCH_BLOCKLIST.has(token)) {
+      continue;
+    }
+
+    const firstNameMatches = index.playerFirstNames.get(token) || [];
+    if (firstNameMatches.length === 1) {
+      matches.add(firstNameMatches[0]);
+    }
+
+    const lastNameMatches = index.playerLastNames.get(token) || [];
+    if (lastNameMatches.length === 1) {
+      matches.add(lastNameMatches[0]);
+    }
+  }
+
+  for (const token of tokens) {
+    if (token.length < 4 || PLAYER_MATCH_BLOCKLIST.has(token)) {
+      continue;
+    }
+
+    let bestName = null;
+    let bestDistance = Infinity;
+
+    for (const name of index.players) {
+      const parts = name.split(/\s+/);
+      const firstName = parts[0];
+      const lastName = parts.slice(-1)[0];
+      const candidateParts = [firstName, lastName, collapseInitials(name)];
+
+      for (const candidate of candidateParts) {
+        const distance = editDistance(token, candidate);
+        const lengthGap = Math.abs(token.length - candidate.length);
+        if (distance <= 2 && lengthGap <= 2 && distance < bestDistance) {
+          bestDistance = distance;
+          bestName = name;
+        }
+      }
+    }
+
+    if (bestName) {
+      matches.add(bestName);
+    }
+  }
+
+  return [...matches];
 }
 
 function detectOpponentCodes(text) {
@@ -448,6 +555,47 @@ function detectRequestedStats(text) {
   }
 
   return labels;
+}
+
+function detectAggregation(text) {
+  const normalized = normalizeText(text);
+  const asksWho = /\bwho\b/.test(normalized);
+  const hasLeaderLanguage = /(best|most|leader|top)/.test(normalized);
+  const hasExtremeLanguage = /(highest|lowest|fewest|career high|career low|max|min)/.test(normalized);
+
+  if (asksWho && hasLeaderLanguage) {
+    return { type: 'player-total-leader', order: 'max' };
+  }
+  if (hasLeaderLanguage && /\b(for the pacers|as a pacer|on the pacers)\b/.test(normalized) && !/\bgame\b/.test(normalized)) {
+    return { type: 'player-total-leader', order: 'max' };
+  }
+  if (/(highest|most|career high|best|max)/.test(normalized)) {
+    return { type: 'single-game-extreme', order: 'max' };
+  }
+  if (/(lowest|fewest|career low|min)/.test(normalized)) {
+    return { type: 'single-game-extreme', order: 'min' };
+  }
+  if (hasExtremeLanguage) {
+    return { type: 'single-game-extreme', order: 'max' };
+  }
+  return null;
+}
+
+function parseStatValue(value) {
+  if (typeof value === 'number') {
+    return Number.isFinite(value) ? value : null;
+  }
+
+  const text = String(value || '').trim();
+  if (!text) {
+    return null;
+  }
+
+  if (/^-?\d+(\.\d+)?$/.test(text)) {
+    return Number(text);
+  }
+
+  return null;
 }
 
 function scoreRecord(record, query, matchedPlayers, matchedOpponents, requestedStats) {
@@ -591,6 +739,163 @@ function filterScoredMatches(scoredMatches, query, matchedPlayers, resolvedConte
   return filtered;
 }
 
+function runAggregateQuery(index, classification, query) {
+  const requestedStat = classification.requestedStats[0];
+  if (!requestedStat) {
+    return [];
+  }
+
+  const candidateIds = gatherCandidateIds(
+    query,
+    index,
+    classification.matchedPlayers,
+    classification.matchedOpponents,
+    classification.priorResolvedContext
+  );
+
+  let matches = candidateIds
+    .map((id) => index.records[id])
+    .filter((record) => record.type === 'player-game')
+    .filter((record) => Object.prototype.hasOwnProperty.call(record.stats || {}, requestedStat))
+    .filter((record) => {
+      const value = parseStatValue(record.stats[requestedStat]);
+      return value !== null;
+    });
+
+  matches = filterScoredMatches(
+    matches.map((record) => ({
+      record,
+      score: scoreRecord(record, query, classification.matchedPlayers, classification.matchedOpponents, classification.requestedStats)
+    })),
+    query,
+    classification.matchedPlayers,
+    classification.priorResolvedContext
+  );
+
+  matches.sort((a, b) => {
+    const valueA = parseStatValue(a.record.stats[requestedStat]);
+    const valueB = parseStatValue(b.record.stats[requestedStat]);
+    if (valueA !== valueB) {
+      return classification.aggregation.order === 'min' ? valueA - valueB : valueB - valueA;
+    }
+    return String(b.record.date || '').localeCompare(String(a.record.date || ''));
+  });
+
+  if (matches.length === 0) {
+    return [];
+  }
+
+  const bestValue = parseStatValue(matches[0].record.stats[requestedStat]);
+  return matches
+    .filter((item) => parseStatValue(item.record.stats[requestedStat]) === bestValue)
+    .slice(0, 5);
+}
+
+function createAggregateLeaderRecord(player, statLabel, total, supportRecords, query) {
+  const first = supportRecords[0]?.record || {};
+  const sourceRecords = supportRecords.slice(0, 5).map((item) => item.record);
+  const sourceUrls = sourceRecords.map((record) => record.source_url).filter(Boolean);
+  const gamesCount = supportRecords.length;
+
+  return {
+    type: 'player-total-leader',
+    game_id: '',
+    date: '',
+    season: query.seasons[0] || '',
+    opponent: query.matchedOpponents?.[0] || '',
+    playoffs: query.phase === 'playoffs',
+    source_url: sourceUrls[0] || '',
+    source_urls: sourceUrls,
+    title: `${player} total ${statLabel}`,
+    result: '',
+    stat_line: `${statLabel}:${total}`,
+    player,
+    player_id: first.player_id || '',
+    stats: { [statLabel]: String(total), GAMES: String(gamesCount) },
+    contextLines: [
+      `player: ${player}`,
+      `aggregate_type: player total leader`,
+      `stat: ${statLabel}`,
+      `total: ${total}`,
+      `games_counted: ${gamesCount}`,
+      `season_filter: ${query.seasons.join(', ') || 'all seasons'}`,
+      `opponent_filter: ${query.matchedOpponents?.join(', ') || 'all opponents'}`,
+      `phase_filter: ${query.phase || 'all phases'}`,
+      `sample_source_urls: ${sourceUrls.slice(0, 3).join(', ') || 'unknown'}`
+    ]
+  };
+}
+
+function runLeaderAggregateQuery(index, classification, query) {
+  const requestedStat = classification.requestedStats[0];
+  if (!requestedStat) {
+    return [];
+  }
+
+  let candidateIds = gatherCandidateIds(
+    query,
+    index,
+    classification.matchedPlayers,
+    classification.matchedOpponents,
+    classification.priorResolvedContext
+  );
+
+  if (candidateIds.length === 0) {
+    candidateIds = index.records.map((_, id) => id);
+  }
+
+  const playerGames = candidateIds
+    .map((id) => index.records[id])
+    .filter((record) => record.type === 'player-game')
+    .filter((record) => Object.prototype.hasOwnProperty.call(record.stats || {}, requestedStat))
+    .filter((record) => parseStatValue(record.stats[requestedStat]) !== null);
+
+  if (playerGames.length === 0) {
+    return [];
+  }
+
+  const grouped = new Map();
+  for (const record of playerGames) {
+    if (!grouped.has(record.player)) {
+      grouped.set(record.player, []);
+    }
+    grouped.get(record.player).push({
+      record,
+      score: scoreRecord(record, query, classification.matchedPlayers, classification.matchedOpponents, classification.requestedStats)
+    });
+  }
+
+  const leaders = [...grouped.entries()]
+    .map(([player, records]) => {
+      const total = records.reduce((sum, item) => sum + parseStatValue(item.record.stats[requestedStat]), 0);
+      return {
+        record: createAggregateLeaderRecord(player, requestedStat, total, records, {
+          seasons: query.seasons,
+          phase: query.phase,
+          matchedOpponents: classification.matchedOpponents
+        }),
+        score: records.reduce((sum, item) => sum + item.score, 0)
+      };
+    })
+    .sort((a, b) => {
+      const totalA = parseStatValue(a.record.stats[requestedStat]);
+      const totalB = parseStatValue(b.record.stats[requestedStat]);
+      if (totalA !== totalB) {
+        return classification.aggregation.order === 'min' ? totalA - totalB : totalB - totalA;
+      }
+      return b.score - a.score;
+    });
+
+  if (leaders.length === 0) {
+    return [];
+  }
+
+  const bestValue = parseStatValue(leaders[0].record.stats[requestedStat]);
+  return leaders
+    .filter((item) => parseStatValue(item.record.stats[requestedStat]) === bestValue)
+    .slice(0, 5);
+}
+
 function findRelevantRecords(question, history, debugMode) {
   const index = buildIndex();
   const classification = classifyQuestion(question, history, index);
@@ -604,6 +909,8 @@ function findRelevantRecords(question, history, debugMode) {
         matched_seasons: classification.seasons,
         matched_dates: classification.dates,
         matched_phase: classification.phase,
+        requested_stats: classification.requestedStats,
+        aggregation: classification.aggregation,
         prior_resolved_context: classification.priorResolvedContext,
         records_retrieved: []
       } : null,
@@ -628,7 +935,66 @@ function findRelevantRecords(question, history, debugMode) {
     ...classification.matchedOpponents,
     ...detectOpponentCodes(retrievalQuestion)
   ])];
-  const requestedStats = detectRequestedStats(retrievalQuestion);
+  const requestedStats = classification.requestedStats.length > 0
+    ? classification.requestedStats
+    : detectRequestedStats(retrievalQuestion);
+  if (classification.aggregation?.type === 'single-game-extreme') {
+    const matches = runAggregateQuery(index, { ...classification, requestedStats }, query);
+    const resolvedContext = buildResolvedContext(matches, classification.priorResolvedContext);
+    const debug = debugMode ? {
+      classification: classification.classification,
+      query_type: 'single-game-extreme',
+      candidate_count: matches.length,
+      matched_players: matchedPlayers,
+      matched_opponents: matchedOpponents,
+      matched_seasons: query.seasons,
+      matched_dates: query.dates,
+      matched_phase: query.phase,
+      requested_stats: requestedStats,
+      aggregation: classification.aggregation,
+      prior_resolved_context: classification.priorResolvedContext,
+      records_retrieved: matches.map((item) => ({
+        title: item.record.title,
+        type: item.record.type,
+        game_id: item.record.game_id,
+        date: item.record.date,
+        season: item.record.season,
+        opponent: item.record.opponent,
+        player: item.record.player || null,
+        retrieval_score: item.score,
+        stat_value: item.record.stats[requestedStats[0]],
+        source_url: item.record.source_url || null
+      }))
+    } : null;
+    return { matches, debug, classification: classification.classification, resolvedContext };
+  }
+  if (classification.aggregation?.type === 'player-total-leader') {
+    const matches = runLeaderAggregateQuery(index, { ...classification, requestedStats }, query);
+    const resolvedContext = buildResolvedContext(matches, classification.priorResolvedContext);
+    const debug = debugMode ? {
+      classification: classification.classification,
+      query_type: 'player-total-leader',
+      candidate_count: matches.length,
+      matched_players: matchedPlayers,
+      matched_opponents: matchedOpponents,
+      matched_seasons: query.seasons,
+      matched_dates: query.dates,
+      matched_phase: query.phase,
+      requested_stats: requestedStats,
+      aggregation: classification.aggregation,
+      prior_resolved_context: classification.priorResolvedContext,
+      records_retrieved: matches.map((item) => ({
+        title: item.record.title,
+        type: item.record.type,
+        player: item.record.player || null,
+        total_value: item.record.stats[requestedStats[0]],
+        games_counted: item.record.stats.GAMES,
+        retrieval_score: item.score,
+        source_url: item.record.source_url || null
+      }))
+    } : null;
+    return { matches, debug, classification: classification.classification, resolvedContext };
+  }
   const candidateIds = gatherCandidateIds(query, index, matchedPlayers, matchedOpponents, classification.priorResolvedContext);
   const requireStrongSupport = !hasStrongSignals(query, matchedPlayers, matchedOpponents, classification.priorResolvedContext);
 
@@ -727,12 +1093,23 @@ function buildContextBlock(matches) {
 }
 
 function buildSources(matches) {
-  return matches.map(({ record }) => ({
-    title: record.title,
-    date: record.date || null,
-    opponent: record.opponent || null,
-    url: record.source_url || null
-  }));
+  return matches.flatMap(({ record }) => {
+    if (record.type === 'player-total-leader' && Array.isArray(record.source_urls) && record.source_urls.length > 0) {
+      return record.source_urls.slice(0, 5).map((url, index) => ({
+        title: `${record.player} supporting game ${index + 1}`,
+        date: null,
+        opponent: null,
+        url
+      }));
+    }
+
+    return [{
+      title: record.title,
+      date: record.date || null,
+      opponent: record.opponent || null,
+      url: record.source_url || null
+    }];
+  });
 }
 
 module.exports = async function handler(req, res) {

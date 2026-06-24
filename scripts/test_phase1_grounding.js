@@ -134,6 +134,98 @@ tests.push(() => {
   };
 });
 
+tests.push(() => {
+  const result = findRelevantRecords("What is TJ McConnell's highest steals game?", [], true);
+  assert.strictEqual(result.classification, 'box_score_supported');
+  expectTopMatch(result, {
+    type: 'player-game',
+    player: 'T.J. McConnell',
+    date: '2021-03-04',
+    opponent: 'CLE'
+  });
+  assert.strictEqual(result.matches[0].record.stats.STL, '10');
+  return {
+    name: "TJ McConnell's highest steals game",
+    result: 'pass',
+    retrieved: summarize(result.matches)
+  };
+});
+
+tests.push(() => {
+  const result = findRelevantRecords("What is T.J. McConnell's highest assists game?", [], true);
+  assert.strictEqual(result.classification, 'box_score_supported');
+  expectTopMatch(result, {
+    type: 'player-game',
+    player: 'T.J. McConnell',
+    date: '2021-05-16',
+    opponent: 'TOR'
+  });
+  assert.strictEqual(result.matches[0].record.stats.AST, '17');
+  return {
+    name: "T.J. McConnell's highest assists game",
+    result: 'pass',
+    retrieved: summarize(result.matches)
+  };
+});
+
+tests.push(() => {
+  const result = findRelevantRecords('Who is the best rebounder for the Pacers?', [], true);
+  assert.strictEqual(result.classification, 'box_score_supported');
+  expectTopMatch(result, {
+    type: 'player-total-leader',
+    player: 'Jeff Foster'
+  });
+  assert.strictEqual(result.matches[0].record.stats.REB, '5528');
+  return {
+    name: 'Best rebounder for the Pacers',
+    result: 'pass',
+    retrieved: summarize(result.matches)
+  };
+});
+
+tests.push(() => {
+  const result = findRelevantRecords('Who has the most assists for the Pacers?', [], true);
+  assert.strictEqual(result.classification, 'box_score_supported');
+  expectTopMatch(result, {
+    type: 'player-total-leader',
+    player: 'Mark Jackson'
+  });
+  assert.strictEqual(result.matches[0].record.stats.AST, '3608');
+  return {
+    name: 'Most assists for the Pacers',
+    result: 'pass',
+    retrieved: summarize(result.matches)
+  };
+});
+
+tests.push(() => {
+  const result = findRelevantRecords('What is Tyrese highest assists game?', [], true);
+  assert.strictEqual(result.classification, 'box_score_supported');
+  expectTopMatch(result, {
+    type: 'player-game',
+    player: 'Tyrese Haliburton'
+  });
+  return {
+    name: 'Tyrese shorthand resolves to Tyrese Haliburton',
+    result: 'pass',
+    retrieved: summarize(result.matches)
+  };
+});
+
+tests.push(() => {
+  const result = findRelevantRecords('What is Haliburten highest assists game?', [], true);
+  assert.strictEqual(result.classification, 'box_score_supported');
+  expectTopMatch(result, {
+    type: 'player-game',
+    player: 'Tyrese Haliburton'
+  });
+  return {
+    name: 'Misspelled Haliburton resolves correctly',
+    result: 'pass',
+    retrieved: summarize(result.matches)
+  };
+});
+
 const results = [];
 for (const test of tests) {
   results.push(test());
