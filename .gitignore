@@ -2,4 +2,6 @@
 update.log
 data.json.tmp
 *.tmp
+__pycache__/
+*.pyc
 data/pacers-boxscores-raw.json
