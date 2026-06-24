@@ -114,6 +114,18 @@ class PacersStateEngine:
         cleaned = question.strip()
         lowered = normalize_text(cleaned)
 
+        if self._is_first_apron_question(lowered):
+            return self._answer_first_apron_distance()
+
+        if self._is_what_if_question(lowered):
+            return self._answer_what_if(cleaned, lowered)
+
+        if self._is_top_paid_question(lowered):
+            return self._answer_highest_paid(lowered)
+
+        if self._is_salary_lookup_question(lowered):
+            return self._answer_player_salary(cleaned)
+
         cba_answer = self._answer_cba_rule_question(cleaned, lowered)
         if cba_answer is not None:
             return cba_answer
@@ -124,18 +136,6 @@ class PacersStateEngine:
                 answer=LEGAL_LIMITATION_MESSAGE,
                 sources=self._state_sources(),
             )
-
-        if self._is_what_if_question(lowered):
-            return self._answer_what_if(cleaned, lowered)
-
-        if self._is_top_paid_question(lowered):
-            return self._answer_highest_paid(lowered)
-
-        if self._is_first_apron_question(lowered):
-            return self._answer_first_apron_distance()
-
-        if self._is_salary_lookup_question(lowered):
-            return self._answer_player_salary(cleaned)
 
         return StateEngineAnswer(
             kind="unsupported",
