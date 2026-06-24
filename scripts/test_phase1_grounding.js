@@ -138,12 +138,12 @@ tests.push(() => {
   const result = findRelevantRecords("What is TJ McConnell's highest steals game?", [], true);
   assert.strictEqual(result.classification, 'box_score_supported');
   expectTopMatch(result, {
-    type: 'player-game',
+    type: 'player-best-performance',
     player: 'T.J. McConnell',
     date: '2021-03-04',
     opponent: 'CLE'
   });
-  assert.strictEqual(result.matches[0].record.stats.STL, '10');
+  assert.strictEqual(result.matches[0].record.stats.STL, 10);
   return {
     name: "TJ McConnell's highest steals game",
     result: 'pass',
@@ -155,12 +155,12 @@ tests.push(() => {
   const result = findRelevantRecords("What is T.J. McConnell's highest assists game?", [], true);
   assert.strictEqual(result.classification, 'box_score_supported');
   expectTopMatch(result, {
-    type: 'player-game',
+    type: 'player-best-performance',
     player: 'T.J. McConnell',
     date: '2021-05-16',
     opponent: 'TOR'
   });
-  assert.strictEqual(result.matches[0].record.stats.AST, '17');
+  assert.strictEqual(result.matches[0].record.stats.AST, 17);
   return {
     name: "T.J. McConnell's highest assists game",
     result: 'pass',
@@ -172,10 +172,10 @@ tests.push(() => {
   const result = findRelevantRecords('Who is the best rebounder for the Pacers?', [], true);
   assert.strictEqual(result.classification, 'box_score_supported');
   expectTopMatch(result, {
-    type: 'player-total-leader',
+    type: 'franchise-leaderboard',
     player: 'Jeff Foster'
   });
-  assert.strictEqual(result.matches[0].record.stats.REB, '5528');
+  assert.strictEqual(result.matches[0].record.stats.REB, 5528);
   return {
     name: 'Best rebounder for the Pacers',
     result: 'pass',
@@ -187,10 +187,10 @@ tests.push(() => {
   const result = findRelevantRecords('Who has the most assists for the Pacers?', [], true);
   assert.strictEqual(result.classification, 'box_score_supported');
   expectTopMatch(result, {
-    type: 'player-total-leader',
+    type: 'franchise-leaderboard',
     player: 'Mark Jackson'
   });
-  assert.strictEqual(result.matches[0].record.stats.AST, '3608');
+  assert.strictEqual(result.matches[0].record.stats.AST, 3608);
   return {
     name: 'Most assists for the Pacers',
     result: 'pass',
@@ -202,7 +202,7 @@ tests.push(() => {
   const result = findRelevantRecords('What is Tyrese highest assists game?', [], true);
   assert.strictEqual(result.classification, 'box_score_supported');
   expectTopMatch(result, {
-    type: 'player-game',
+    type: 'player-best-performance',
     player: 'Tyrese Haliburton'
   });
   return {
@@ -216,11 +216,62 @@ tests.push(() => {
   const result = findRelevantRecords('What is Haliburten highest assists game?', [], true);
   assert.strictEqual(result.classification, 'box_score_supported');
   expectTopMatch(result, {
-    type: 'player-game',
+    type: 'player-best-performance',
     player: 'Tyrese Haliburton'
   });
   return {
     name: 'Misspelled Haliburton resolves correctly',
+    result: 'pass',
+    retrieved: summarize(result.matches)
+  };
+});
+
+tests.push(() => {
+  const result = findRelevantRecords("What is Reggie Miller's highest scoring game?", [], true);
+  assert.strictEqual(result.classification, 'box_score_supported');
+  expectTopMatch(result, {
+    type: 'player-best-performance',
+    player: 'Reggie Miller',
+    date: '2001-04-25',
+    opponent: 'PHI'
+  });
+  assert.strictEqual(result.matches[0].record.stats.PTS, 41);
+  return {
+    name: "Reggie Miller's highest scoring game",
+    result: 'pass',
+    retrieved: summarize(result.matches)
+  };
+});
+
+tests.push(() => {
+  const result = findRelevantRecords('What did Paul George average in 2013-14?', [], true);
+  assert.strictEqual(result.classification, 'box_score_supported');
+  expectTopMatch(result, {
+    type: 'player-season-summary',
+    player: 'Paul George',
+    season: '2013-14'
+  });
+  assert.strictEqual(result.matches[0].record.regular.averages.PTS, 20.02);
+  assert.strictEqual(result.matches[0].record.playoffs_summary.averages.PTS, 22.58);
+  return {
+    name: 'Paul George 2013-14 season averages',
+    result: 'pass',
+    retrieved: summarize(result.matches)
+  };
+});
+
+tests.push(() => {
+  const result = findRelevantRecords('Did Tyrese Haliburton average more assists in the playoffs or regular season as a Pacer?', [], true);
+  assert.strictEqual(result.classification, 'box_score_supported');
+  expectTopMatch(result, {
+    type: 'player-career-summary',
+    player: 'Tyrese Haliburton'
+  });
+  assert.strictEqual(result.matches[0].record.regular.averages.AST, 10.09);
+  assert.strictEqual(result.matches[0].record.playoffs_summary.averages.AST, 8.42);
+  assert(result.matches[0].record.regular.averages.AST > result.matches[0].record.playoffs_summary.averages.AST);
+  return {
+    name: 'Tyrese Haliburton playoff vs regular assists comparison',
     result: 'pass',
     retrieved: summarize(result.matches)
   };

@@ -2,6 +2,10 @@ const fs = require('fs');
 const path = require('path');
 
 const BOX_SCORES_PATH = path.join(process.cwd(), 'data', 'pacers-boxscores.json');
+const CAREER_SUMMARIES_PATH = path.join(process.cwd(), 'data', 'player-career-summaries.json');
+const SEASON_SUMMARIES_PATH = path.join(process.cwd(), 'data', 'player-season-summaries.json');
+const LEADERBOARDS_PATH = path.join(process.cwd(), 'data', 'franchise-leaderboards.json');
+const BEST_PERFORMANCES_PATH = path.join(process.cwd(), 'data', 'best-performances.json');
 const NO_DATA_ANSWER = "I don't have that in the TalkingPacers data yet.";
 const BOX_SCORE_HINTS = [
   'points', 'point', 'pts', 'rebounds', 'rebound', 'boards', 'assists', 'assist',
@@ -34,7 +38,7 @@ const STOPWORDS = new Set([
 ]);
 const STAT_ALIASES = {
   MIN: ['min', 'mins', 'minute', 'minutes'],
-  PTS: ['point', 'points', 'pts', 'score', 'scored'],
+  PTS: ['point', 'points', 'pts', 'score', 'scored', 'scoring'],
   FG: ['fg', 'field goal', 'field goals', 'shooting'],
   '3PT': ['3pt', '3pts', 'three', 'three pointers', 'threes'],
   FT: ['ft', 'free throw', 'free throws'],
@@ -82,6 +86,7 @@ const OPPONENT_ALIASES = {
 };
 
 let cachedIndex = null;
+let cachedDerivedKnowledge = null;
 
 function collapseInitials(text) {
   return normalizeText(text)
@@ -163,6 +168,22 @@ function extractSeasonTerms(text) {
 
 function extractDateTerms(text) {
   return text.match(/\b\d{4}-\d{2}-\d{2}\b/g) || [];
+}
+
+function hasAverageLanguage(text) {
+  return /\baverage|averaged|per game|ppg|rpg|apg\b/.test(normalizeText(text));
+}
+
+function hasCareerLanguage(text) {
+  return /\bcareer|all time|all-time|as a pacer|with the pacers|for the pacers\b/.test(normalizeText(text));
+}
+
+function hasComparisonLanguage(text) {
+  return /(playoff.*regular|regular.*playoff|vs regular|vs playoffs|compare)/.test(normalizeText(text));
+}
+
+function hasLeaderboardLanguage(text) {
+  return /\b(franchise leader|leaderboard|who has the most|who is the best|top)\b/.test(normalizeText(text));
 }
 
 function sanitizeHistory(history) {
@@ -248,6 +269,11 @@ function classifyQuestion(question, history, index) {
   const phase = detectPhase(question);
   const requestedStats = detectRequestedStats(question);
   const aggregation = detectAggregation(question);
+  const asksAverage = hasAverageLanguage(question);
+  const asksCareer = hasCareerLanguage(question);
+  const asksComparison = hasComparisonLanguage(question);
+  const asksLeaderboard = hasLeaderboardLanguage(question);
+  const hasDirectGameAnchor = dates.length > 0 || (matchedOpponents.length > 0 && /(against|vs)\b/.test(normalized));
   const hasUnsupportedHint = UNSUPPORTED_HINTS.some((hint) => hasPhrase(normalized, hint));
   const hasBoxScoreHint = BOX_SCORE_HINTS.some((hint) => hasPhrase(normalized, hint));
   const hasFollowUpHint = FOLLOW_UP_HINTS.some((hint) => hasPhrase(normalized, hint));
@@ -266,24 +292,45 @@ function classifyQuestion(question, history, index) {
   );
 
   let classification = 'unsupported';
+  let route = 'unsupported';
   if (hasUnsupportedHint) {
     classification = 'unsupported';
+    route = 'unsupported';
   } else if (hasFollowUpHint && priorResolvedContext) {
     classification = 'likely_supported_followup';
+    route = 'box-score';
+  } else if (aggregation?.type === 'single-game-extreme' && requestedStats.length > 0) {
+    classification = 'box_score_supported';
+    route = 'best-performances';
   } else if (aggregation?.type === 'player-total-leader' && requestedStats.length > 0) {
     classification = 'box_score_supported';
-  } else if (aggregation?.type === 'single-game-extreme' && requestedStats.length > 0 && (matchedPlayers.length > 0 || priorResolvedContext?.player)) {
+    route = 'franchise-leaderboards';
+  } else if (matchedPlayers.length > 0 && seasons.length > 0 && (asksAverage || requestedStats.length > 0 || phase !== null)) {
     classification = 'box_score_supported';
+    route = 'player-season-summaries';
+  } else if (matchedPlayers.length > 0 && (asksCareer || asksComparison || asksAverage) && !hasDirectGameAnchor) {
+    classification = 'box_score_supported';
+    route = 'player-career-summaries';
+  } else if (asksLeaderboard && requestedStats.length > 0 && !hasDirectGameAnchor) {
+    classification = 'box_score_supported';
+    route = 'franchise-leaderboards';
+  } else if (hasDirectGameAnchor && matchedPlayers.length > 0) {
+    classification = 'box_score_supported';
+    route = 'box-score';
   } else if (hasBoxScoreHint && hasStrongAnchor) {
     classification = 'box_score_supported';
+    route = 'box-score';
   } else if (hasStrongAnchor && dates.length > 0) {
     classification = 'box_score_supported';
+    route = 'box-score';
   } else if (hasPlayerGameAnchor) {
     classification = 'box_score_supported';
+    route = 'box-score';
   }
 
   return {
     classification,
+    route,
     priorResolvedContext,
     matchedPlayers,
     matchedOpponents,
@@ -466,6 +513,52 @@ function buildIndex() {
   return cachedIndex;
 }
 
+function buildDerivedKnowledge() {
+  if (cachedDerivedKnowledge) {
+    return cachedDerivedKnowledge;
+  }
+
+  const datasets = {
+    career: JSON.parse(fs.readFileSync(CAREER_SUMMARIES_PATH, 'utf8')),
+    season: JSON.parse(fs.readFileSync(SEASON_SUMMARIES_PATH, 'utf8')),
+    leaderboards: JSON.parse(fs.readFileSync(LEADERBOARDS_PATH, 'utf8')),
+    performances: JSON.parse(fs.readFileSync(BEST_PERFORMANCES_PATH, 'utf8'))
+  };
+
+  const decorate = (records) => records.map((record) => ({
+    ...record,
+    text: normalizeText([
+      record.title,
+      record.player || '',
+      record.season || '',
+      record.phase || '',
+      record.stat || '',
+      ...(record.contextLines || [])
+    ].join(' ')),
+    player_normalized: normalizeText(record.player || '')
+  }));
+
+  cachedDerivedKnowledge = {
+    career: {
+      metadata: datasets.career.metadata,
+      records: decorate(datasets.career.records)
+    },
+    season: {
+      metadata: datasets.season.metadata,
+      records: decorate(datasets.season.records)
+    },
+    leaderboards: {
+      metadata: datasets.leaderboards.metadata,
+      records: decorate(datasets.leaderboards.records)
+    },
+    performances: {
+      metadata: datasets.performances.metadata,
+      records: decorate(datasets.performances.records)
+    }
+  };
+  return cachedDerivedKnowledge;
+}
+
 function detectPlayers(text, index) {
   const normalized = normalizeText(text);
   const collapsed = collapseInitials(text);
@@ -494,32 +587,34 @@ function detectPlayers(text, index) {
     }
   }
 
-  for (const token of tokens) {
-    if (token.length < 4 || PLAYER_MATCH_BLOCKLIST.has(token)) {
-      continue;
-    }
+  if (matches.size === 0) {
+    for (const token of tokens) {
+      if (token.length < 4 || PLAYER_MATCH_BLOCKLIST.has(token)) {
+        continue;
+      }
 
-    let bestName = null;
-    let bestDistance = Infinity;
+      let bestName = null;
+      let bestDistance = Infinity;
 
-    for (const name of index.players) {
-      const parts = name.split(/\s+/);
-      const firstName = parts[0];
-      const lastName = parts.slice(-1)[0];
-      const candidateParts = [firstName, lastName, collapseInitials(name)];
+      for (const name of index.players) {
+        const parts = name.split(/\s+/);
+        const firstName = parts[0];
+        const lastName = parts.slice(-1)[0];
+        const candidateParts = [firstName, lastName, collapseInitials(name)];
 
-      for (const candidate of candidateParts) {
-        const distance = editDistance(token, candidate);
-        const lengthGap = Math.abs(token.length - candidate.length);
-        if (distance <= 2 && lengthGap <= 2 && distance < bestDistance) {
-          bestDistance = distance;
-          bestName = name;
+        for (const candidate of candidateParts) {
+          const distance = editDistance(token, candidate);
+          const lengthGap = Math.abs(token.length - candidate.length);
+          if (distance <= 2 && lengthGap <= 2 && distance < bestDistance) {
+            bestDistance = distance;
+            bestName = name;
+          }
         }
       }
-    }
 
-    if (bestName) {
-      matches.add(bestName);
+      if (bestName) {
+        matches.add(bestName);
+      }
     }
   }
 
@@ -529,7 +624,7 @@ function detectPlayers(text, index) {
 function detectOpponentCodes(text) {
   const normalized = normalizeText(text);
   return Object.entries(OPPONENT_ALIASES)
-    .filter(([, aliases]) => aliases.some((alias) => normalized.includes(normalizeText(alias))))
+    .filter(([, aliases]) => aliases.some((alias) => hasPhrase(normalized, alias)))
     .map(([code]) => code);
 }
 
@@ -647,6 +742,47 @@ function scoreRecord(record, query, matchedPlayers, matchedOpponents, requestedS
   return score;
 }
 
+function scoreDerivedRecord(record, query, matchedPlayers, requestedStats) {
+  let score = 0;
+
+  for (const keyword of query.keywords) {
+    if (record.text.includes(keyword)) {
+      score += 1;
+    }
+  }
+
+  if (matchedPlayers.some((player) => player === record.player_normalized)) {
+    score += 12;
+  } else if (matchedPlayers.length > 0 && record.player_normalized) {
+    const lastName = record.player_normalized.split(/\s+/).slice(-1)[0];
+    if (matchedPlayers.some((player) => player.endsWith(lastName))) {
+      score += 8;
+    }
+  }
+
+  if (query.seasons.length > 0 && record.season && query.seasons.includes(record.season)) {
+    score += 10;
+  }
+
+  if (query.phase && (record.phase === query.phase || (query.phase === 'playoffs' && record.playoffs === true))) {
+    score += 5;
+  }
+
+  if (requestedStats.length > 0) {
+    for (const label of requestedStats) {
+      if (record.stat === label || Object.prototype.hasOwnProperty.call(record.stats || {}, label)) {
+        score += 6;
+      }
+    }
+  }
+
+  if (record.type === 'franchise-leaderboard' && /(leader|most|best|top)/.test(query.text)) {
+    score += 4;
+  }
+
+  return score;
+}
+
 function hasStrongSignals(query, matchedPlayers, matchedOpponents, resolvedContext) {
   return (
     matchedPlayers.length > 0 ||
@@ -737,6 +873,106 @@ function filterScoredMatches(scoredMatches, query, matchedPlayers, resolvedConte
   }
 
   return filtered;
+}
+
+function filterDerivedRecords(records, route, classification, query, requestedStats) {
+  if (route === 'player-career-summaries') {
+    return records.filter((record) => classification.matchedPlayers.length === 0
+      ? true
+      : classification.matchedPlayers.some((player) => player === record.player_normalized || player.endsWith(record.player_normalized.split(/\s+/).slice(-1)[0])));
+  }
+
+  if (route === 'player-season-summaries') {
+    return records
+      .filter((record) => classification.matchedPlayers.some((player) => player === record.player_normalized || player.endsWith(record.player_normalized.split(/\s+/).slice(-1)[0])))
+      .filter((record) => query.seasons.length === 0 || query.seasons.includes(record.season));
+  }
+
+  if (route === 'franchise-leaderboards') {
+    return records.filter((record) => requestedStats.length === 0 || requestedStats.includes(record.stat));
+  }
+
+  if (route === 'best-performances') {
+    let filtered = records.filter((record) => requestedStats.length === 0 || requestedStats.includes(record.stat));
+    if (classification.matchedPlayers.length > 0) {
+      filtered = filtered.filter((record) => record.type === 'player-best-performance')
+        .filter((record) => classification.matchedPlayers.some((player) => player === record.player_normalized || player.endsWith(record.player_normalized.split(/\s+/).slice(-1)[0])));
+    } else {
+      filtered = filtered.filter((record) => record.type === 'franchise-best-performance');
+    }
+    if (query.phase) {
+      filtered = filtered.filter((record) => record.phase === query.phase || record.phase === 'combined');
+    } else {
+      filtered = filtered.filter((record) => record.phase === 'combined');
+    }
+    return filtered;
+  }
+
+  return records;
+}
+
+function findDerivedRecords(question, history, debugMode, classification) {
+  const knowledge = buildDerivedKnowledge();
+  const retrievalQuestion = buildRetrievalText(question, classification.priorResolvedContext);
+  const query = {
+    text: normalizeText(retrievalQuestion),
+    keywords: uniqueTokens(retrievalQuestion),
+    seasons: extractSeasonTerms(retrievalQuestion),
+    dates: extractDateTerms(retrievalQuestion),
+    phase: detectPhase(retrievalQuestion)
+  };
+  const requestedStats = classification.requestedStats.length > 0
+    ? classification.requestedStats
+    : detectRequestedStats(retrievalQuestion);
+  const routeKey = classification.route === 'player-career-summaries'
+    ? 'career'
+    : classification.route === 'player-season-summaries'
+      ? 'season'
+      : classification.route === 'franchise-leaderboards'
+        ? 'leaderboards'
+        : 'performances';
+  const records = knowledge[routeKey].records;
+  const filtered = filterDerivedRecords(records, classification.route, classification, query, requestedStats);
+  const matches = filtered
+    .map((record) => ({
+      record,
+      score: scoreDerivedRecord(record, query, classification.matchedPlayers, requestedStats)
+    }))
+    .filter((item) => item.score > 0)
+    .sort((a, b) => {
+      if (b.score !== a.score) {
+        return b.score - a.score;
+      }
+      return String(b.record.date || '').localeCompare(String(a.record.date || ''));
+    })
+    .slice(0, 5);
+
+  const debug = debugMode ? {
+    classification: classification.classification,
+    route: classification.route,
+    dataset: knowledge[routeKey].metadata.dataset,
+    dataset_size: knowledge[routeKey].metadata.record_count,
+    matched_players: classification.matchedPlayers,
+    matched_seasons: query.seasons,
+    matched_phase: query.phase,
+    requested_stats: requestedStats,
+    records_retrieved: matches.map((item) => ({
+      title: item.record.title,
+      type: item.record.type,
+      player: item.record.player || null,
+      season: item.record.season || null,
+      stat: item.record.stat || null,
+      retrieval_score: item.score,
+      source_url: item.record.source_url || null
+    }))
+  } : null;
+
+  return {
+    matches,
+    debug,
+    classification: classification.classification,
+    resolvedContext: buildResolvedContext(matches, classification.priorResolvedContext)
+  };
 }
 
 function runAggregateQuery(index, classification, query) {
@@ -919,6 +1155,10 @@ function findRelevantRecords(question, history, debugMode) {
     };
   }
 
+  if (classification.route && classification.route !== 'box-score') {
+    return findDerivedRecords(question, history, debugMode, classification);
+  }
+
   const retrievalQuestion = buildRetrievalText(question, classification.priorResolvedContext);
   const query = {
     text: normalizeText(retrievalQuestion),
@@ -1042,6 +1282,7 @@ function findRelevantRecords(question, history, debugMode) {
 
   const debug = debugMode ? {
     classification: classification.classification,
+    route: classification.route,
     candidate_count: candidateIds.length,
     matched_players: matchedPlayers,
     matched_opponents: matchedOpponents,
@@ -1094,12 +1335,21 @@ function buildContextBlock(matches) {
 
 function buildSources(matches) {
   return matches.flatMap(({ record }) => {
-    if (record.type === 'player-total-leader' && Array.isArray(record.source_urls) && record.source_urls.length > 0) {
+    if ((record.type === 'player-total-leader' || record.type === 'player-career-summary' || record.type === 'player-season-summary' || record.type === 'franchise-leaderboard') && Array.isArray(record.source_urls) && record.source_urls.length > 0) {
       return record.source_urls.slice(0, 5).map((url, index) => ({
-        title: `${record.player} supporting game ${index + 1}`,
+        title: `${record.player || record.title} supporting game ${index + 1}`,
         date: null,
         opponent: null,
         url
+      }));
+    }
+
+    if ((record.type === 'player-best-performance' || record.type === 'franchise-best-performance') && Array.isArray(record.performances)) {
+      return record.performances.map((performance) => ({
+        title: `${performance.player} ${record.stat} game`,
+        date: performance.date || null,
+        opponent: performance.opponent || null,
+        url: performance.source_url || null
       }));
     }
 
@@ -1159,7 +1409,7 @@ module.exports = async function handler(req, res) {
                 text: [
                   'You are TalkingPacers.',
                   '',
-                  'Answer only from the supplied Pacers box score records.',
+                  'Answer only from the supplied Pacers knowledge records derived from Pacers box scores.',
                   'Use conversation history only to resolve references like "that game," "him," or "what happened next?"',
                   'Do not let conversation history add facts that are not in the supplied records.',
                   'Write naturally and conversationally.',
@@ -1181,7 +1431,7 @@ module.exports = async function handler(req, res) {
             content: [
               {
                 type: 'input_text',
-                text: `Conversation history:\n${historyBlock}\n\nQuestion:\n${question}\n\nPacers box score records:\n${buildContextBlock(matches)}`,
+                text: `Conversation history:\n${historyBlock}\n\nQuestion:\n${question}\n\nPacers knowledge records:\n${buildContextBlock(matches)}`,
               },
             ],
           },
@@ -1210,6 +1460,7 @@ module.exports = async function handler(req, res) {
 module.exports._internals = {
   NO_DATA_ANSWER,
   buildIndex,
+  buildDerivedKnowledge,
   classifyQuestion,
   findRelevantRecords,
   sanitizeHistory,
