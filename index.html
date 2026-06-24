@@ -172,13 +172,13 @@
 
         <section id="chatApp" class="app" aria-labelledby="app-title">
           <h1 id="app-title">Let's talk pacers.</h1>
-          <p class="subtle">Ask a Pacers question. Full AI and RAG wiring will plug in here later.</p>
+          <p class="subtle">Ask a Pacers question.</p>
           <textarea id="questionInput" class="ask-box" rows="6" placeholder="What do you want to know about the Pacers?"></textarea>
           <div class="actions">
             <button id="askButton" class="btn btn-primary" type="button">Ask</button>
           </div>
           <p id="askStatus" class="status"></p>
-          <p class="hint">Server-side AI only. Future RAG logic will plug into the same endpoint.</p>
+          <p class="hint">Powered by a server-side Pacers assistant.</p>
           <div id="responseBox" class="answer" hidden></div>
         </section>
       </main>
@@ -248,12 +248,16 @@
             body: JSON.stringify({ question })
           });
 
-          const payload = await response.json();
+          const payload = await response.json().catch(() => null);
           if (!response.ok) {
-            throw new Error(payload.error || 'Request failed.');
+            throw new Error(payload?.error || 'OpenAI request failed.');
           }
 
-          responseBox.textContent = payload.answer || 'No response returned.';
+          if (typeof payload?.answer !== 'string' || !payload.answer.trim()) {
+            throw new Error('Malformed response from server.');
+          }
+
+          responseBox.textContent = payload.answer.trim();
           responseBox.hidden = false;
           askStatus.textContent = '';
         } catch (error) {
