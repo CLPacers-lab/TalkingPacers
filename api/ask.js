@@ -1,7 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 
-const DATA_PATH = path.join(process.cwd(), 'data', 'remember-this.json');
+const REMEMBER_THIS_PATH = path.join(process.cwd(), 'data', 'remember-this.json');
+const CBA_PAGES_PATH = path.join(process.cwd(), 'data', 'cba_pages.json');
 const NO_DATA_ANSWER = "I don't have that in the TalkingPacers data yet.";
 const STOPWORDS = new Set([
   'a', 'an', 'and', 'are', 'as', 'at', 'be', 'did', 'do', 'for', 'from', 'game',
@@ -64,16 +65,16 @@ function extractAnswer(payload) {
   return combined || null;
 }
 
-function loadRememberThis() {
-  const raw = fs.readFileSync(DATA_PATH, 'utf8');
-  const parsed = JSON.parse(raw);
-  return Array.isArray(parsed) ? parsed : [];
-}
-
-function tokenize(text) {
+function normalizeText(text) {
   return String(text || '')
     .toLowerCase()
     .replace(/[^a-z0-9\s-]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function tokenize(text) {
+  return normalizeText(text)
     .split(/\s+/)
     .filter((token) => token && !STOPWORDS.has(token) && token.length >= 2);
 }
@@ -90,96 +91,32 @@ function extractDateTerms(question) {
   return question.match(/\b\d{4}-\d{2}-\d{2}\b/g) || [];
 }
 
-function buildRecordText(record) {
-  return [
-    record.date,
-    record.season,
-    record.opponent,
-    record.homeAway,
-    record.result,
-    record.player,
-    record.stat_line,
-    record.category,
-    record.why
-  ].join(' ').toLowerCase();
-}
-
-function scoreRecord(record, questionLower, keywords, seasons, dates) {
-  let score = 0;
-  const reasons = [];
-  const recordText = buildRecordText(record);
-
-  for (const keyword of keywords) {
-    if (recordText.includes(keyword)) {
-      score += 1;
-      reasons.push(`keyword:${keyword}`);
-    }
+function loadRememberThis() {
+  const raw = fs.readFileSync(REMEMBER_THIS_PATH, 'utf8');
+  const parsed = JSON.parse(raw);
+  if (!Array.isArray(parsed)) {
+    return [];
   }
 
-  const playerName = String(record.player || '').trim();
-  if (playerName && playerName !== 'Team Event') {
-    const playerLower = playerName.toLowerCase();
-    if (questionLower.includes(playerLower)) {
-      score += 8;
-      reasons.push(`player:${playerName}`);
-    } else {
-      const lastName = playerLower.split(/\s+/).slice(-1)[0];
-      if (lastName && lastName.length >= 4 && questionLower.includes(lastName)) {
-        score += 5;
-        reasons.push(`player-last:${lastName}`);
-      }
-    }
-  }
-
-  const opponent = String(record.opponent || '').toUpperCase();
-  const aliases = OPPONENT_ALIASES[opponent] || [opponent.toLowerCase()];
-  if (aliases.some((alias) => questionLower.includes(alias))) {
-    score += 6;
-    reasons.push(`opponent:${opponent}`);
-  }
-
-  for (const season of seasons) {
-    if (record.season === season) {
-      score += 6;
-      reasons.push(`season:${season}`);
-    }
-  }
-
-  for (const date of dates) {
-    if (record.date === date) {
-      score += 6;
-      reasons.push(`date:${date}`);
-    }
-  }
-
-  return { score, reasons };
-}
-
-function findRelevantRecords(question, records) {
-  const questionLower = question.toLowerCase();
-  const keywords = uniqueTokens(question);
-  const seasons = extractSeasonTerms(question);
-  const dates = extractDateTerms(question);
-
-  return records
-    .map((record) => {
-      const { score, reasons } = scoreRecord(record, questionLower, keywords, seasons, dates);
-      return { record, score, reasons };
-    })
-    .filter((item) => item.score > 0)
-    .sort((a, b) => {
-      if (b.score !== a.score) {
-        return b.score - a.score;
-      }
-      return String(b.record.date || '').localeCompare(String(a.record.date || ''));
-    })
-    .slice(0, 5);
-}
-
-function buildContextBlock(matches) {
-  return matches.map(({ record }, index) => {
-    return [
-      `Record ${index + 1}`,
+  return parsed.map((record) => ({
+    sourceType: 'remember-this',
+    date: record.date || '',
+    season: record.season || '',
+    opponent: record.opponent || '',
+    player: record.player || '',
+    label: `${record.date || 'unknown date'} vs ${record.opponent || 'unknown'}`,
+    text: [
+      record.date,
+      record.season,
+      record.opponent,
+      record.homeAway,
+      record.result,
+      record.player,
+      record.category,
+      record.stat_line,
+      record.why
+    ].join(' '),
+    contextLines: [
       `date: ${record.date || 'unknown'}`,
       `season: ${record.season || 'unknown'}`,
       `opponent: ${record.opponent || 'unknown'}`,
@@ -190,15 +127,116 @@ function buildContextBlock(matches) {
       `stat_line: ${record.stat_line || 'unknown'}`,
       `why: ${record.why || 'unknown'}`,
       `recap_url: ${record.recap_url || 'unknown'}`
+    ]
+  }));
+}
+
+function loadCbaPages() {
+  const raw = fs.readFileSync(CBA_PAGES_PATH, 'utf8');
+  const parsed = JSON.parse(raw);
+  if (!Array.isArray(parsed)) {
+    return [];
+  }
+
+  return parsed.map((page) => ({
+    sourceType: 'cba',
+    date: '',
+    season: '',
+    opponent: '',
+    player: '',
+    label: `CBA page ${page.page}`,
+    text: page.text || '',
+    contextLines: [
+      `page: ${page.page}`,
+      `text: ${page.text || ''}`
+    ]
+  }));
+}
+
+function scoreDocument(document, questionText, keywords, seasons, dates) {
+  const docText = normalizeText(document.text);
+  let score = 0;
+
+  for (const keyword of keywords) {
+    if (docText.includes(keyword)) {
+      score += 1;
+    }
+  }
+
+  const playerName = normalizeText(document.player);
+  if (playerName && playerName !== 'team event' && questionText.includes(playerName)) {
+    score += 8;
+  } else if (playerName) {
+    const lastName = playerName.split(/\s+/).slice(-1)[0];
+    if (lastName && lastName.length >= 4 && questionText.includes(lastName)) {
+      score += 5;
+    }
+  }
+
+  const opponent = String(document.opponent || '').toUpperCase();
+  const aliases = (OPPONENT_ALIASES[opponent] || []).map(normalizeText);
+  if (aliases.some((alias) => questionText.includes(alias))) {
+    score += 6;
+  }
+
+  for (const season of seasons) {
+    if (document.season === season) {
+      score += 6;
+    }
+  }
+
+  for (const date of dates) {
+    if (document.date === date) {
+      score += 6;
+    }
+  }
+
+  if (document.sourceType === 'cba') {
+    const cbaTerms = ['contract', 'salary', 'cap', 'trade', 'waive', 'waiver', 'extension', 'rookie', 'free agent', 'two-way', '10-day', 'option'];
+    for (const term of cbaTerms) {
+      if (questionText.includes(term) && docText.includes(term)) {
+        score += 3;
+      }
+    }
+  }
+
+  return score;
+}
+
+function findRelevantDocuments(question, documents) {
+  const questionText = normalizeText(question);
+  const keywords = uniqueTokens(question);
+  const seasons = extractSeasonTerms(question);
+  const dates = extractDateTerms(question);
+
+  return documents
+    .map((document) => ({
+      document,
+      score: scoreDocument(document, questionText, keywords, seasons, dates)
+    }))
+    .filter((item) => item.score > 0)
+    .sort((a, b) => {
+      if (b.score !== a.score) {
+        return b.score - a.score;
+      }
+      return String(b.document.date || '').localeCompare(String(a.document.date || ''));
+    })
+    .slice(0, 5);
+}
+
+function buildContextBlock(matches) {
+  return matches.map(({ document }, index) => {
+    return [
+      `Source ${index + 1}`,
+      `source_type: ${document.sourceType}`,
+      `label: ${document.label}`,
+      ...document.contextLines
     ].join('\n');
   }).join('\n\n');
 }
 
-function formatUsedRecords(matches) {
-  return matches.map(({ record }, index) => {
-    const playerPart = record.player && record.player !== 'Team Event' ? `, ${record.player}` : '';
-    return `${index + 1}. ${record.date || 'unknown date'} vs ${record.opponent || 'unknown'}${playerPart} (${record.category || 'unknown'})`;
-  });
+function formatUsedSources(matches) {
+  return matches.map(({ document }, index) => `${index + 1}. ${document.label} (${document.sourceType})`);
 }
 
 module.exports = async function handler(req, res) {
@@ -213,8 +251,11 @@ module.exports = async function handler(req, res) {
       return res.status(400).json({ error: 'Question cannot be empty.' });
     }
 
-    const records = loadRememberThis();
-    const matches = findRelevantRecords(question, records);
+    const documents = [
+      ...loadRememberThis(),
+      ...loadCbaPages(),
+    ];
+    const matches = findRelevantDocuments(question, documents);
 
     if (matches.length === 0) {
       return res.status(200).json({ answer: NO_DATA_ANSWER, recordsUsed: [] });
@@ -224,9 +265,6 @@ module.exports = async function handler(req, res) {
     if (!apiKey) {
       return res.status(500).json({ error: 'OPENAI_API_KEY is missing on the server.' });
     }
-
-    const contextBlock = buildContextBlock(matches);
-    const usedRecords = formatUsedRecords(matches);
 
     const response = await fetch('https://api.openai.com/v1/responses', {
       method: 'POST',
@@ -245,15 +283,17 @@ module.exports = async function handler(req, res) {
                 text: [
                   'You are TalkingPacers.',
                   '',
-                  'Answer only from the supplied TalkingPacers records.',
+                  'Answer only from the supplied TalkingPacers records and CBA pages.',
+                  'Write like a real person: natural, conversational, and direct.',
+                  'Keep it concise unless the question clearly needs more detail.',
                   '',
-                  "If the answer is not supported by the records, respond:",
+                  'If the answer is not supported by the supplied material, respond exactly:',
                   '',
                   "'I don't have that in the TalkingPacers data yet.'",
                   '',
                   'Do not use outside basketball knowledge.',
                   'Do not guess.',
-                  'Mention which records were used.',
+                  'Mention which sources you used.',
                   'Include dates when available.'
                 ].join('\n'),
               },
@@ -264,7 +304,7 @@ module.exports = async function handler(req, res) {
             content: [
               {
                 type: 'input_text',
-                text: `Question:\n${question}\n\nTalkingPacers records:\n${contextBlock}`,
+                text: `Question:\n${question}\n\nTalkingPacers source material:\n${buildContextBlock(matches)}`,
               },
             ],
           },
@@ -283,8 +323,11 @@ module.exports = async function handler(req, res) {
       return res.status(502).json({ error: 'Malformed response from OpenAI.' });
     }
 
-    const answerWithSources = `${answer}\n\nRecords used:\n${usedRecords.join('\n')}`;
-    return res.status(200).json({ answer: answerWithSources, recordsUsed: usedRecords });
+    const usedSources = formatUsedSources(matches);
+    return res.status(200).json({
+      answer: `${answer}\n\nSources used:\n${usedSources.join('\n')}`,
+      recordsUsed: usedSources,
+    });
   } catch (error) {
     console.error('Ask endpoint failed:', error);
     return res.status(500).json({ error: 'Server error while answering question.' });
