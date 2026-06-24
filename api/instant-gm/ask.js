@@ -10,6 +10,26 @@ const CBA_RULES_PATH = path.join(DATA_DIR, 'cba-rules.json');
 const OPENAI_MODEL = process.env.OPENAI_INSTANT_GM_MODEL || 'gpt-4.1-mini';
 const LEGAL_LIMITATION_MESSAGE =
   'I can calculate the payroll impact, but I do not have the CBA rule engine needed to make that legal conclusion yet.';
+const EXCEPTION_RULE_CONFIG = {
+  non_taxpayer_mid_level_exception: {
+    aliases: ['non-taxpayer mle', 'non taxpayer mle', 'full mle', 'non-taxpayer mid-level exception', 'mid-level exception'],
+    amount_type: 'percent_of_cap',
+    percent_of_cap: 0.0912,
+    threshold: 'first apron',
+  },
+  bi_annual_exception: {
+    aliases: ['bi-annual exception', 'bi annual exception', 'bae'],
+    amount_type: 'percent_of_cap',
+    percent_of_cap: 0.0332,
+    threshold: 'first apron',
+  },
+  room_exception: {
+    aliases: ['room exception', 'room mle', 'mid-level exception for room teams'],
+    amount_type: 'percent_of_cap',
+    percent_of_cap: 0.05678,
+    threshold: 'salary cap',
+  },
+};
 
 function loadJson(filePath) {
   return JSON.parse(fs.readFileSync(filePath, 'utf8'));
@@ -186,6 +206,30 @@ function stateSources(engine) {
   return dedupeSources(sources);
 }
 
+function buildPayrollSnapshot(baseTeamSalary, engine) {
+  const snapshot = engine.capSheet.snapshot;
+  return {
+    team_salary: baseTeamSalary,
+    luxury_tax_line: snapshot.luxury_tax_line,
+    first_apron: snapshot.first_apron,
+    second_apron: snapshot.second_apron,
+    distance_to_tax: snapshot.luxury_tax_line - baseTeamSalary,
+    distance_to_first_apron: snapshot.first_apron - baseTeamSalary,
+    distance_to_second_apron: snapshot.second_apron - baseTeamSalary,
+  };
+}
+
+function thresholdValueByName(name, engine) {
+  const snapshot = engine.capSheet.snapshot;
+  const normalized = normalizeText(name || '');
+  if (!normalized) return null;
+  if (normalized === 'salary cap' || normalized === 'cap') return snapshot.salary_cap;
+  if (normalized === 'luxury tax' || normalized === 'tax' || normalized === 'luxury tax line') return snapshot.luxury_tax_line;
+  if (normalized === 'first apron') return snapshot.first_apron;
+  if (normalized === 'second apron') return snapshot.second_apron;
+  return null;
+}
+
 function findCbaRule(query, engine) {
   const lowered = normalizeText(query);
   const scored = [];
@@ -224,7 +268,7 @@ function findCbaRule(query, engine) {
       answer: 'I could not find a vetted rule for that question in the current Instant GM CBA library yet.',
       sources: [makeSource(engine.cbaRules.metadata.source_label)],
       toolPayload: {
-        tool: 'cba_rule_lookup',
+        tool: 'lookup_cba_rule',
         found: false,
         query,
       },
@@ -239,7 +283,7 @@ function findCbaRule(query, engine) {
       answer: `I could not find a vetted ${best.title} record in the current Instant GM CBA library yet. This topic needs manual review before I should treat it as reliable.`,
       sources: [makeSource(best.source_label || engine.cbaRules.metadata.source_label)],
       toolPayload: {
-        tool: 'cba_rule_lookup',
+        tool: 'lookup_cba_rule',
         found: false,
         query,
         matched_rule_id: best.rule_id,
@@ -259,7 +303,7 @@ function findCbaRule(query, engine) {
     answer: `${best.title}: ${best.plain_english_summary}`,
     sources: [makeSource(best.source_label || engine.cbaRules.metadata.source_label)],
     toolPayload: {
-      tool: 'cba_rule_lookup',
+      tool: 'lookup_cba_rule',
       found: true,
       query,
       rule_id: best.rule_id,
@@ -277,6 +321,102 @@ function findCbaRule(query, engine) {
   };
 }
 
+function findExceptionRule(query, engine) {
+  const lowered = normalizeText(query);
+  let bestConfig = null;
+  let bestScore = 0;
+
+  for (const [ruleId, config] of Object.entries(EXCEPTION_RULE_CONFIG)) {
+    let score = 0;
+    for (const alias of config.aliases) {
+      const normalized = normalizeText(alias);
+      if (lowered.includes(normalized)) {
+        score += normalized.split(' ').length > 1 ? 6 : 2;
+      } else {
+        score += normalized.split(' ').filter((token) => lowered.split(' ').includes(token)).length;
+      }
+    }
+    if (score > bestScore) {
+      bestScore = score;
+      bestConfig = { ruleId, config };
+    }
+  }
+
+  if (!bestConfig) {
+    return null;
+  }
+
+  const matchedRule = engine.cbaRules.records.find((record) => record.rule_id === bestConfig.ruleId);
+  if (!matchedRule) {
+    return null;
+  }
+
+  return { rule: matchedRule, config: bestConfig.config };
+}
+
+function getExceptionAmount(exceptionQuery, engine) {
+  const matched = findExceptionRule(exceptionQuery, engine);
+  if (!matched) {
+    return {
+      ok: false,
+      kind: 'clarification',
+      answer: 'I could not match that exception to a structured exception amount in the current Instant GM rules layer.',
+      sources: [makeSource(engine.cbaRules.metadata.source_label)],
+      toolPayload: {
+        tool: 'get_exception_amount',
+        found: false,
+        exception_query: exceptionQuery,
+      },
+    };
+  }
+
+  const { rule, config } = matched;
+  const salaryCap = engine.capSheet.snapshot.salary_cap;
+  let firstYearAmount = null;
+
+  if (config.amount_type === 'percent_of_cap') {
+    firstYearAmount = Math.round(salaryCap * config.percent_of_cap);
+  }
+
+  if (!Number.isFinite(firstYearAmount)) {
+    return {
+      ok: false,
+      kind: 'lookup',
+      answer: `I matched ${rule.title}, but I do not have a structured amount formula for it yet.`,
+      sources: [makeSource(rule.source_label || engine.cbaRules.metadata.source_label)],
+      toolPayload: {
+        tool: 'get_exception_amount',
+        found: false,
+        exception_query: exceptionQuery,
+        rule_id: rule.rule_id,
+      },
+    };
+  }
+
+  return {
+    ok: true,
+    kind: 'lookup',
+    answer: `${rule.title} projects to ${formatMoney(firstYearAmount)} for ${engine.capSheet.metadata.season} based on ${config.percent_of_cap * 100}% of the ${formatMoney(salaryCap)} salary cap.`,
+    sources: [
+      makeSource(rule.source_label || engine.cbaRules.metadata.source_label),
+      ...stateSources(engine),
+    ],
+    toolPayload: {
+      tool: 'get_exception_amount',
+      found: true,
+      exception_query: exceptionQuery,
+      rule_id: rule.rule_id,
+      title: rule.title,
+      amount_type: config.amount_type,
+      percent_of_cap: config.percent_of_cap ?? null,
+      first_year_amount: firstYearAmount,
+      threshold: config.threshold || null,
+      season: engine.capSheet.metadata.season,
+      salary_cap: salaryCap,
+    },
+  };
+}
+
 function lookupPlayerSalary(playerQuery, engine) {
   const resolved = resolvePlayer(playerQuery, engine.players, engine.aliases);
   if (!resolved.player) {
@@ -288,7 +428,7 @@ function lookupPlayerSalary(playerQuery, engine) {
         : 'I could not match that player to the current Pacers roster.',
       sources: [makeSource('Pacers contracts source', engine.contracts.metadata.source_url)],
       toolPayload: {
-        tool: 'player_salary_lookup',
+        tool: 'get_player_salary',
         found: false,
         player_query: playerQuery,
         options: resolved.options,
@@ -304,7 +444,7 @@ function lookupPlayerSalary(playerQuery, engine) {
       answer: `I do not have a contract record for ${resolved.player} in the current Pacers State Engine.`,
       sources: [makeSource('Pacers contracts source', engine.contracts.metadata.source_url)],
       toolPayload: {
-        tool: 'player_salary_lookup',
+        tool: 'get_player_salary',
         found: false,
         player_query: playerQuery,
         resolved_player: resolved.player,
@@ -319,7 +459,7 @@ function lookupPlayerSalary(playerQuery, engine) {
       answer: `I do not have a verified current-season salary for ${resolved.player} yet. The contract row exists, but the salary is still unverified.`,
       sources: [makeSource(resolved.player, record.source_url)],
       toolPayload: {
-        tool: 'player_salary_lookup',
+        tool: 'get_player_salary',
         found: false,
         player_query: playerQuery,
         resolved_player: resolved.player,
@@ -334,7 +474,7 @@ function lookupPlayerSalary(playerQuery, engine) {
     answer: `${resolved.player} is making ${formatMoney(record.salary)} in ${record.season}.`,
     sources: [makeSource(resolved.player, record.source_url)],
     toolPayload: {
-      tool: 'player_salary_lookup',
+      tool: 'get_player_salary',
       found: true,
       player_query: playerQuery,
       player: resolved.player,
@@ -364,7 +504,7 @@ function lookupTopPaidPlayers(limit, engine) {
     ].join('\n'),
     sources: ranked.map((record) => makeSource(record.player, record.source_url)),
     toolPayload: {
-      tool: 'top_paid_players',
+      tool: 'get_top_paid_players',
       count: limit,
       players: ranked.map((record) => ({
         player: record.player,
@@ -376,7 +516,7 @@ function lookupTopPaidPlayers(limit, engine) {
   };
 }
 
-function lookupApronDistance(engine) {
+function getCapSnapshot(engine) {
   const snapshot = engine.capSheet.snapshot;
   return {
     ok: true,
@@ -384,8 +524,9 @@ function lookupApronDistance(engine) {
     answer: `The Pacers are ${formatMoney(snapshot.distance_to_first_apron)} below the first apron. Current team salary: ${formatMoney(snapshot.team_salary)}. First apron: ${formatMoney(snapshot.first_apron)}.`,
     sources: stateSources(engine),
     toolPayload: {
-      tool: 'apron_distance',
+      tool: 'get_cap_snapshot',
       team_salary: snapshot.team_salary,
+      salary_cap: snapshot.salary_cap,
       luxury_tax_line: snapshot.luxury_tax_line,
       first_apron: snapshot.first_apron,
       second_apron: snapshot.second_apron,
@@ -460,29 +601,251 @@ function calculatePayrollScenario({ additions = [], fixedRemovals = [], removePl
   }
 
   const newTeamSalary = snapshot.team_salary + delta;
+  const payroll = buildPayrollSnapshot(newTeamSalary, engine);
   return {
     ok: true,
     kind: 'what_if',
     answer: [
       ...steps.map((step) => step.description),
-      `New team salary: ${formatMoney(newTeamSalary)}`,
-      `Distance to luxury tax: ${formatMoney(snapshot.luxury_tax_line - newTeamSalary)}`,
-      `Distance to first apron: ${formatMoney(snapshot.first_apron - newTeamSalary)}`,
-      `Distance to second apron: ${formatMoney(snapshot.second_apron - newTeamSalary)}`,
+      `New team salary: ${formatMoney(payroll.team_salary)}`,
+      `Distance to luxury tax: ${formatMoney(payroll.distance_to_tax)}`,
+      `Distance to first apron: ${formatMoney(payroll.distance_to_first_apron)}`,
+      `Distance to second apron: ${formatMoney(payroll.distance_to_second_apron)}`,
     ].join('\n'),
     sources: dedupeSources(sources),
     toolPayload: {
       tool: 'payroll_scenario',
       steps,
       base_team_salary: snapshot.team_salary,
-      new_team_salary: newTeamSalary,
-      luxury_tax_line: snapshot.luxury_tax_line,
-      first_apron: snapshot.first_apron,
-      second_apron: snapshot.second_apron,
-      distance_to_tax: snapshot.luxury_tax_line - newTeamSalary,
-      distance_to_first_apron: snapshot.first_apron - newTeamSalary,
-      distance_to_second_apron: snapshot.second_apron - newTeamSalary,
+      new_team_salary: payroll.team_salary,
+      luxury_tax_line: payroll.luxury_tax_line,
+      first_apron: payroll.first_apron,
+      second_apron: payroll.second_apron,
+      distance_to_tax: payroll.distance_to_tax,
+      distance_to_first_apron: payroll.distance_to_first_apron,
+      distance_to_second_apron: payroll.distance_to_second_apron,
       total_delta: delta,
+    },
+  };
+}
+
+function simulateAddSalary(amount, engine, options = {}) {
+  if (!Number.isFinite(Number(amount))) {
+    return {
+      ok: false,
+      kind: 'clarification',
+      answer: 'What salary amount should I add for that scenario?',
+      sources: stateSources(engine),
+      toolPayload: {
+        tool: 'simulate_add_salary',
+        found: false,
+      },
+    };
+  }
+
+  const baseTeamSalary = Number.isFinite(Number(options.base_team_salary))
+    ? Number(options.base_team_salary)
+    : engine.capSheet.snapshot.team_salary;
+  const payroll = buildPayrollSnapshot(baseTeamSalary + Number(amount), engine);
+
+  return {
+    ok: true,
+    kind: 'what_if',
+    answer: [
+      `Added ${formatMoney(Number(amount))}.`,
+      `New team salary: ${formatMoney(payroll.team_salary)}`,
+      `Distance to luxury tax: ${formatMoney(payroll.distance_to_tax)}`,
+      `Distance to first apron: ${formatMoney(payroll.distance_to_first_apron)}`,
+      `Distance to second apron: ${formatMoney(payroll.distance_to_second_apron)}`,
+    ].join('\n'),
+    sources: stateSources(engine),
+    toolPayload: {
+      tool: 'simulate_add_salary',
+      amount: Number(amount),
+      base_team_salary: baseTeamSalary,
+      ...payroll,
+    },
+  };
+}
+
+function simulateRemovePlayerSalary(playerQuery, engine, options = {}) {
+  const resolved = resolvePlayer(playerQuery, engine.players, engine.aliases);
+  if (!resolved.player) {
+    return {
+      ok: false,
+      kind: 'clarification',
+      answer: resolved.options.length
+        ? `I need clarification on which player you mean: ${resolved.options.join(', ')}.`
+        : 'I could not match that player to the current Pacers roster.',
+      sources: [makeSource('Pacers contracts source', engine.contracts.metadata.source_url)],
+      toolPayload: {
+        tool: 'simulate_remove_player_salary',
+        found: false,
+        player_query: playerQuery,
+        options: resolved.options,
+      },
+    };
+  }
+
+  const record = engine.contractByPlayer.get(resolved.player);
+  if (!record || record.salary === null || record.salary === undefined) {
+    return {
+      ok: false,
+      kind: 'clarification',
+      answer: `I found ${resolved.player}, but I do not have a verified current-season salary for that player yet, so I cannot run the payroll what-if.`,
+      sources: record ? [makeSource(resolved.player, record.source_url)] : [makeSource('Pacers contracts source', engine.contracts.metadata.source_url)],
+      toolPayload: {
+        tool: 'simulate_remove_player_salary',
+        found: false,
+        player_query: playerQuery,
+        resolved_player: resolved.player,
+      },
+    };
+  }
+
+  const baseTeamSalary = Number.isFinite(Number(options.base_team_salary))
+    ? Number(options.base_team_salary)
+    : engine.capSheet.snapshot.team_salary;
+  const payroll = buildPayrollSnapshot(baseTeamSalary - Number(record.salary), engine);
+
+  return {
+    ok: true,
+    kind: 'what_if',
+    answer: [
+      `Removed ${resolved.player}'s salary of ${formatMoney(record.salary)}.`,
+      `New team salary: ${formatMoney(payroll.team_salary)}`,
+      `Distance to luxury tax: ${formatMoney(payroll.distance_to_tax)}`,
+      `Distance to first apron: ${formatMoney(payroll.distance_to_first_apron)}`,
+      `Distance to second apron: ${formatMoney(payroll.distance_to_second_apron)}`,
+    ].join('\n'),
+    sources: dedupeSources([makeSource(resolved.player, record.source_url), ...stateSources(engine)]),
+    toolPayload: {
+      tool: 'simulate_remove_player_salary',
+      player_query: playerQuery,
+      player: resolved.player,
+      removed_salary: record.salary,
+      base_team_salary: baseTeamSalary,
+      ...payroll,
+    },
+  };
+}
+
+function simulateRemoveEachPlayer(targetThreshold, engine) {
+  const ranked = engine.contracts.records
+    .filter((record) => typeof record.salary === 'number')
+    .map((record) => {
+      const payroll = buildPayrollSnapshot(engine.capSheet.snapshot.team_salary - record.salary, engine);
+      const thresholdValue = thresholdValueByName(targetThreshold, engine);
+      return {
+        player: record.player,
+        removed_salary: record.salary,
+        new_team_salary: payroll.team_salary,
+        distance_to_tax: payroll.distance_to_tax,
+        distance_to_first_apron: payroll.distance_to_first_apron,
+        distance_to_second_apron: payroll.distance_to_second_apron,
+        gets_below_target: thresholdValue === null ? null : payroll.team_salary <= thresholdValue,
+        source_url: record.source_url,
+      };
+    })
+    .sort((a, b) => b.removed_salary - a.removed_salary);
+
+  return {
+    ok: true,
+    kind: 'lookup',
+    answer: `Simulated removing each single player salary from the current Pacers payroll${targetThreshold ? ` against the ${targetThreshold}` : ''}.`,
+    sources: ranked.slice(0, 10).map((record) => makeSource(record.player, record.source_url)),
+    toolPayload: {
+      tool: 'simulate_remove_each_player',
+      target_threshold: targetThreshold || null,
+      base_team_salary: engine.capSheet.snapshot.team_salary,
+      candidates: ranked,
+    },
+  };
+}
+
+function simulateRoomCreationOptions({ target_threshold, required_room = 0, mode = 'single_player_removal', limit = 10 }, engine) {
+  const thresholdValue = thresholdValueByName(target_threshold, engine);
+  if (!Number.isFinite(thresholdValue)) {
+    return {
+      ok: false,
+      kind: 'clarification',
+      answer: 'I need a supported threshold such as salary cap, luxury tax, first apron, or second apron.',
+      sources: stateSources(engine),
+      toolPayload: {
+        tool: 'simulate_room_creation_options',
+        found: false,
+        target_threshold,
+      },
+    };
+  }
+
+  if (mode !== 'single_player_removal') {
+    return {
+      ok: false,
+      kind: 'unsupported',
+      answer: 'I only support single-player removal room scans right now.',
+      sources: stateSources(engine),
+      toolPayload: {
+        tool: 'simulate_room_creation_options',
+        found: false,
+        target_threshold,
+        mode,
+      },
+    };
+  }
+
+  const currentTeamSalary = engine.capSheet.snapshot.team_salary;
+  const requiredMaxTeamSalary = thresholdValue - Number(required_room || 0);
+  const currentSlack = thresholdValue - currentTeamSalary;
+
+  const candidates = engine.contracts.records
+    .filter((record) => typeof record.salary === 'number')
+    .map((record) => {
+      const newTeamSalary = currentTeamSalary - record.salary;
+      const roomAfterMove = thresholdValue - newTeamSalary;
+      return {
+        player: record.player,
+        removed_salary: record.salary,
+        new_team_salary: newTeamSalary,
+        target_threshold,
+        threshold_value: thresholdValue,
+        required_room: Number(required_room || 0),
+        required_max_team_salary: requiredMaxTeamSalary,
+        qualifies: newTeamSalary <= requiredMaxTeamSalary,
+        remaining_buffer_after_required_room: requiredMaxTeamSalary - newTeamSalary,
+        room_after_move: roomAfterMove,
+        source_url: record.source_url,
+      };
+    })
+    .sort((a, b) => {
+      if (a.qualifies !== b.qualifies) {
+        return a.qualifies ? -1 : 1;
+      }
+      return a.removed_salary - b.removed_salary;
+    });
+
+  const qualifying = candidates.filter((candidate) => candidate.qualifies);
+  const displayCandidates = (qualifying.length ? qualifying : candidates).slice(0, Math.max(1, Math.min(Number(limit) || 10, 20)));
+
+  return {
+    ok: true,
+    kind: 'lookup',
+    answer: qualifying.length
+      ? `Found ${qualifying.length} single-player removal options that would create at least ${formatMoney(required_room)} of room below the ${target_threshold}.`
+      : `No single-player removal creates ${formatMoney(required_room)} of room below the ${target_threshold} from the current snapshot.`,
+    sources: displayCandidates.map((record) => makeSource(record.player, record.source_url)),
+    toolPayload: {
+      tool: 'simulate_room_creation_options',
+      mode,
+      target_threshold,
+      threshold_value: thresholdValue,
+      required_room: Number(required_room || 0),
+      current_team_salary: currentTeamSalary,
+      current_slack_to_threshold: currentSlack,
+      required_max_team_salary: requiredMaxTeamSalary,
+      qualifies_without_move: currentTeamSalary <= requiredMaxTeamSalary,
+      qualifying_candidates: qualifying,
+      displayed_candidates: displayCandidates,
     },
   };
 }
@@ -537,32 +900,19 @@ function runIntent(classification, originalQuestion, engine) {
   }
 
   if (intent === 'apron_distance') {
-    return lookupApronDistance(engine);
+    return getCapSnapshot(engine);
   }
 
   if (intent === 'payroll_addition') {
-    const amount = Number(classification.amount);
-    if (!Number.isFinite(amount)) {
-      return {
-        ok: false,
-        kind: 'clarification',
-        answer: 'What salary amount should I add for that scenario?',
-        sources: stateSources(engine),
-      };
-    }
-    return calculatePayrollScenario({ additions: [amount] }, engine);
+    return simulateAddSalary(Number(classification.amount), engine);
   }
 
   if (intent === 'payroll_removal') {
-    const removePlayers = [];
     if (classification.remove_player_query) {
-      removePlayers.push(classification.remove_player_query);
+      return simulateRemovePlayerSalary(classification.remove_player_query, engine);
     }
-    const fixedRemovals = [];
-    if (Number.isFinite(Number(classification.amount))) {
-      fixedRemovals.push(Number(classification.amount));
-    }
-    if (!removePlayers.length && !fixedRemovals.length) {
+    const amount = Number(classification.amount);
+    if (!Number.isFinite(amount)) {
       return {
         ok: false,
         kind: 'clarification',
@@ -570,7 +920,7 @@ function runIntent(classification, originalQuestion, engine) {
         sources: stateSources(engine),
       };
     }
-    return calculatePayrollScenario({ fixedRemovals, removePlayers }, engine);
+    return calculatePayrollScenario({ fixedRemovals: [amount] }, engine);
   }
 
   if (intent === 'mixed_payroll_and_rule_question') {
@@ -684,155 +1034,271 @@ async function openAIChatCompletion(messages, options = {}) {
   return payload;
 }
 
-async function classifyIntentWithOpenAI(question) {
-  const schema = {
-    name: 'instant_gm_intent',
-    strict: true,
-    schema: {
-      type: 'object',
-      additionalProperties: false,
-      properties: {
-        intent: {
-          type: 'string',
-          enum: [
-            'player_salary_lookup',
-            'top_paid_players',
-            'apron_distance',
-            'payroll_addition',
-            'payroll_removal',
-            'cba_rule_lookup',
-            'mixed_payroll_and_rule_question',
-            'unsupported_or_needs_clarification',
-          ],
-        },
-        player_query: { type: ['string', 'null'] },
-        top_n: { type: ['integer', 'null'] },
-        amount: { type: ['number', 'null'] },
-        add_amount: { type: ['number', 'null'] },
-        remove_amount: { type: ['number', 'null'] },
-        remove_player_query: { type: ['string', 'null'] },
-        cba_rule_query: { type: ['string', 'null'] },
-        legal_question: { type: 'boolean' },
-        clarification_question: { type: ['string', 'null'] },
+const OPENAI_TOOLS = [
+  {
+    type: 'function',
+    function: {
+      name: 'get_cap_snapshot',
+      description: 'Get the current Pacers payroll snapshot including team salary, salary cap, tax line, first apron, second apron, and distances to each threshold.',
+      parameters: {
+        type: 'object',
+        additionalProperties: false,
+        properties: {},
       },
-      required: [
-        'intent',
-        'player_query',
-        'top_n',
-        'amount',
-        'add_amount',
-        'remove_amount',
-        'remove_player_query',
-        'cba_rule_query',
-        'legal_question',
-        'clarification_question',
-      ],
+    },
+  },
+  {
+    type: 'function',
+    function: {
+      name: 'get_player_salary',
+      description: 'Get the current-season Pacers salary record for one player.',
+      parameters: {
+        type: 'object',
+        additionalProperties: false,
+        properties: {
+          player_query: { type: 'string' },
+        },
+        required: ['player_query'],
+      },
+    },
+  },
+  {
+    type: 'function',
+    function: {
+      name: 'get_top_paid_players',
+      description: 'Get the highest-paid Pacers players by current-season salary.',
+      parameters: {
+        type: 'object',
+        additionalProperties: false,
+        properties: {
+          limit: { type: 'integer' },
+        },
+        required: ['limit'],
+      },
+    },
+  },
+  {
+    type: 'function',
+    function: {
+      name: 'simulate_add_salary',
+      description: 'Add salary to the current or provided Pacers team salary and return the updated payroll distances.',
+      parameters: {
+        type: 'object',
+        additionalProperties: false,
+        properties: {
+          amount: { type: 'number' },
+          base_team_salary: { type: ['number', 'null'] },
+        },
+        required: ['amount', 'base_team_salary'],
+      },
+    },
+  },
+  {
+    type: 'function',
+    function: {
+      name: 'simulate_remove_player_salary',
+      description: 'Remove one Pacers player salary from the current or provided Pacers team salary and return the updated payroll distances.',
+      parameters: {
+        type: 'object',
+        additionalProperties: false,
+        properties: {
+          player_query: { type: 'string' },
+          base_team_salary: { type: ['number', 'null'] },
+        },
+        required: ['player_query', 'base_team_salary'],
+      },
+    },
+  },
+  {
+    type: 'function',
+    function: {
+      name: 'simulate_remove_each_player',
+      description: 'Simulate removing each single Pacers player salary from the current payroll. Useful for questions like who could be removed to get below a threshold.',
+      parameters: {
+        type: 'object',
+        additionalProperties: false,
+        properties: {
+          target_threshold: {
+            type: ['string', 'null'],
+            description: 'Optional threshold name such as first apron, second apron, luxury tax, or salary cap.',
+          },
+        },
+        required: ['target_threshold'],
+      },
+    },
+  },
+  {
+    type: 'function',
+    function: {
+      name: 'lookup_cba_rule',
+      description: 'Look up a curated CBA rule summary and citation from the local rules library.',
+      parameters: {
+        type: 'object',
+        additionalProperties: false,
+        properties: {
+          query: { type: 'string' },
+        },
+        required: ['query'],
+      },
+    },
+  },
+  {
+    type: 'function',
+    function: {
+      name: 'get_exception_amount',
+      description: 'Get the projected first-year amount of a supported cap exception from the current salary cap and the local CBA rules layer.',
+      parameters: {
+        type: 'object',
+        additionalProperties: false,
+        properties: {
+          exception_query: { type: 'string' },
+        },
+        required: ['exception_query'],
+      },
+    },
+  },
+  {
+    type: 'function',
+    function: {
+      name: 'simulate_room_creation_options',
+      description: 'Given a target threshold and required amount of room below that threshold, scan single-player salary removals and return which options create enough room.',
+      parameters: {
+        type: 'object',
+        additionalProperties: false,
+        properties: {
+          target_threshold: { type: 'string' },
+          required_room: { type: 'number' },
+          mode: { type: 'string', enum: ['single_player_removal'] },
+          limit: { type: 'integer' },
+        },
+        required: ['target_threshold', 'required_room', 'mode', 'limit'],
+      },
+    },
+  },
+];
+
+function executeToolCall(name, args, engine) {
+  if (name === 'get_cap_snapshot') {
+    return getCapSnapshot(engine);
+  }
+  if (name === 'get_player_salary') {
+    return lookupPlayerSalary(args.player_query, engine);
+  }
+  if (name === 'get_top_paid_players') {
+    return lookupTopPaidPlayers(Math.max(1, Math.min(Number(args.limit) || 5, 15)), engine);
+  }
+  if (name === 'simulate_add_salary') {
+    return simulateAddSalary(args.amount, engine, { base_team_salary: args.base_team_salary });
+  }
+  if (name === 'simulate_remove_player_salary') {
+    return simulateRemovePlayerSalary(args.player_query, engine, { base_team_salary: args.base_team_salary });
+  }
+  if (name === 'simulate_remove_each_player') {
+    return simulateRemoveEachPlayer(args.target_threshold, engine);
+  }
+  if (name === 'lookup_cba_rule') {
+    const result = findCbaRule(args.query, engine);
+    if (hasLegalConclusionLanguage(args.query || '')) {
+      result.toolPayload.legal_limitations = LEGAL_LIMITATION_MESSAGE;
+    }
+    return result;
+  }
+  if (name === 'get_exception_amount') {
+    return getExceptionAmount(args.exception_query, engine);
+  }
+  if (name === 'simulate_room_creation_options') {
+    return simulateRoomCreationOptions(args, engine);
+  }
+  return {
+    ok: false,
+    kind: 'unsupported',
+    answer: 'I do not have a trusted tool for that request yet.',
+    sources: [],
+    toolPayload: {
+      tool: name,
+      found: false,
     },
   };
+}
 
+async function answerWithOpenAI(question, engine) {
   const messages = [
     {
       role: 'system',
       content: [
-        'You classify Instant GM questions for a Pacers-only state engine.',
+        'You are Instant GM, a Pacers-only front office assistant.',
         'Interpret "we" and "our" as the Indiana Pacers.',
-        'Choose exactly one intent.',
-        'Use payroll_addition for adding salary only.',
-        'Use payroll_removal for removing a player salary or removing a fixed salary amount.',
-        'Use mixed_payroll_and_rule_question when a question combines payroll impact and a CBA rule or legal-style conclusion.',
-        'Use cba_rule_lookup for general rule explanations.',
-        'Use unsupported_or_needs_clarification when the question is outside current support or too vague to act on.',
-        'Do not invent data. If the user is asking for a legal conclusion, set legal_question=true.',
-        'If clarification is needed, return one short clarification question. Otherwise clarification_question should be null.',
+        'Use tools for facts, calculations, payroll changes, and CBA lookups.',
+        'Do not invent salaries, roster facts, thresholds, or legal conclusions.',
+        'If a question is ambiguous, ask one concise clarification question instead of guessing.',
+        'If a question asks for a legal conclusion beyond the available tools, you may still call tools for payroll impact and rule summaries, but you must clearly say the legal conclusion is not yet supported.',
+        'If a tool you would need does not exist, say so plainly.',
+        'For room-creation questions, prefer get_exception_amount plus simulate_room_creation_options.',
+        'For questions like who could we get rid of to use the full MLE, use get_exception_amount for the non-taxpayer MLE, then simulate_room_creation_options against the first apron, and optionally lookup_cba_rule for the governing rule.',
       ].join(' '),
     },
     { role: 'user', content: question },
   ];
 
-  const payload = await openAIChatCompletion(messages, {
-    response_format: {
-      type: 'json_schema',
-      json_schema: schema,
-    },
-  });
+  const toolResults = [];
 
-  const content = payload?.choices?.[0]?.message?.content;
-  if (typeof content !== 'string' || !content.trim()) {
-    throw new Error('OpenAI classification returned no content.');
+  for (let round = 0; round < 4; round += 1) {
+    const payload = await openAIChatCompletion(messages, {
+      tools: OPENAI_TOOLS,
+      tool_choice: 'auto',
+    });
+
+    const message = payload?.choices?.[0]?.message;
+    if (!message) {
+      throw new Error('OpenAI tool flow returned no message.');
+    }
+
+    const toolCalls = Array.isArray(message.tool_calls) ? message.tool_calls : [];
+    if (!toolCalls.length) {
+      const answer = typeof message.content === 'string' ? message.content.trim() : '';
+      if (!answer) {
+        throw new Error('OpenAI final response returned no content.');
+      }
+      return {
+        answer,
+        sources: dedupeSources(toolResults.flatMap((result) => result.sources || [])),
+      };
+    }
+
+    messages.push({
+      role: 'assistant',
+      content: message.content || '',
+      tool_calls: toolCalls,
+    });
+
+    for (const call of toolCalls) {
+      const name = call?.function?.name;
+      let args = {};
+
+      try {
+        args = call?.function?.arguments ? JSON.parse(call.function.arguments) : {};
+      } catch (_error) {
+        args = {};
+      }
+
+      const result = executeToolCall(name, args, engine);
+      toolResults.push(result);
+
+      messages.push({
+        role: 'tool',
+        tool_call_id: call.id,
+        content: JSON.stringify({
+          ok: result.ok,
+          kind: result.kind,
+          answer: result.answer,
+          sources: result.sources,
+          tool_result: result.toolPayload || null,
+        }),
+      });
+    }
   }
 
-  return JSON.parse(content);
-}
-
-async function explainWithOpenAI(question, classification, toolResults) {
-  const sources = dedupeSources(toolResults.flatMap((result) => result.sources || []));
-  const toolPayloads = toolResults.map((result) => result.toolPayload).filter(Boolean);
-
-  const messages = [
-    {
-      role: 'system',
-      content: [
-        'You are Instant GM.',
-        'Use only the supplied tool outputs.',
-        'Do not invent salaries, rules, roster facts, thresholds, or legal conclusions.',
-        'If tool outputs do not support a conclusion, say so plainly.',
-        'Write a concise answer with these sections when applicable:',
-        'Answer:',
-        'Assumptions:',
-        'Calculation:',
-        'What I cannot conclude yet:',
-        'Do not mention tools or hidden reasoning.',
-      ].join(' '),
-    },
-    {
-      role: 'user',
-      content: JSON.stringify({
-        question,
-        classification,
-        tool_results: toolPayloads,
-      }),
-    },
-  ];
-
-  const payload = await openAIChatCompletion(messages);
-  const answer = payload?.choices?.[0]?.message?.content;
-  if (typeof answer !== 'string' || !answer.trim()) {
-    throw new Error('OpenAI explanation returned no content.');
-  }
-
-  return {
-    answer: answer.trim(),
-    sources,
-  };
-}
-
-async function answerWithOpenAI(question, engine) {
-  const classification = await classifyIntentWithOpenAI(question);
-
-  if (classification.intent === 'unsupported_or_needs_clarification') {
-    return runIntent(classification, question, engine);
-  }
-
-  const primaryResult = runIntent(classification, question, engine);
-  if (!primaryResult.ok || primaryResult.kind === 'clarification') {
-    return primaryResult;
-  }
-
-  const explainableIntents = new Set([
-    'player_salary_lookup',
-    'top_paid_players',
-    'apron_distance',
-    'payroll_addition',
-    'payroll_removal',
-    'mixed_payroll_and_rule_question',
-    'cba_rule_lookup',
-  ]);
-
-  if (!explainableIntents.has(classification.intent)) {
-    return primaryResult;
-  }
-
-  return explainWithOpenAI(question, classification, [primaryResult]);
+  throw new Error('OpenAI tool flow exceeded the maximum number of rounds.');
 }
 
 module.exports = async function handler(req, res) {
