@@ -24,6 +24,13 @@
         "https://www.spotrac.com/nba/indiana-pacers/cap/_/year/2025",
         "https://www.spotrac.com/nba/indiana-pacers/tax/_/year/2025"
       ]
+    },
+    {
+      "dataset": "cba-rules",
+      "source_name": "Instant GM curated CBA rules library",
+      "source_url": "data/cba_pages.json",
+      "update_frequency": "manual-curated from local CBA extract",
+      "updated_at": "2026-06-24T19:45:00Z"
     }
   ]
 }

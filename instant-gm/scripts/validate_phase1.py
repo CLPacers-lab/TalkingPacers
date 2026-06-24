@@ -71,6 +71,47 @@ def validate_cap_sheet(payload, errors):
     )
 
 
+def validate_cba_rules(payload, errors):
+    metadata = payload.get("metadata")
+    if not isinstance(metadata, dict):
+        errors.append("cba-rules.json: missing metadata object")
+        return
+
+    require_keys(
+        metadata,
+        ["source_name", "source_label", "source_file", "built_at", "rule_count"],
+        "cba-rules.json.metadata",
+        errors,
+    )
+
+    records = payload.get("records")
+    if not isinstance(records, list):
+        errors.append("cba-rules.json: records must be an array")
+        return
+
+    for index, record in enumerate(records):
+        label = f"cba-rules.json.records[{index}]"
+        require_keys(
+            record,
+            [
+                "rule_id",
+                "title",
+                "plain_english_summary",
+                "rule_text_excerpt",
+                "article",
+                "section",
+                "page",
+                "tags",
+                "confidence",
+                "notes",
+            ],
+            label,
+            errors,
+        )
+        if "source_url" not in record and "source_label" not in record:
+            errors.append(f"{label}: missing source_url or source_label")
+
+
 def validate_source_metadata(payload, errors):
     sources = payload.get("sources")
     if not isinstance(sources, list):
@@ -92,9 +133,10 @@ def main():
     roster_path = DATA_DIR / "pacers-roster.json"
     contracts_path = DATA_DIR / "pacers-contracts.json"
     cap_sheet_path = DATA_DIR / "pacers-cap-sheet.json"
+    cba_rules_path = DATA_DIR / "cba-rules.json"
     source_metadata_path = DATA_DIR / "source-metadata.json"
 
-    required_files = [roster_path, contracts_path, cap_sheet_path, source_metadata_path]
+    required_files = [roster_path, contracts_path, cap_sheet_path, cba_rules_path, source_metadata_path]
     for path in required_files:
         if not path.exists():
             errors.append(f"missing required file: {path}")
@@ -108,6 +150,7 @@ def main():
     validate_roster(load_json(roster_path), errors)
     validate_contracts(load_json(contracts_path), errors)
     validate_cap_sheet(load_json(cap_sheet_path), errors)
+    validate_cba_rules(load_json(cba_rules_path), errors)
     validate_source_metadata(load_json(source_metadata_path), errors)
 
     if errors:
@@ -120,6 +163,7 @@ def main():
     print(f"- validated: {roster_path}")
     print(f"- validated: {contracts_path}")
     print(f"- validated: {cap_sheet_path}")
+    print(f"- validated: {cba_rules_path}")
     print(f"- validated: {source_metadata_path}")
 
 

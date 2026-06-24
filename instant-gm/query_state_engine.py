@@ -66,16 +66,19 @@ class PacersStateEngine:
         self.roster = load_json(DATA_DIR / "pacers-roster.json")
         self.contracts = load_json(DATA_DIR / "pacers-contracts.json")
         self.cap_sheet = load_json(DATA_DIR / "pacers-cap-sheet.json")
+        self.cba_rules = load_json(DATA_DIR / "cba-rules.json")
 
         self.roster_records = self.roster["records"]
         self.contract_records = self.contracts["records"]
         self.cap_snapshot = self.cap_sheet["snapshot"]
         self.cap_metadata = self.cap_sheet["metadata"]
         self.contract_metadata = self.contracts["metadata"]
+        self.cba_rule_records = self.cba_rules["records"]
 
         self.players = [record["player"] for record in self.roster_records]
         self.contract_by_player = {record["player"]: record for record in self.contract_records}
         self.search_aliases = self._build_search_aliases()
+        self.cba_search_index = self._build_cba_search_index()
 
     def _build_search_aliases(self) -> dict[str, set[str]]:
         aliases: dict[str, set[str]] = {}
@@ -92,9 +95,28 @@ class PacersStateEngine:
             aliases[player] = values
         return aliases
 
+    def _build_cba_search_index(self) -> list[dict[str, Any]]:
+        search_rows = []
+        for record in self.cba_rule_records:
+            terms = [
+                normalize_text(record.get("title", "")),
+                normalize_text(record.get("plain_english_summary", "")),
+                normalize_text(record.get("notes", "")),
+            ]
+            for tag in record.get("tags", []):
+                terms.append(normalize_text(tag))
+            for term in record.get("match_terms", []):
+                terms.append(normalize_text(term))
+            search_rows.append({"record": record, "terms": [term for term in terms if term]})
+        return search_rows
+
     def answer(self, question: str) -> StateEngineAnswer:
         cleaned = question.strip()
         lowered = normalize_text(cleaned)
+
+        cba_answer = self._answer_cba_rule_question(cleaned, lowered)
+        if cba_answer is not None:
+            return cba_answer
 
         if self._is_unsupported_legal_question(lowered):
             return StateEngineAnswer(
@@ -131,6 +153,108 @@ class PacersStateEngine:
             if url not in sources:
                 sources.append(url)
         return sources
+
+    def _is_cba_rule_question(self, lowered: str) -> bool:
+        cba_terms = [
+            "exception",
+            "mle",
+            "apron",
+            "aggregate",
+            "aggregation",
+            "newly signed",
+            "recently signed",
+            "trade exception",
+            "traded player exception",
+            "traded",
+            "stepien",
+            "two way",
+            "two-way",
+            "roster limit",
+            "december 15",
+            "january 15",
+            "hard cap",
+            "hard-capped",
+        ]
+        return any(term in lowered for term in cba_terms) or ("rule" in lowered and "trade" in lowered)
+
+    def _answer_cba_rule_question(self, raw_question: str, lowered: str) -> StateEngineAnswer | None:
+        if not self._is_cba_rule_question(lowered):
+            return None
+
+        scored: list[tuple[int, dict[str, Any]]] = []
+        for row in self.cba_search_index:
+            score = 0
+            for term in row["terms"]:
+                if not term:
+                    continue
+                if term in lowered:
+                    score += 6 if len(term.split()) > 1 else 2
+                else:
+                    token_overlap = len(set(term.split()) & set(lowered.split()))
+                    score += token_overlap
+            if score > 0:
+                scored.append((score, row["record"]))
+
+        scored.sort(key=lambda item: item[0], reverse=True)
+        if not scored:
+            return StateEngineAnswer(
+                kind="lookup",
+                answer="I could not find a vetted rule for that question in the current Instant GM CBA library yet.",
+                sources=["2023 NBA Collective Bargaining Agreement (local page extract from data/cba_pages.json)"],
+            )
+
+        best_score, best_record = scored[0]
+        related_records = [record for score, record in scored[1:3] if score >= max(4, best_score - 2)]
+
+        if best_record["confidence"] == "needs_manual_review":
+            return StateEngineAnswer(
+                kind="lookup",
+                answer=(
+                    f"I could not find a vetted {best_record['title']} record in the current Instant GM CBA library yet. "
+                    "This topic needs manual review before I should treat it as reliable."
+                ),
+                sources=[best_record.get("source_label", "2023 NBA Collective Bargaining Agreement (local page extract from data/cba_pages.json)")],
+                details={"rule_id": best_record["rule_id"]},
+            )
+
+        article_bits = []
+        if best_record.get("article"):
+            article_bits.append(best_record["article"])
+        if best_record.get("section"):
+            article_bits.append(best_record["section"])
+        if best_record.get("page") is not None:
+            article_bits.append(f"page {best_record['page']}")
+        citation = ", ".join(article_bits)
+
+        lines = [f"{best_record['title']}: {best_record['plain_english_summary']}"]
+        if citation:
+            lines.append(f"Citation: {citation}.")
+        if best_record.get("rule_text_excerpt"):
+            lines.append(f"Excerpt: {best_record['rule_text_excerpt']}")
+
+        if any(word in lowered for word in ["can we", "can i", "legally", "allowed", "is it legal"]):
+            lines.append(LEGAL_LIMITATION_MESSAGE)
+        else:
+            lines.append("This is a general rule explanation only. I am not applying it to a full transaction yet.")
+
+        if related_records:
+            related_titles = ", ".join(record["title"] for record in related_records)
+            lines.append(f"Related rules: {related_titles}.")
+
+        sources = []
+        if best_record.get("source_label"):
+            sources.append(best_record["source_label"])
+        for record in related_records:
+            label = record.get("source_label")
+            if label and label not in sources:
+                sources.append(label)
+
+        return StateEngineAnswer(
+            kind="lookup",
+            answer="\n".join(lines),
+            sources=sources,
+            details={"rule_id": best_record["rule_id"], "related_rule_ids": [record["rule_id"] for record in related_records]},
+        )
 
     def _is_unsupported_legal_question(self, lowered: str) -> bool:
         unsupported_terms = [
@@ -392,4 +516,3 @@ class PacersStateEngine:
                 "distance_to_second_apron": new_distance_to_second_apron,
             },
         )
-

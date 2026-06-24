@@ -1,0 +1,350 @@
+{
+  "metadata": {
+    "source_name": "Instant GM curated CBA rules library",
+    "source_label": "2023 NBA Collective Bargaining Agreement (local page extract from data/cba_pages.json)",
+    "source_file": "data/cba_pages.json",
+    "built_at": "2026-06-24T18:23:33Z",
+    "rule_count": 14,
+    "notes": "This is a curated rules subset intended for sourced explanation, not full legal conclusion or transaction validation."
+  },
+  "records": [
+    {
+      "rule_id": "bi_annual_exception",
+      "title": "Bi-annual exception",
+      "plain_english_summary": "A team can use the bi-annual exception to sign or acquire one or more contracts with first-year salary totaling up to 3.32% of the cap. It generally lasts up to two seasons, cannot be used in consecutive cap years, and cannot be used in a year when the team already used the room exception.",
+      "rule_text_excerpt": "A Team may use the Bi-annual Exception during a Salary Cap Year to sign and/or acquire by assignment one (1) or more Player Contracts that, in the aggregate, provide for Salaries and Unlikely Bonuses (or in the case of assignment, post-assignment Salaries and Unlikely Bonuses) in the first Salary Cap Year totaling up to 3.32% of the Salary Cap for such Salary Cap Year; provided, however, that, prior to the first day of the 2024-25 Salary Cap Year, a Team shall not be permitted to use the Bi-annual Exception to acquire a Player Contract by assignment. (2) The term of a Player Contract signed pursuant to the Bi-annual Exception may not exceed two (2) Seasons in length, and the remaining term of a Player Contract acquired by assignment pursuant to the Bi-annual Exception may not exceed two (2) Seasons in length. (3) A Team may not use all or any portion of the Bi-annual Exception (i) if at",
+      "article": "Article VII",
+      "section": "Section 6(d)",
+      "page": 259,
+      "tags": [
+        "exception",
+        "bi-annual",
+        "cap-exception",
+        "first-apron"
+      ],
+      "source_label": "2023 NBA Collective Bargaining Agreement (local page extract from data/cba_pages.json)",
+      "confidence": "high",
+      "notes": "This rule explains the basic exception mechanics only. Using it can also trigger first-apron restrictions under the transaction restrictions table.",
+      "match_terms": [
+        "bi annual",
+        "bi-annual",
+        "bae",
+        "biannual exception"
+      ]
+    },
+    {
+      "rule_id": "non_taxpayer_mid_level_exception",
+      "title": "Non-taxpayer mid-level exception",
+      "plain_english_summary": "A team can use the non-taxpayer mid-level exception to sign or acquire one or more contracts with first-year salary totaling up to 9.12% of the cap. The contract term can run up to four seasons, and the exception cannot be used in the same cap year as the room exception.",
+      "rule_text_excerpt": "A Team may use the Non-Taxpayer Mid-Level Salary Exception to sign and/or acquire by assignment one (1) or more Player Contracts during each Salary Cap Year that, in the aggregate, provide for Salaries and Unlikely Bonuses (or in the case of assignment, post-assignment Salaries and Unlikely Bonuses) in the first Salary Cap Year totaling up to 9.12% of the Salary Cap for such Salary Cap Year; provided, however, that, prior to the first day of the 2024-25 Salary Cap Year, a Team shall not be permitted to use the Non-Taxpayer Mid-Level Salary Exception to acquire a Player Contract by assignment. (2) The term of a Player Contract signed pursuant to the Non-Taxpayer Mid-Level Salary Exception may not exceed four (4) Seasons in length, and the remaining term of a Player Contract acquired by assignment pursuant to the Non-Taxpayer Mid-Level Salary Exception may not exceed four (4) Seasons in",
+      "article": "Article VII",
+      "section": "Section 6(e)",
+      "page": 260,
+      "tags": [
+        "exception",
+        "mle",
+        "non-taxpayer-mle",
+        "first-apron"
+      ],
+      "source_label": "2023 NBA Collective Bargaining Agreement (local page extract from data/cba_pages.json)",
+      "confidence": "high",
+      "notes": "Using this exception interacts with first-apron rules and can hard-cap a team at the first apron for the rest of the cap year.",
+      "match_terms": [
+        "non taxpayer mle",
+        "non-taxpayer mle",
+        "ntmle",
+        "mid-level exception"
+      ]
+    },
+    {
+      "rule_id": "taxpayer_mid_level_exception",
+      "title": "Taxpayer mid-level exception",
+      "plain_english_summary": "A team may use the taxpayer mid-level exception only when its apron team salary immediately after using the exception exceeds the first apron. It is limited to contracts of up to two seasons and cannot be used in the same cap year as the room exception.",
+      "rule_text_excerpt": "A Team may use the Taxpayer Mid-Level Salary Exception to sign one (1) or more Player Contracts during each Salary Cap Year not to exceed two (2) Seasons in length, that, in the aggregate, provide for Salaries and Unlikely Bonuses in the first Salary Cap Year totaling up to the amounts set forth below, provided that the Team\u2019s Apron Team Salary immediately following the Team\u2019s use of such Exception exceeds the First Apron Level: Taxpayer Mid-Level Salary Exception For the 2023-24 Salary Cap Year: For each subsequent Salary Cap Year: $5 million $5 million multiplied by a fraction, the numerator of which is the Salary Cap for that Salary Cap Year and the denominator of which is the Salary Cap for the 2023-24 Salary Cap Year (2) A Team may not use all or any portion of the Taxpayer Mid-Level Salary Exception if at the time the Team proposes to use the Exception the Team has already used",
+      "article": "Article VII",
+      "section": "Section 6(f)",
+      "page": 261,
+      "tags": [
+        "exception",
+        "mle",
+        "taxpayer-mle",
+        "second-apron"
+      ],
+      "source_label": "2023 NBA Collective Bargaining Agreement (local page extract from data/cba_pages.json)",
+      "confidence": "high",
+      "notes": "The taxpayer MLE has additional apron-transaction restrictions described in Article VII Section 2(e).",
+      "match_terms": [
+        "taxpayer mle",
+        "taxpayer mid-level",
+        "tmle"
+      ]
+    },
+    {
+      "rule_id": "room_exception",
+      "title": "Mid-level exception for room teams",
+      "plain_english_summary": "A team below the cap that is not entitled to the bi-annual, non-taxpayer MLE, or taxpayer MLE may use the room exception. It can cover up to 5.678% of the cap in first-year salary and runs up to three seasons.",
+      "rule_text_excerpt": "Mid-Level Salary Exception for Room Teams. Subject to the rules set forth in Section 6(n) below: (1) In the event (i) a Team\u2019s Team Salary at any time during a Salary Cap Year is below the Salary Cap for such Salary Cap Year such that the Team is not entitled to use the Bi-annual Exception, Non-Taxpayer Mid-Level Salary Exception, or Taxpayer Mid-Level Salary Exception, and (ii) at the time the Team proposes to use the Mid-Level Salary Exception for Room Teams, the Team has",
+      "article": "Article VII",
+      "section": "Section 6(g)",
+      "page": 262,
+      "tags": [
+        "exception",
+        "room-exception",
+        "room-team",
+        "cap-space"
+      ],
+      "source_label": "2023 NBA Collective Bargaining Agreement (local page extract from data/cba_pages.json)",
+      "confidence": "high",
+      "notes": "Once a team uses the room exception, it cannot later use the bi-annual, non-taxpayer MLE, or taxpayer MLE in that same cap year.",
+      "match_terms": [
+        "room exception",
+        "room mle",
+        "room mid-level",
+        "mid-level for room teams"
+      ]
+    },
+    {
+      "rule_id": "first_apron_restrictions",
+      "title": "First apron transaction restrictions",
+      "plain_english_summary": "The CBA\u2019s transaction restrictions table blocks certain transactions if a team would exceed the first apron immediately after the move, and after using one of those transactions the team cannot later rise above the applicable first-apron level that year.",
+      "rule_text_excerpt": "Transaction Restrictions Table: Transaction A. Team signs or acquires a player using the Bi-annual Exception (as described in Section 6(d) below) B. Team signs or acquires a player using the Non-Taxpayer Mid-Level Salary Exception (as described in Section 6(e) below) C. Team acquires a player pursuant to a Contract entered into in accordance with Section 8(e)(1) below D. Team signs a Contract during the Regular Season with a player who was previously under a Contract that: (i) was terminated during such Regular Season; and (ii) prior to such termination, provided for a Salary for the Salary Cap Year encompassing such Regular Season of greater than the amount of the Non-Taxpayer Mid-Level Salary Exception for such Salary Cap Year E. Team acquires a player using an Expanded Traded Player Exception (as described in Section 6(j)(1)(iv) below) F. Team acquires a player using a Standard",
+      "article": "Article VII",
+      "section": "Section 2(e)(2) and 2(e)(4)",
+      "page": 214,
+      "tags": [
+        "first-apron",
+        "apron",
+        "restrictions",
+        "hard-cap",
+        "sign-and-trade"
+      ],
+      "source_label": "2023 NBA Collective Bargaining Agreement (local page extract from data/cba_pages.json)",
+      "confidence": "high",
+      "notes": "The first-apron rows in the table include bi-annual exception use, non-taxpayer MLE use, certain sign-and-trades, certain waived-player signings, and specific traded-player-exception uses.",
+      "match_terms": [
+        "first apron",
+        "what does the first apron restrict",
+        "first apron restrictions"
+      ]
+    },
+    {
+      "rule_id": "second_apron_restrictions",
+      "title": "Second apron transaction restrictions",
+      "plain_english_summary": "The transaction restrictions table also assigns some moves to the second apron. Those include aggregated standard traded player exceptions, cash sent in trades, certain sign-and-trade related traded player exceptions, and the taxpayer MLE.",
+      "rule_text_excerpt": "Transaction Applicable Apron Level G. Team acquires a player using a Transition Traded Player Exception (as described in Section 6(j)(1)(iii) below) First Apron Level H. Team acquires a player using an Aggregated Standard Traded Player Exception (as described in Section 6(j)(1)(ii) below) Second Apron Level I. Team pays cash to another Team in connection with a trade in accordance with Section 8(a) below Second Apron Level J. Team acquires a player using a Traded Player Exception (as described in Section 6(j)(1)(i), (ii), (iii), or (iv) below), which Traded Player Exception is in respect of a Player Contract signed and traded pursuant to Section 8(e)(1) below Second Apron Level K. Team signs a player using the Taxpayer Mid-Level Salary Exception (as described in Section 6(f) below) Second Apron Level (5) Notwithstanding anything to the contrary in Section 2(e)(2) above, a Team that",
+      "article": "Article VII",
+      "section": "Section 2(e)(4)",
+      "page": 215,
+      "tags": [
+        "second-apron",
+        "apron",
+        "restrictions",
+        "cash-in-trades",
+        "taxpayer-mle"
+      ],
+      "source_label": "2023 NBA Collective Bargaining Agreement (local page extract from data/cba_pages.json)",
+      "confidence": "high",
+      "notes": "This record explains the transaction categories tied to the second apron, not whether a specific proposed move is legal for the Pacers today.",
+      "match_terms": [
+        "second apron",
+        "what does the second apron restrict",
+        "second apron restrictions"
+      ]
+    },
+    {
+      "rule_id": "salary_aggregation_in_trades",
+      "title": "Salary aggregation in trades",
+      "plain_english_summary": "The aggregated standard traded player exception allows a team to aggregate the salaries of two or more outgoing traded players in a simultaneous trade, subject to the traded-player-exception matching limits and the apron rules.",
+      "rule_text_excerpt": "Aggregated Standard Traded Player Exception. Subject to the rules set forth in Section 2(e) above, a Team may use the \u201cAggregated Standard Traded Player Exception\u201d to replace two (2) or more Traded Players with one (1) or more Replacement Players whose Player Contracts are acquired simultaneously and whose post-trade Salaries for the then-current Salary Cap Year, in the aggregate, are no more than an amount equal to one hundred percent (100%) of the aggregated pre-trade Salaries of the Traded Players, plus",
+      "article": "Article VII",
+      "section": "Section 6(j)(1)(ii)",
+      "page": 264,
+      "tags": [
+        "trade",
+        "salary-aggregation",
+        "traded-player-exception",
+        "salary-matching"
+      ],
+      "source_label": "2023 NBA Collective Bargaining Agreement (local page extract from data/cba_pages.json)",
+      "confidence": "high",
+      "notes": "This is the general traded-salary aggregation rule. Separate timing restrictions apply to recently acquired players.",
+      "match_terms": [
+        "aggregate salaries",
+        "salary aggregation",
+        "aggregate salary",
+        "aggregate contracts"
+      ]
+    },
+    {
+      "rule_id": "newly_signed_player_trade_restrictions",
+      "title": "Newly signed player trade restrictions",
+      "plain_english_summary": "Draft rookies on standard deals and players on two-way contracts generally cannot be traded for 30 days after signing. Free agents on new standard contracts generally cannot be traded until the later of three months after signing or December 15, and some larger over-the-cap re-signings are pushed to the later of three months or January 15.",
+      "rule_text_excerpt": "No Draft Rookie who signs a Standard NBA Contract or player who signs a Two-Way Contract may be traded before thirty (30) days following the date on which the Contract is signed. (ii) No player who signs a Standard NBA Contract as a Free Agent (or who signs a Standard NBA Contract while under a Two-Way Contract) may be traded before the later of (A) three (3) months following the date on which such Contract was signed or (B) the December 15 of the Salary Cap Year in which such Contract was signed; provided, that if a Contract is signed in connection with an agreement to trade the Contract in accordance with Section 8(e) below, the foregoing rule shall not apply to the initial trade but shall instead be applicable if the Contract is traded a second time. For the purposes of this rule, a Two-Way Contract that is converted to a Standard NBA Contract pursuant to such Contract\u2019s Standard NBA",
+      "article": "Article VII",
+      "section": "Section 8(d)",
+      "page": 285,
+      "tags": [
+        "trade",
+        "newly-signed",
+        "trade-restrictions",
+        "december-15",
+        "january-15"
+      ],
+      "source_label": "2023 NBA Collective Bargaining Agreement (local page extract from data/cba_pages.json)",
+      "confidence": "high",
+      "notes": "This record covers timing restrictions only. It does not decide whether a specific present-day trade is legal.",
+      "match_terms": [
+        "newly signed player traded",
+        "recently signed player trade",
+        "december 15",
+        "january 15"
+      ]
+    },
+    {
+      "rule_id": "recently_acquired_player_aggregation_restriction",
+      "title": "Recently acquired player aggregation restriction",
+      "plain_english_summary": "If a team acquired a player via an exception, that player generally cannot be aggregated with other salaries in a trade for two months after the acquisition, subject to the CBA\u2019s trade-deadline carveout described in the same subsection.",
+      "rule_text_excerpt": "No player whose Player Contract was acquired pursuant to an Exception in the two (2) month period preceding the trade may be among the Traded Players whose Contracts are being aggregated pursuant to Sections 6(j)(ii), 6(j)(iii), or 6(j)(iv) above (for example, if a player were traded to a Team pursuant to an Exception on November 20, 2023, then the player\u2019s Contract could not be aggregated with any other Contract for purposes of a trade until January 20, 2024); provided, however, that if a Team acquires a Player Contract pursuant to an Exception on or before December 16 of a Salary Cap Year, then the foregoing restriction shall not apply in the event the player is subsequently traded on or after the day prior to the NBA trade deadline of such Salary Cap Year; and (ii) Other than during the period beginning on December 15 of a Salary Cap Year through the NBA trade deadline of such Salary",
+      "article": "Article VII",
+      "section": "Section 6(j)(4)(i)",
+      "page": 266,
+      "tags": [
+        "trade",
+        "aggregation",
+        "recently-traded",
+        "recently-acquired",
+        "two-month-rule"
+      ],
+      "source_label": "2023 NBA Collective Bargaining Agreement (local page extract from data/cba_pages.json)",
+      "confidence": "high",
+      "notes": "This is one of the most important exceptions-to-aggregation rules for trade construction.",
+      "match_terms": [
+        "recently traded aggregation",
+        "recently acquired aggregation",
+        "two month trade rule"
+      ]
+    },
+    {
+      "rule_id": "hard_cap_triggers",
+      "title": "First apron hard-cap triggers",
+      "plain_english_summary": "Some transactions effectively hard-cap a team at the first apron for the rest of the cap year. The CBA example section shows that once a team uses a first-apron-triggering transaction, it may not later exceed the first apron for the remainder of that year.",
+      "rule_text_excerpt": "As a result of such signing, pursuant to Section 2(e)(2)(i)(B) above, Team A may not, for the remainder of the 2023-24 Salary Cap Year, have a 2023-24 Apron Team Salary that exceeds $170 million (i.e., the 2023-24 First Apron Level). 2. On June 20, 2025 (after the conclusion of the 2024-25 Regular Season in April 2025), having not previously signed a Player Contract pursuant to the Taxpayer Mid-Level Salary Exception at any point during the 2024-25 Salary Cap Year, Team B acquires by assignment a Player Contract using a Standard Traded Player Exception that arose during the 2024-25 Regular Season. Immediately following such trade, Team B\u2019s 2024-25 Apron Team Salary is $177 million, and Team B\u2019s 2025-26 Apron Team Salary (calculated in accordance with Section 2(e)(3)(i) above) is $175 million. Such trade (a transaction set forth in row F of the Transaction Restrictions Table with an",
+      "article": "Article VII",
+      "section": "Section 2(e)(2) and examples",
+      "page": 216,
+      "tags": [
+        "hard-cap",
+        "first-apron",
+        "non-taxpayer-mle",
+        "bi-annual",
+        "sign-and-trade"
+      ],
+      "source_label": "2023 NBA Collective Bargaining Agreement (local page extract from data/cba_pages.json)",
+      "confidence": "high",
+      "notes": "This rule is about the triggering mechanism, not whether the Pacers currently satisfy every condition for a specific move.",
+      "match_terms": [
+        "hard cap",
+        "hard-capped",
+        "what hard caps a team",
+        "hard cap triggers"
+      ]
+    },
+    {
+      "rule_id": "roster_limits",
+      "title": "Roster limits",
+      "plain_english_summary": "During the regular season, teams generally must carry 14 or 15 players on the active and inactive lists, with only limited short-term drops to 12 or 13 players. Offseason and hardship situations are handled separately in the same article.",
+      "rule_text_excerpt": "Each Team agrees to have at least twelve (12) and no more than fifteen (15) players on its Active List and to have a minimum of eight (8) players on the bench for all Regular Season games; provided, however, that for no more than (a) two (2) consecutive weeks at a time, and (b) a total of twenty-eight (28) days, a Team may have eleven (11) players on its Active List. During the period from the day following the last day of the Season until the day before the first day of the following Regular Season, the maximum number of players (including Two-Way Players) that a Team may carry on its Active List shall be twenty-one (21). Players on the Inactive List and Two-Way List shall be transferred to the Active List on the day following the last day of the Season. Section 2. Roster Size. (a) During the period from the first day of the Regular Season through the last day of the Regular Season",
+      "article": "Article XXIX",
+      "section": "Sections 1-2",
+      "page": 453,
+      "tags": [
+        "roster",
+        "roster-limits",
+        "active-list",
+        "inactive-list"
+      ],
+      "source_label": "2023 NBA Collective Bargaining Agreement (local page extract from data/cba_pages.json)",
+      "confidence": "high",
+      "notes": "Two-way roster interactions are covered separately in the two-way rules record.",
+      "match_terms": [
+        "roster limit",
+        "roster limits",
+        "how many players",
+        "minimum roster",
+        "maximum roster"
+      ]
+    },
+    {
+      "rule_id": "two_way_contract_basics",
+      "title": "Two-way contract basics",
+      "plain_english_summary": "Teams may carry up to three two-way players. Two-way players have active-list game limits, under-fifteen-game limits, eligibility limits based on years of service, and cannot generally appear in the postseason unless converted to a standard deal before the deadline.",
+      "rule_text_excerpt": "No Team may have on its roster at any time more than three (3) Two-Way Players. (ii) No player under a Two-Way Contract may be on the Active List for more than fifty (50) games during a Regular Season. If a player is signed to a Two-Way Contract after the start of a Regular Season, the maximum number of games for which such player may be on the Active List during that Regular Season shall be fifty (50) multiplied by a fraction, the numerator of which is the number of days remaining in such Regular Season as of the date such Two-Way Contract is entered into (including the day on which the Two-Way Contract is entered into), and the denominator of which is the total number of days of such Regular Season, rounded to the nearest whole number; provided, however, that in no event shall the maximum number of games for which a player may be on the Active List be fewer than one (1). (iii) Any",
+      "article": "Article II and Article XXIX",
+      "section": "Article II Section 11(b)-(f); Article XXIX Section 3",
+      "page": 76,
+      "tags": [
+        "two-way",
+        "roster",
+        "eligibility",
+        "postseason",
+        "active-list"
+      ],
+      "source_label": "2023 NBA Collective Bargaining Agreement (local page extract from data/cba_pages.json)",
+      "confidence": "high",
+      "notes": "The excerpt is from the contract mechanics section. Postseason treatment is addressed later in Article XXIX.",
+      "match_terms": [
+        "two-way",
+        "two way",
+        "two-way contract",
+        "two-way player"
+      ]
+    },
+    {
+      "rule_id": "traded_player_exception",
+      "title": "Traded player exception basics",
+      "plain_english_summary": "The CBA defines several traded player exceptions, including standard, aggregated standard, transition, and expanded traded player exceptions. These rules govern how much outgoing salary can be replaced and when acquired contracts can be taken in simultaneously or later.",
+      "rule_text_excerpt": "Traded Player Exception. (1) Subject to the rules set forth in Section 6(n) below and Section 6(j)(6) below, a Team may acquire one (1) or more players by assignment in accordance with the following: (i) Standard Traded Player Exception. Subject to the rules set forth in Section 2(e) above, a Team may use the \u201cStandard Traded Player Exception\u201d to replace one (1) Traded Player with one (1) or more Replacement Players whose Player Contracts are acquired simultaneously or non-simultaneously and whose post-assignment Salaries for the Salary Cap Year in which the Replacement Player(s) are acquired, in the aggregate, are no more than an amount equal to one hundred percent (100%) of the pre-trade Salary of the Traded Player, plus $250,000, provided that any Player Contract acquired non-simultaneously pursuant to this Exception must be acquired within one (1) year following the date on which",
+      "article": "Article VII",
+      "section": "Section 6(j)(1)",
+      "page": 264,
+      "tags": [
+        "trade",
+        "traded-player-exception",
+        "tpe",
+        "salary-matching"
+      ],
+      "source_label": "2023 NBA Collective Bargaining Agreement (local page extract from data/cba_pages.json)",
+      "confidence": "high",
+      "notes": "This is the general traded player exception framework. Apron, aggregation, and timing restrictions are covered in related rules.",
+      "match_terms": [
+        "trade exception",
+        "traded player exception",
+        "tpe"
+      ]
+    },
+    {
+      "rule_id": "stepien_rule_manual_review",
+      "title": "Stepien rule / future first-round pick restrictions",
+      "plain_english_summary": "I do not yet have a vetted Stepien-rule record in the current local CBA extract. This topic likely needs a separate draft-pick ownership and tradeability source or a more targeted manual CBA review before it should be treated as reliable.",
+      "rule_text_excerpt": null,
+      "article": null,
+      "section": null,
+      "page": null,
+      "tags": [
+        "draft-picks",
+        "stepien",
+        "future-firsts",
+        "manual-review"
+      ],
+      "source_label": "2023 NBA Collective Bargaining Agreement (local page extract from data/cba_pages.json)",
+      "confidence": "needs_manual_review",
+      "notes": "No explicit Stepien-rule passage was located in the current local extract during this implementation pass.",
+      "match_terms": [
+        "stepien",
+        "future first round pick",
+        "future first-round pick",
+        "trade this pick"
+      ]
+    }
+  ]
+}
