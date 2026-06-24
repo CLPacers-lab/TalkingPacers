@@ -12,14 +12,10 @@
         --bg: #06152d;
         --bg-deep: #03101f;
         --panel: rgba(255, 255, 255, 0.95);
-        --panel-soft: rgba(255, 255, 255, 0.08);
         --ink: #0f172a;
         --muted: #4c5a70;
         --line: rgba(255, 255, 255, 0.12);
-        --blue: #002d62;
-        --blue-bright: #1f5daa;
         --gold: #fdbb30;
-        --gold-soft: rgba(253, 187, 48, 0.18);
       }
 
       * { box-sizing: border-box; }
@@ -43,7 +39,7 @@
       }
 
       .card {
-        width: min(100%, 760px);
+        width: min(100%, 860px);
         background:
           linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.05)),
           rgba(4, 18, 36, 0.72);
@@ -86,19 +82,9 @@
         border-color: rgba(253, 187, 48, 0.44);
       }
 
-      .gate, .app {
-        display: none;
-      }
-
-      .gate.active, .app.active {
-        display: block;
-      }
-
-      .gate,
-      .app {
-        position: relative;
-        z-index: 1;
-      }
+      .gate, .app { display: none; }
+      .gate.active, .app.active { display: block; }
+      .gate, .app { position: relative; z-index: 1; }
 
       .brand {
         display: flex;
@@ -134,12 +120,6 @@
         text-wrap: balance;
       }
 
-      .subtle {
-        margin: 0 0 24px;
-        color: rgba(255, 255, 255, 0.72);
-        font-size: 1rem;
-      }
-
       .field,
       .ask-box {
         width: 100%;
@@ -162,12 +142,104 @@
         outline-offset: 2px;
       }
 
+      .chat-thread {
+        display: grid;
+        gap: 14px;
+        margin: 22px 0 0;
+      }
+
+      .message {
+        border-radius: 22px;
+        padding: 16px 18px;
+        max-width: 88%;
+        white-space: pre-wrap;
+        line-height: 1.55;
+      }
+
+      .message-user {
+        justify-self: end;
+        background: linear-gradient(135deg, rgba(253, 187, 48, 0.95), rgba(245, 166, 0, 0.95));
+        color: #17263e;
+      }
+
+      .message-assistant {
+        justify-self: start;
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: #f8fbff;
+      }
+
+      .message-sources {
+        margin-top: 14px;
+        padding-top: 12px;
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
+      }
+
+      .sources-title {
+        margin: 0 0 8px;
+        font-size: 0.92rem;
+        color: rgba(255, 255, 255, 0.74);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .sources-list {
+        display: grid;
+        gap: 8px;
+      }
+
+      .source-link,
+      .source-text {
+        font-size: 0.98rem;
+      }
+
+      .source-link {
+        color: #ffe29a;
+        text-decoration: none;
+      }
+
+      .source-link:hover { text-decoration: underline; }
+      .source-text { color: rgba(255, 255, 255, 0.8); }
+
       .actions {
         display: flex;
         gap: 12px;
         margin-top: 14px;
         align-items: center;
         flex-wrap: wrap;
+      }
+
+      .debug-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: rgba(255, 255, 255, 0.78);
+        font-size: 0.95rem;
+      }
+
+      .debug-panel {
+        margin-top: 14px;
+        padding-top: 12px;
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
+      }
+
+      .debug-title {
+        margin: 0 0 8px;
+        font-size: 0.92rem;
+        color: rgba(255, 255, 255, 0.74);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .debug-pre {
+        margin: 0;
+        padding: 12px;
+        border-radius: 14px;
+        background: rgba(3, 16, 31, 0.5);
+        color: rgba(255, 255, 255, 0.88);
+        font-size: 0.9rem;
+        overflow-x: auto;
+        white-space: pre-wrap;
       }
 
       .btn {
@@ -191,19 +263,10 @@
         color: rgba(255, 255, 255, 0.74);
       }
 
-      .answer {
-        margin-top: 18px;
-        padding: 18px 20px 0;
-        border-top: 1px solid rgba(255, 255, 255, 0.12);
-        color: #f8fbff;
-        white-space: pre-wrap;
-        font-size: 1.02rem;
-        line-height: 1.6;
-      }
-
       @media (max-width: 640px) {
         .card { padding: 24px; border-radius: 24px; }
         .brand-logo { width: 48px; height: 48px; }
+        .message { max-width: 100%; }
       }
     </style>
   </head>
@@ -231,12 +294,16 @@
             <p class="brand-mark">Indiana Pacers</p>
           </div>
           <h1 id="app-title">Let's talk pacers.</h1>
-          <textarea id="questionInput" class="ask-box" rows="6"></textarea>
+          <div id="chatThread" class="chat-thread"></div>
+          <textarea id="questionInput" class="ask-box" rows="4"></textarea>
           <div class="actions">
             <button id="askButton" class="btn btn-primary" type="button">Ask</button>
+            <label class="debug-toggle">
+              <input id="debugToggle" type="checkbox" />
+              Debug
+            </label>
           </div>
           <p id="askStatus" class="status"></p>
-          <div id="responseBox" class="answer" hidden></div>
         </section>
       </main>
     </div>
@@ -244,16 +311,92 @@
     <script>
       const PASSWORD = 'IkeDiogu';
       const ACCESS_KEY = 'talking_pacers_access';
+      const conversation = [];
 
       const passwordGate = document.getElementById('passwordGate');
       const chatApp = document.getElementById('chatApp');
       const passwordInput = document.getElementById('passwordInput');
       const gateStatus = document.getElementById('gateStatus');
-      const responseBox = document.getElementById('responseBox');
       const askStatus = document.getElementById('askStatus');
       const questionInput = document.getElementById('questionInput');
       const logoutButton = document.getElementById('logoutButton');
       const askButton = document.getElementById('askButton');
+      const chatThread = document.getElementById('chatThread');
+      const debugToggle = document.getElementById('debugToggle');
+      const searchParams = new URLSearchParams(window.location.search);
+
+      if (searchParams.get('debug') === '1') {
+        debugToggle.checked = true;
+      }
+
+      function sourceLabel(source) {
+        const bits = [];
+        if (source.date) bits.push(source.date);
+        if (source.opponent) bits.push(`vs ${source.opponent}`);
+        return bits.length > 0 ? `${source.title} (${bits.join(', ')})` : source.title;
+      }
+
+      function renderConversation() {
+        chatThread.innerHTML = '';
+
+        for (const message of conversation) {
+          const bubble = document.createElement('article');
+          bubble.className = `message message-${message.role}`;
+          bubble.textContent = message.content;
+
+          if (message.role === 'assistant' && Array.isArray(message.sources) && message.sources.length > 0) {
+            const sourcesWrap = document.createElement('div');
+            sourcesWrap.className = 'message-sources';
+
+            const title = document.createElement('p');
+            title.className = 'sources-title';
+            title.textContent = 'Sources';
+            sourcesWrap.appendChild(title);
+
+            const list = document.createElement('div');
+            list.className = 'sources-list';
+
+            for (const source of message.sources) {
+              if (source.url) {
+                const link = document.createElement('a');
+                link.className = 'source-link';
+                link.href = source.url;
+                link.target = '_blank';
+                link.rel = 'noreferrer';
+                link.textContent = sourceLabel(source);
+                list.appendChild(link);
+              } else {
+                const text = document.createElement('p');
+                text.className = 'source-text';
+                text.textContent = `${sourceLabel(source)} — No source link available.`;
+                list.appendChild(text);
+              }
+            }
+
+            sourcesWrap.appendChild(list);
+            bubble.appendChild(sourcesWrap);
+          }
+
+          if (message.role === 'assistant' && message.debug) {
+            const debugWrap = document.createElement('div');
+            debugWrap.className = 'debug-panel';
+
+            const debugTitle = document.createElement('p');
+            debugTitle.className = 'debug-title';
+            debugTitle.textContent = 'Retrieval Debug';
+            debugWrap.appendChild(debugTitle);
+
+            const debugPre = document.createElement('pre');
+            debugPre.className = 'debug-pre';
+            debugPre.textContent = JSON.stringify(message.debug, null, 2);
+            debugWrap.appendChild(debugPre);
+
+            bubble.appendChild(debugWrap);
+          }
+
+          chatThread.appendChild(bubble);
+        }
+      }
 
       function setUnlocked(unlocked) {
         if (unlocked) {
@@ -269,11 +412,12 @@
         passwordGate.classList.add('active');
         chatApp.classList.remove('active');
         logoutButton.hidden = true;
-        responseBox.hidden = true;
-        responseBox.textContent = '';
+        conversation.length = 0;
+        renderConversation();
         askStatus.textContent = '';
         gateStatus.textContent = '';
         passwordInput.value = '';
+        questionInput.value = '';
         passwordInput.focus();
       }
 
@@ -289,20 +433,28 @@
         const question = questionInput.value.trim();
         if (!question) {
           askStatus.textContent = 'Enter a question first.';
-          responseBox.hidden = true;
           return;
         }
+
+        const history = conversation.map((message) => ({
+          role: message.role,
+          content: message.content,
+          resolvedContext: message.resolvedContext || null
+        }));
+
+        conversation.push({ role: 'user', content: question });
+        renderConversation();
+        questionInput.value = '';
 
         askButton.disabled = true;
         askButton.textContent = 'Thinking...';
         askStatus.textContent = 'Loading...';
-        responseBox.hidden = true;
 
         try {
           const response = await fetch('/api/ask', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ question })
+            body: JSON.stringify({ question, history, debug: debugToggle.checked })
           });
 
           const payload = await response.json().catch(() => null);
@@ -314,15 +466,23 @@
             throw new Error('Malformed response from server.');
           }
 
-          responseBox.textContent = payload.answer.trim();
-          responseBox.hidden = false;
+          conversation.push({
+            role: 'assistant',
+            content: payload.answer.trim(),
+            sources: Array.isArray(payload?.sources) ? payload.sources : [],
+            debug: payload?.debug || null,
+            resolvedContext: payload?.resolvedContext || null
+          });
+          renderConversation();
           askStatus.textContent = '';
         } catch (error) {
+          conversation.pop();
+          renderConversation();
           askStatus.textContent = error.message || 'Something went wrong.';
-          responseBox.hidden = true;
         } finally {
           askButton.disabled = false;
           askButton.textContent = 'Ask';
+          questionInput.focus();
         }
       }
 

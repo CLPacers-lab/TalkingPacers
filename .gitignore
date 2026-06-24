@@ -2,3 +2,4 @@
 update.log
 data.json.tmp
 *.tmp
+data/pacers-boxscores-raw.json
