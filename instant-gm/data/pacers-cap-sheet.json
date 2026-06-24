@@ -1,22 +1,27 @@
 {
   "metadata": {
     "team": "Indiana Pacers",
-    "season": "",
-    "as_of_date": "",
-    "updated_at": "",
-    "source_name": "",
-    "source_url": "",
-    "threshold_source_url": ""
+    "season": "2025-26",
+    "as_of_date": "2026-06-24",
+    "updated_at": "2026-06-24T19:05:00Z",
+    "source_name": "Pacers contracts dataset plus published Spotrac NBA cap and tax pages",
+    "source_url": "https://www.spotrac.com/nba/indiana-pacers/cap/_/year/2025",
+    "threshold_source_url": "https://www.spotrac.com/nba/indiana-pacers/tax/_/year/2025",
+    "threshold_sources": [
+      "https://www.spotrac.com/nba/indiana-pacers/cap/_/year/2025",
+      "https://www.spotrac.com/nba/indiana-pacers/tax/_/year/2025"
+    ],
+    "notes": "team_salary is calculated from current-season salary values in pacers-contracts.json only. Ethan Thompson is excluded because his 2025-26 salary remains unverified and is null in pacers-contracts.json. Dead money, cap holds, incentives, and tax-only allocation adjustments are not included in team_salary."
   },
   "snapshot": {
-    "team_salary": 0,
-    "salary_cap": 0,
-    "luxury_tax_line": 0,
-    "first_apron": 0,
-    "second_apron": 0,
-    "distance_to_tax": 0,
-    "distance_to_first_apron": 0,
-    "distance_to_second_apron": 0,
-    "hard_capped": false
+    "team_salary": 182569565,
+    "salary_cap": 154647000,
+    "luxury_tax_line": 187895000,
+    "first_apron": 195945000,
+    "second_apron": 207824000,
+    "distance_to_tax": 5325435,
+    "distance_to_first_apron": 13375435,
+    "distance_to_second_apron": 25254435,
+    "hard_capped": true
   }
 }
