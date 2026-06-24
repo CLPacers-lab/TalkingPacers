@@ -246,7 +246,7 @@
             }
           }
 
-          askStatus.textContent = '';
+          askStatus.textContent = typeof payload?.warning === 'string' ? payload.warning : '';
         } catch (error) {
           answerWrap.hidden = true;
           askStatus.textContent = error.message || 'Something went wrong.';
