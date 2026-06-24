@@ -1,0 +1,22 @@
+{
+  "metadata": {
+    "team": "Indiana Pacers",
+    "season": "",
+    "as_of_date": "",
+    "updated_at": "",
+    "source_name": "",
+    "source_url": "",
+    "threshold_source_url": ""
+  },
+  "snapshot": {
+    "team_salary": 0,
+    "salary_cap": 0,
+    "luxury_tax_line": 0,
+    "first_apron": 0,
+    "second_apron": 0,
+    "distance_to_tax": 0,
+    "distance_to_first_apron": 0,
+    "distance_to_second_apron": 0,
+    "hard_capped": false
+  }
+}

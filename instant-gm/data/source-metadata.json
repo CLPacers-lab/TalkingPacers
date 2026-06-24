@@ -1,0 +1,25 @@
+{
+  "sources": [
+    {
+      "dataset": "pacers-roster",
+      "source_name": "",
+      "source_url": "",
+      "update_frequency": "",
+      "updated_at": ""
+    },
+    {
+      "dataset": "pacers-contracts",
+      "source_name": "",
+      "source_url": "",
+      "update_frequency": "",
+      "updated_at": ""
+    },
+    {
+      "dataset": "pacers-cap-sheet",
+      "source_name": "",
+      "source_url": "",
+      "update_frequency": "",
+      "updated_at": ""
+    }
+  ]
+}
