@@ -186,7 +186,7 @@
   "keyGames": [],
   "meta": {
     "pacersSlot": 2,
-    "updatedAtUtc": "2026-07-30T17:27:23.964754Z",
+    "updatedAtUtc": "2026-07-30T18:56:05.420150Z",
     "sources": {
       "draftStandings": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/standings",
       "draftSchedule": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/11/schedule",
@@ -200,7 +200,7 @@
         "url": "https://site.web.api.espn.com/apis/v2/sports/basketball/nba/standings",
         "http_status": 200,
         "source": "network",
-        "fetched_at_utc": "2026-07-30T17:27:22.167423Z",
+        "fetched_at_utc": "2026-07-30T18:56:03.518900Z",
         "ok": true,
         "validated_rows": 14
       }
@@ -211,65 +211,65 @@
     },
     "stale": true,
     "schema_version": 1,
-    "generated_at_utc": "2026-07-30T17:27:25.755557Z",
+    "generated_at_utc": "2026-07-30T18:56:07.664162Z",
     "sections": {
       "standings": {
         "status": "ok",
         "source": "espn_api",
-        "fetched_at_utc": "2026-07-30T17:27:25.755574Z",
-        "last_ok_at_utc": "2026-07-30T17:27:25.755574Z"
+        "fetched_at_utc": "2026-07-30T18:56:07.664181Z",
+        "last_ok_at_utc": "2026-07-30T18:56:07.664181Z"
       },
       "schedule": {
         "status": "ok",
         "source": "espn_api",
-        "fetched_at_utc": "2026-07-30T17:27:25.755579Z",
-        "last_ok_at_utc": "2026-07-30T17:27:25.755579Z"
+        "fetched_at_utc": "2026-07-30T18:56:07.664186Z",
+        "last_ok_at_utc": "2026-07-30T18:56:07.664186Z"
       },
       "scoreboard": {
         "status": "ok",
         "source": "espn_api",
-        "fetched_at_utc": "2026-07-30T17:27:25.755582Z",
-        "last_ok_at_utc": "2026-07-30T17:27:25.755582Z"
+        "fetched_at_utc": "2026-07-30T18:56:07.664190Z",
+        "last_ok_at_utc": "2026-07-30T18:56:07.664190Z"
       },
       "boxscores": {
         "status": "stale",
         "source": "espn_api",
-        "fetched_at_utc": "2026-07-30T17:27:25.755586Z",
+        "fetched_at_utc": "2026-07-30T18:56:07.664193Z",
         "last_ok_at_utc": "2026-04-28T06:17:53.769687Z",
         "error": "no_completed_game_found"
       },
       "players": {
         "status": "disabled",
         "source": "none",
-        "fetched_at_utc": "2026-07-30T17:27:25.755589Z",
+        "fetched_at_utc": "2026-07-30T18:56:07.664197Z",
         "last_ok_at_utc": "2026-02-24T17:51:48.566416Z",
         "reason": "no_compliant_source"
       },
       "draft": {
         "status": "ok",
         "source": "espn_api+odds_table+manual_override",
-        "fetched_at_utc": "2026-07-30T17:27:25.755593Z",
-        "last_ok_at_utc": "2026-07-30T17:27:25.755772Z",
+        "fetched_at_utc": "2026-07-30T18:56:07.664201Z",
+        "last_ok_at_utc": "2026-07-30T18:56:07.664421Z",
         "reason": null
       },
       "videos": {
         "status": "ok",
         "source": "youtube_embed_official",
-        "fetched_at_utc": "2026-07-30T17:27:25.755596Z",
-        "last_ok_at_utc": "2026-07-30T17:27:25.755596Z"
+        "fetched_at_utc": "2026-07-30T18:56:07.664203Z",
+        "last_ok_at_utc": "2026-07-30T18:56:07.664203Z"
       },
       "whatYouMissed": {
         "status": "stale",
         "source": "espn_api+lkg",
-        "fetched_at_utc": "2026-07-30T17:27:25.755601Z",
+        "fetched_at_utc": "2026-07-30T18:56:07.664209Z",
         "last_ok_at_utc": "2026-04-27T00:04:58.162360Z",
         "error": "no_completed_game_found"
       },
       "pickProtection": {
         "status": "ok",
         "source": "static",
-        "fetched_at_utc": "2026-07-30T17:27:25.755605Z",
-        "last_ok_at_utc": "2026-07-30T17:27:25.755605Z"
+        "fetched_at_utc": "2026-07-30T18:56:07.664212Z",
+        "last_ok_at_utc": "2026-07-30T18:56:07.664212Z"
       }
     },
     "requirements": {
