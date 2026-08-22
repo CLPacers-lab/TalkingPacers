@@ -6,508 +6,107 @@
     <title>Talking Pacers</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet" />
-    <style>
-      :root {
-        --bg: #06152d;
-        --bg-deep: #03101f;
-        --panel: rgba(255, 255, 255, 0.95);
-        --ink: #0f172a;
-        --muted: #4c5a70;
-        --line: rgba(255, 255, 255, 0.12);
-        --gold: #fdbb30;
-      }
-
-      * { box-sizing: border-box; }
-
-      body {
-        margin: 0;
-        min-height: 100vh;
-        font-family: "Source Sans 3", "Helvetica Neue", sans-serif;
-        color: #fff;
-        background:
-          radial-gradient(circle at top left, rgba(253, 187, 48, 0.22), transparent 22%),
-          radial-gradient(circle at 80% 10%, rgba(31, 93, 170, 0.28), transparent 24%),
-          linear-gradient(160deg, var(--bg) 0%, var(--bg-deep) 100%);
-      }
-
-      .shell {
-        min-height: 100vh;
-        display: grid;
-        place-items: center;
-        padding: 24px;
-      }
-
-      .card {
-        width: min(100%, 860px);
-        background:
-          linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.05)),
-          rgba(4, 18, 36, 0.72);
-        border: 1px solid var(--line);
-        border-radius: 32px;
-        box-shadow: 0 24px 80px rgba(0, 0, 0, 0.34);
-        padding: 32px;
-        position: relative;
-        overflow: hidden;
-        backdrop-filter: blur(20px);
-      }
-
-      .card::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background:
-          linear-gradient(135deg, rgba(253, 187, 48, 0.16), transparent 32%),
-          linear-gradient(210deg, rgba(31, 93, 170, 0.28), transparent 40%);
-        pointer-events: none;
-      }
-
-      .lock-btn {
-        position: absolute;
-        top: 16px;
-        right: 16px;
-        z-index: 1;
-        border: 1px solid rgba(255, 255, 255, 0.18);
-        background: rgba(255, 255, 255, 0.08);
-        color: rgba(255, 255, 255, 0.86);
-        border-radius: 999px;
-        padding: 8px 12px;
-        font: inherit;
-        cursor: pointer;
-        backdrop-filter: blur(8px);
-      }
-
-      .lock-btn:hover {
-        color: #fff;
-        border-color: rgba(253, 187, 48, 0.44);
-      }
-
-      .gate, .app { display: none; }
-      .gate.active, .app.active { display: block; }
-      .gate, .app { position: relative; z-index: 1; }
-
-      .brand {
-        display: flex;
-        align-items: center;
-        gap: 14px;
-        margin-bottom: 20px;
-      }
-
-      .brand-logo {
-        width: 56px;
-        height: 56px;
-        border-radius: 16px;
-        background: rgba(255, 255, 255, 0.94);
-        padding: 8px;
-        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.18);
-      }
-
-      .brand-mark {
-        margin: 0;
-        color: rgba(255, 255, 255, 0.78);
-        font-size: 0.82rem;
-        letter-spacing: 0.22em;
-        text-transform: uppercase;
-      }
-
-      h1 {
-        margin: 0 0 10px;
-        font-family: Oswald, sans-serif;
-        font-size: clamp(2.2rem, 8vw, 4.8rem);
-        line-height: 0.95;
-        letter-spacing: 0.02em;
-        color: #ffffff;
-        text-wrap: balance;
-      }
-
-      .field,
-      .ask-box {
-        width: 100%;
-        border: 1px solid rgba(255, 255, 255, 0.16);
-        border-radius: 22px;
-        padding: 18px 20px;
-        font: inherit;
-        font-size: 1.02rem;
-        color: var(--ink);
-        background: var(--panel);
-        resize: vertical;
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22);
-      }
-
-      .field { margin-bottom: 12px; }
-
-      .field:focus,
-      .ask-box:focus {
-        outline: 2px solid rgba(253, 187, 48, 0.7);
-        outline-offset: 2px;
-      }
-
-      .chat-thread {
-        display: grid;
-        gap: 14px;
-        margin: 22px 0 0;
-      }
-
-      .message {
-        border-radius: 22px;
-        padding: 16px 18px;
-        max-width: 88%;
-        white-space: pre-wrap;
-        line-height: 1.55;
-      }
-
-      .message-user {
-        justify-self: end;
-        background: linear-gradient(135deg, rgba(253, 187, 48, 0.95), rgba(245, 166, 0, 0.95));
-        color: #17263e;
-      }
-
-      .message-assistant {
-        justify-self: start;
-        background: rgba(255, 255, 255, 0.12);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        color: #f8fbff;
-      }
-
-      .message-sources {
-        margin-top: 14px;
-        padding-top: 12px;
-        border-top: 1px solid rgba(255, 255, 255, 0.12);
-      }
-
-      .sources-title {
-        margin: 0 0 8px;
-        font-size: 0.92rem;
-        color: rgba(255, 255, 255, 0.74);
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-      }
-
-      .sources-list {
-        display: grid;
-        gap: 8px;
-      }
-
-      .source-link,
-      .source-text {
-        font-size: 0.98rem;
-      }
-
-      .source-link {
-        color: #ffe29a;
-        text-decoration: none;
-      }
-
-      .source-link:hover { text-decoration: underline; }
-      .source-text { color: rgba(255, 255, 255, 0.8); }
-
-      .actions {
-        display: flex;
-        gap: 12px;
-        margin-top: 14px;
-        align-items: center;
-        flex-wrap: wrap;
-      }
-
-      .debug-toggle {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        color: rgba(255, 255, 255, 0.78);
-        font-size: 0.95rem;
-      }
-
-      .debug-panel {
-        margin-top: 14px;
-        padding-top: 12px;
-        border-top: 1px solid rgba(255, 255, 255, 0.12);
-      }
-
-      .debug-title {
-        margin: 0 0 8px;
-        font-size: 0.92rem;
-        color: rgba(255, 255, 255, 0.74);
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-      }
-
-      .debug-pre {
-        margin: 0;
-        padding: 12px;
-        border-radius: 14px;
-        background: rgba(3, 16, 31, 0.5);
-        color: rgba(255, 255, 255, 0.88);
-        font-size: 0.9rem;
-        overflow-x: auto;
-        white-space: pre-wrap;
-      }
-
-      .btn {
-        border: 0;
-        border-radius: 999px;
-        padding: 12px 20px;
-        font: inherit;
-        font-weight: 700;
-        cursor: pointer;
-      }
-
-      .btn-primary {
-        background: linear-gradient(135deg, var(--gold), #f5a600);
-        color: #17263e;
-        box-shadow: 0 10px 24px rgba(253, 187, 48, 0.28);
-      }
-
-      .status {
-        min-height: 24px;
-        margin-top: 12px;
-        color: rgba(255, 255, 255, 0.74);
-      }
-
-      @media (max-width: 640px) {
-        .card { padding: 24px; border-radius: 24px; }
-        .brand-logo { width: 48px; height: 48px; }
-        .message { max-width: 100%; }
-      }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css?v=20260224-4" />
   </head>
   <body>
-    <div class="shell">
-      <main class="card" aria-live="polite">
-        <button id="logoutButton" class="lock-btn" type="button" hidden title="Lock and log out">Lock</button>
+    <header class="hero">
+      <div class="hero__overlay"></div>
+      <div class="hero__content">
+        <div class="hero__brand">
+          <img class="hero-logo" src="https://cdn.nba.com/logos/nba/1610612754/primary/L/logo.svg" alt="Indiana Pacers logo" />
+          <div>
+            <h1>Talking Pacers</h1>
+            <p class="subtitle">Your dashboard for the rest of the Pacers season</p>
+          </div>
+        </div>
+      </div>
+    </header>
 
-        <section id="passwordGate" class="gate active" aria-labelledby="gate-title">
-          <div class="brand" aria-hidden="true">
-            <img class="brand-logo" src="https://cdn.nba.com/logos/nba/1610612754/primary/L/logo.svg" alt="" />
-            <p class="brand-mark">Indiana Pacers</p>
+    <main>
+      <div class="dashboard-grid">
+        <div class="left-column">
+          <section class="panel panel-missed" aria-labelledby="missed-title">
+            <h2 id="missed-title">1) Last Game</h2>
+            <p id="missed-meta" class="section-note"></p>
+            <h3 class="subhead">Stat Leaders</h3>
+            <div id="missed-grid" class="leader-grid"></div>
+            <div id="missed-highlight" class="highlight-wrap"></div>
+            <h3 class="subhead">Key Upcoming Games</h3>
+            <div id="games-list" class="games"></div>
+          </section>
+        </div>
+
+        <section class="panel panel-draft" aria-labelledby="draft-title">
+          <h2 id="draft-title">2) Draft Outlook</h2>
+          <p class="section-note">Current lottery order, pick odds, trade protection impact, and key standings-swing games.</p>
+
+          <h3 class="subhead">Lottery Snapshot</h3>
+          <div id="standings-table" class="table-wrap"></div>
+
+          <h3 class="subhead">Pick Protection</h3>
+          <p id="protection-summary" class="section-note"></p>
+          <div class="odds-viz-wrap">
+            <div id="odds-ring" class="odds-ring">
+              <div class="odds-ring__inner">
+                <p class="odds-ring__label">Keep Odds</p>
+                <p id="keep-pct-ring" class="odds-ring__value"></p>
+              </div>
+            </div>
+            <div class="odds-grid">
+              <article class="odds-card keep">
+                <h3>Keep Pick</h3>
+                <p id="keep-pct" class="big-pct"></p>
+                <p id="keep-detail" class="muted"></p>
+              </article>
+              <article class="odds-card send">
+                <h3>Pick Sent to LAC</h3>
+                <p id="send-pct" class="big-pct"></p>
+                <p id="send-detail" class="muted"></p>
+              </article>
+            </div>
           </div>
-          <h1 id="gate-title">Talking Pacers</h1>
-          <input id="passwordInput" class="field" type="password" placeholder="Password" autocomplete="current-password" />
-          <div class="actions">
-            <button id="unlockButton" class="btn btn-primary" type="button">Enter</button>
-          </div>
-          <p id="gateStatus" class="status"></p>
+          <div id="pick-odds-breakdown" class="table-wrap"></div>
+
         </section>
 
-        <section id="chatApp" class="app" aria-labelledby="app-title">
-          <div class="brand" aria-hidden="true">
-            <img class="brand-logo" src="https://cdn.nba.com/logos/nba/1610612754/primary/L/logo.svg" alt="" />
-            <p class="brand-mark">Indiana Pacers</p>
-          </div>
-          <h1 id="app-title">Let's talk pacers.</h1>
-          <div id="chatThread" class="chat-thread"></div>
-          <textarea id="questionInput" class="ask-box" rows="4"></textarea>
-          <div class="actions">
-            <button id="askButton" class="btn btn-primary" type="button">Ask</button>
-            <a class="btn" href="/gm/" style="text-decoration:none;background:rgba(255,255,255,0.12);color:#fff;border:1px solid rgba(255,255,255,0.16);">Instant GM</a>
-            <label class="debug-toggle">
-              <input id="debugToggle" type="checkbox" />
-              Debug
-            </label>
-          </div>
-          <p id="askStatus" class="status"></p>
-        </section>
-      </main>
-    </div>
+      </div>
 
-    <script>
-      const PASSWORD = 'IkeDiogu';
-      const ACCESS_KEY = 'talking_pacers_access';
-      const conversation = [];
+    </main>
 
-      const passwordGate = document.getElementById('passwordGate');
-      const chatApp = document.getElementById('chatApp');
-      const passwordInput = document.getElementById('passwordInput');
-      const gateStatus = document.getElementById('gateStatus');
-      const askStatus = document.getElementById('askStatus');
-      const questionInput = document.getElementById('questionInput');
-      const logoutButton = document.getElementById('logoutButton');
-      const askButton = document.getElementById('askButton');
-      const chatThread = document.getElementById('chatThread');
-      const debugToggle = document.getElementById('debugToggle');
-      const searchParams = new URLSearchParams(window.location.search);
+    <script src="script.js?v=20260224-4"></script>
+    <script type="module">
+      import { FEATURES } from './config/features.js';
 
-      if (searchParams.get('debug') === '1') {
-        debugToggle.checked = true;
-      }
-
-      function sourceLabel(source) {
-        const bits = [];
-        if (source.date) bits.push(source.date);
-        if (source.opponent) bits.push(`vs ${source.opponent}`);
-        return bits.length > 0 ? `${source.title} (${bits.join(', ')})` : source.title;
-      }
-
-      function renderConversation() {
-        chatThread.innerHTML = '';
-
-        for (const message of conversation) {
-          const bubble = document.createElement('article');
-          bubble.className = `message message-${message.role}`;
-          bubble.textContent = message.content;
-
-          if (message.role === 'assistant' && Array.isArray(message.sources) && message.sources.length > 0) {
-            const sourcesWrap = document.createElement('div');
-            sourcesWrap.className = 'message-sources';
-
-            const title = document.createElement('p');
-            title.className = 'sources-title';
-            title.textContent = 'Sources';
-            sourcesWrap.appendChild(title);
-
-            const list = document.createElement('div');
-            list.className = 'sources-list';
-
-            for (const source of message.sources) {
-              if (source.url) {
-                const link = document.createElement('a');
-                link.className = 'source-link';
-                link.href = source.url;
-                link.target = '_blank';
-                link.rel = 'noreferrer';
-                link.textContent = sourceLabel(source);
-                list.appendChild(link);
-              } else {
-                const text = document.createElement('p');
-                text.className = 'source-text';
-                text.textContent = `${sourceLabel(source)} — No source link available.`;
-                list.appendChild(text);
-              }
-            }
-
-            sourcesWrap.appendChild(list);
-            bubble.appendChild(sourcesWrap);
-          }
-
-          if (message.role === 'assistant' && message.debug) {
-            const debugWrap = document.createElement('div');
-            debugWrap.className = 'debug-panel';
-
-            const debugTitle = document.createElement('p');
-            debugTitle.className = 'debug-title';
-            debugTitle.textContent = 'Retrieval Debug';
-            debugWrap.appendChild(debugTitle);
-
-            const debugPre = document.createElement('pre');
-            debugPre.className = 'debug-pre';
-            debugPre.textContent = JSON.stringify(message.debug, null, 2);
-            debugWrap.appendChild(debugPre);
-
-            bubble.appendChild(debugWrap);
-          }
-
-          chatThread.appendChild(bubble);
-        }
-      }
-
-      function setUnlocked(unlocked) {
-        if (unlocked) {
-          localStorage.setItem(ACCESS_KEY, 'granted');
-          passwordGate.classList.remove('active');
-          chatApp.classList.add('active');
-          logoutButton.hidden = false;
-          questionInput.focus();
-          return;
-        }
-
-        localStorage.removeItem(ACCESS_KEY);
-        passwordGate.classList.add('active');
-        chatApp.classList.remove('active');
-        logoutButton.hidden = true;
-        conversation.length = 0;
-        renderConversation();
-        askStatus.textContent = '';
-        gateStatus.textContent = '';
-        passwordInput.value = '';
-        questionInput.value = '';
-        passwordInput.focus();
-      }
-
-      function handleUnlock() {
-        if (passwordInput.value === PASSWORD) {
-          setUnlocked(true);
-        } else {
-          gateStatus.textContent = 'Incorrect password.';
-        }
-      }
-
-      async function handleAsk() {
-        const question = questionInput.value.trim();
-        if (!question) {
-          askStatus.textContent = 'Enter a question first.';
-          return;
-        }
-
-        const history = conversation.map((message) => ({
-          role: message.role,
-          content: message.content,
-          resolvedContext: message.resolvedContext || null
-        }));
-
-        conversation.push({ role: 'user', content: question });
-        renderConversation();
-        questionInput.value = '';
-
-        askButton.disabled = true;
-        askButton.textContent = 'Thinking...';
-        askStatus.textContent = 'Loading...';
-
+      async function loadRememberThisCard() {
         try {
-          const response = await fetch('/api/ask', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ question, history, debug: debugToggle.checked })
-          });
-
-          const payload = await response.json().catch(() => null);
-          if (!response.ok) {
-            throw new Error(payload?.error || 'OpenAI request failed.');
-          }
-
-          if (typeof payload?.answer !== 'string' || !payload.answer.trim()) {
-            throw new Error('Malformed response from server.');
-          }
-
-          conversation.push({
-            role: 'assistant',
-            content: payload.answer.trim(),
-            sources: Array.isArray(payload?.sources) ? payload.sources : [],
-            debug: payload?.debug || null,
-            resolvedContext: payload?.resolvedContext || null
-          });
-          renderConversation();
-          askStatus.textContent = '';
-        } catch (error) {
-          conversation.pop();
-          renderConversation();
-          askStatus.textContent = error.message || 'Something went wrong.';
-        } finally {
-          askButton.disabled = false;
-          askButton.textContent = 'Ask';
-          questionInput.focus();
+          const mod = await import('./components/RememberThisCard.jsx');
+          return mod.default;
+        } catch (_err) {
+          const response = await fetch('./components/RememberThisCard.jsx', { cache: 'no-store' });
+          const source = await response.text();
+          const blobUrl = URL.createObjectURL(new Blob([source], { type: 'text/javascript' }));
+          const mod = await import(blobUrl);
+          URL.revokeObjectURL(blobUrl);
+          return mod.default;
         }
       }
 
-      document.getElementById('unlockButton').addEventListener('click', handleUnlock);
-      passwordInput.addEventListener('keydown', (event) => {
-        if (event.key === 'Enter') {
-          event.preventDefault();
-          handleUnlock();
+      if (FEATURES.rememberThis) {
+        const grid = document.querySelector('.dashboard-grid');
+        if (grid) {
+          const RememberThisCard = await loadRememberThisCard();
+          const section = document.createElement('section');
+          section.className = 'panel remember-this-section';
+          section.setAttribute('aria-label', 'Remember This?');
+          section.appendChild(RememberThisCard());
+          const leftColumn = grid.querySelector('.left-column');
+          if (leftColumn) {
+            leftColumn.appendChild(section);
+          } else {
+            grid.appendChild(section);
+          }
         }
-      });
-
-      askButton.addEventListener('click', handleAsk);
-      questionInput.addEventListener('keydown', (event) => {
-        if ((event.metaKey || event.ctrlKey) && event.key === 'Enter') {
-          event.preventDefault();
-          handleAsk();
-        }
-      });
-      logoutButton.addEventListener('click', () => setUnlocked(false));
-
-      if (localStorage.getItem(ACCESS_KEY) === 'granted') {
-        setUnlocked(true);
-      } else {
-        passwordInput.focus();
       }
     </script>
   </body>
